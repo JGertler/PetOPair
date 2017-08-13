@@ -1,0 +1,39 @@
+
+body {
+	padding-left: 300px;
+};
+
+@media only screen and (min-width : 768px) {
+  header, main, footer {
+    padding-left: 0;
+    }
+};
+
+
+.page-footer {
+   background-color: #6aac18;
+};
+
+nav {
+   background-color: #1820ac !important;
+}
+
+#signUpButton {
+   background-color: #186aac !important;
+}
+
+.material-icons {
+   color: #6aac18 !important;
+   font-size: 40px;
+}
+
+#slide-out {
+   background-color: #dcdefa;
+}
+
+.petBackground {
+    background-image: url("../media/petCartoon.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+
+};  
