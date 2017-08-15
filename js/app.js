@@ -10,5 +10,6 @@ $(document).ready(function(){
       onOpen: function(el) {console.log("onOpen working")}, 
       onClose: function(el) {console.log("onCloseworking")},
  });
+    $('select').material_select();
 }); //end doc ready
           

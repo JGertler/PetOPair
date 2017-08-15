@@ -37,3 +37,10 @@ nav {
     background-position: right top;
 
 };  
+
+
+td, th {
+  color: #1820ac !important;
+}
+
+
