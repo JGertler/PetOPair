@@ -9,6 +9,9 @@ body {
     }
 };
 
+.mainLogo {
+  padding: 0px;
+}
 
 .page-footer {
    background-color: #6aac18;
@@ -43,4 +46,21 @@ td, th {
   color: #1820ac !important;
 }
 
+
+.slideTwo {
+display: none;
+z-index: 2;
+}
+
+
+
+
+.uploadBtn, .submitBtn {
+  color: blue;
+}
+
+.progressBar {
+
+  border-style: solid;
+}
 
