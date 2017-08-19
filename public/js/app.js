@@ -11,5 +11,19 @@ $(document).ready(function(){
       onClose: function(el) {console.log("onCloseworking")},
  });
     $('select').material_select();
+
+
+// first slide of form switch to second slide of form on next
+$('#next1').click(function () {
+  $('#slideOne').animate({width: 'toggle'});
+  $('#slideTwo').animate({width: 'toggle'});
+}); 
+
+$('#next2').click(function () {
+  $('#slideTwo').animate({width: 'toggle'});
+  $('#slideThree').animate({width: 'toggle'});
+}); 
+
+
 }); //end doc ready
-          
+
