@@ -9,14 +9,20 @@ $(document).ready(function(){
       draggable: true, // Choose whether you can drag to open on touch screens,
       onOpen: function(el) {console.log("onOpen working")}, 
       onClose: function(el) {console.log("onCloseworking")},
- });
+    });
     $('select').material_select();
 
 
-//first slide of form switch to second slide of form on submit click
-  $(".submitBtn").click(function(){
-    $(".slideOne").toggle();
-    $(".slideTwo").css("display","block");
-}); 
+// first slide of form switch to second slide of form on next
+    $('#next1').click(function () {
+      $('#slideOne').animate({width: 'toggle'});
+      $('#slideTwo').animate({width: 'toggle'});
+    }); 
+
+    $('#next2').click(function () {
+      $('#slideTwo').animate({width: 'toggle'});
+      $('#slideThree').animate({width: 'toggle'});
+    }); 
+
 }); //end doc ready
-          
+
