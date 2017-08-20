@@ -47,20 +47,18 @@ td, th {
 }
 
 
-.slideTwo {
+#slideTwo {
 display: none;
 z-index: 2;
 }
 
-
+#next1 {
+  margin: 30px;
+}
 
 
 .uploadBtn, .submitBtn {
   color: blue;
 }
 
-.progressBar {
-
-  border-style: solid;
-}
 
