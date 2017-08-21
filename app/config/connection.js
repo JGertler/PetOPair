@@ -7,7 +7,7 @@ var Sequelize = require("sequelize");
 // var keys=require("keys.js");
 var keys=require("../config/keys.js");
 // Creates mySQL connection using Sequelize
-var sequelize = new Sequelize("POP_db", "root", keys.sqlKey, {
+var sequelize = new Sequelize("POP_db", "root", keys.password, {
   host: "localhost",
   dialect: "mysql",
   pool: {

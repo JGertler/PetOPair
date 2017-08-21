@@ -9,7 +9,6 @@ CREATE TABLE `humans` (
   `address_lat` DECIMAL( 18,14 ) NOT NULL,
   `address_lng` DECIMAL( 18,14 ) NOT NULL,
   `created_at` DATETIME NOT NULL,
-  INSERT INTO departments (department_name, over_head_costs)
-  VALUES ("clothing", "200");
+  
 INSERT INTO humans (first_name, last_name, formatted_address, address_lat, address_lng)
   VALUES ( `Mayat`, `Smolnik`, `1320 Quitman St Denver Co 80204`, ) );

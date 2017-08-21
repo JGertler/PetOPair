@@ -34,7 +34,7 @@ nav {
    background-color: #dcdefa;
 }
 
-.petBackground {
+#blah {
     background-image: url("../media/petCartoon.png");
     background-repeat: no-repeat;
     background-position: right top;

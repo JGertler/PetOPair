@@ -10,7 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.js"></script>
-  <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/app.js"></script>         
+
 </head>
 
 
@@ -83,27 +84,32 @@
   <div class="container">
     <div class="section">
 
+
       <!-- First Slide -->
       <div class="row">
         <div class="col s12 slideOne">
           <form action="#">
             <div class="file-field input-field">
-              <div class="btn uploadBtn" style="background-color:blue">
+              <div class="btn uploadBtn" id ="humanImg" style="background-color:blue">
                 <span>Upload</span>
-                <input type="file" name="pic" accept="image/*">
-              </div>
+                </div>
+                </div>
+                <input type="file" name="pic" accept="image/*" onchange="readURL(this);"/>        
+                  <img class="materialboxed userPic" id="blah" src="#" alt="human img" width="200" height="200" style='border: dotted'} />
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload a picture of yourself smiling :-)">
+                <input class="file-path validate" type="text">
               </div>
-            </div>
           </form>
+        </div>
         </div>
         <div class="row"> 
           <div class="col 3">
             <p> We recommend a picture of you smiling. You will upload pictures of your pets separately.</p>
-            <img class="materialboxed userPic" width="200" src="../media/petCartoon.png" style='border: dotted'}>
+
+      
+            <img class="materialboxed userPic" width="200" scr="../media/petCartoon.png" style='border: dotted'}>
           </div>
-            
+
             <div class="row">
               <div class="waves-effect waves-light btn submitBtn col s12" id="next1" style="background-color:blue">
                 <span>Next</span>
@@ -208,4 +214,18 @@
 
   </body>
   </html>
+
+  <script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('blah').src =  e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 
