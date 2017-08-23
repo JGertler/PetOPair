@@ -14,68 +14,63 @@
 </head>
 
 
-<!-- navbar -->
 
-<ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
-  <li><div class="user-view">
-    <div class="background">
-      <img src="">
-    </div>
-    <a href="#!user"><img class="circle" src=""></a>
-    <a href="#!name"><span class="green-text name">Susie Smith</span></a>
-    <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
-  </div></li>
-  <li><a href="#!"><i class="material-icons">account_circle</i>My Pet Profile</a></li>
-  <li><div class="divider"></div></li>
-  <li><a class="subheader">Activity</a></li>
-  <li><a href="#!">Notifications</a></li>
-  <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
-  <li><a class="waves-effect" href="#!">My Cups of Sugar</a></li>
-</ul>
-
-<!-- end navbar -->
 
 <body>
-<nav class="lighten-1" role="navigation">
-  <div class="nav-wrapper">
-    <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
+  <nav class="lighten-1" role="navigation">
+    <div class="nav-wrapper" id="navbar">
+          <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
       <!-- Dropdown Structure -->
+
+
       <ul id="dropdown1" class="dropdown-content">
+        <li><a href="badges.html">About</a></li>
+        <li class="divider"></li>
         <li><a href="#!">Contact</a></li>
         <li class="divider"></li>
         <li><a href="#!">Disclaimer</a></li>
+
+
+
       </ul>
-      
-        <ul class="right hide-on-med-and-down">
-          <li><a href="badges.html">About</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li>
-            <!-- modal goes here -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal"> Login </a>
-            <!-- Modal Structure -->
-            <div id="modal" class="modal open bottom-sheet">
-              <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-              </div>
-              <div class="modal-footer green">
-                <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
-              </div>
-            </div>
-            <!-- modal ends here -->
-          </li>
-        </ul>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a href="badges.html">About</a></li><li><span>|</span></li>
+        <li><a href="#!">Contact</a>|</li><li><span>|</span></li>
+        <li><a href="#!">Disclaimer</a></li>
+        <!-- Dropdown Trigger -->
+
+        <!-- modal goes here -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal"> Login </a>
+        <!-- Modal Structure -->
+        <div id="modal" class="modal open bottom-sheet">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer green">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
+          </div>
+        </div>
+        <!-- modal ends here -->
+        </li>
+      </ul>
+      <!--Added a place for the menu items to collapse into on smaller screens -->
+      <ul class="right show-on-med-and-down hide-on-large-only  ">
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">menu</i></a></li>
+      </ul>
     </div>
-</nav>
+  </nav>
 
   <!-- end nav -->
-<!-- 
+
+  <!-- end nav -->
+<!--
   <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
 
   <div class="section no-pad-bot" id="index-banner">
 
-    <h1 class="header center"><img class="mainLogo" src="/media/Petopair.png"></h1> 
+    <h1 class="header center"><img class="mainLogo" src="/media/Petopair.png"></h1>
   </div>
 
 
@@ -116,7 +111,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col s12">   
+          <div class="col s12">
             <p class="label">Street address</p>
             <p class="slimField"><input class="field" id="street_number"
               disabled="true"></input></p>
@@ -125,20 +120,20 @@
           </div>
         </div>
         <div class="row">
-          <div class="col s12"> 
+          <div class="col s12">
             <p class="label">City</p>
             <p class="wideField" colspan="3"><input class="field" id="locality"
                 disabled="true"></input></p>
           </div>
         </div>
         <div class="row">
-          <div class="col s12"> 
+          <div class="col s12">
             <p class="label">State</p>
             <p class="slimField"><input class="field"
               id="administrative_area_level_1" disabled="true"></input></p>
           </div>
         </div>
-        <div class="row">  
+        <div class="row">
           <div class="col s12">
             <p class="label">Zip code</p>
             <p class="wideField"><input class="field" id="postal_code"
@@ -146,7 +141,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col s12"> 
+          <div class="col s12">
             <p class="label">Country</p>
             <p class="wideField" colspan="3"><input class="field"
               id="country" disabled="true"></input></p>

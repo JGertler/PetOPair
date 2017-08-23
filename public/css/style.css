@@ -1,6 +1,6 @@
 
 body {
-	padding-left: 300px;
+	padding-left: 0px;
 };
 
 @media only screen and (min-width : 768px) {
@@ -39,7 +39,7 @@ nav {
     background-repeat: no-repeat;
     background-position: right top;
 
-};  
+};
 
 
 td, th {
