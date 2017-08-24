@@ -1,5 +1,6 @@
 var path= require("path");
 module.exports = function (app) {
+	
 	app.get("/", function(request, response){
 		response.sendFile(path.join(__dirname + '/../../views/index.html'));
 	});	
@@ -14,6 +15,15 @@ module.exports = function (app) {
 		response.sendFile(path.join(__dirname + '/../../views/aboutPets.html'));
 	});
 
+//path to post human info data to my terminal
+	app.post("/humaninfo", function(req, res) {
+		
+		var info = req.body;
+
+		console.log(info);
+
+		res.json("human info");
+	});
 
 
 

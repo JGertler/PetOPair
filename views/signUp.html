@@ -153,9 +153,9 @@
           </div>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-        <a href="/aboutMe"></a>
-           <i class="material-icons right">send</i>
+        <button class="btn waves-effect waves-light" id = "grabdata" type="submit" name="action">Submit
+<!--         <a href="/aboutMe"></a>
+ -->           <i class="material-icons right">send</i>
         </button>
   </form>
 
@@ -262,6 +262,45 @@
             });
           }
         }
+//function which grab the user's input data from the sign up form and puts it into an object to route to the table
+        function grabData(event) {
+          event.preventDefault();
+
+          var first_name = $("#first_name").val().trim(),
+              last_name = $("#last_name").val().trim(),
+              password = $("#password").val().trim(),
+              email = $("#email").val().trim(),
+              autocomplete = $("#autocomplete").val().trim(),
+              street_number= $("#street_number").val().trim(),
+              route = $("#route").val().trim(),
+              locality = $("#locality").val().trim(),
+              administrative_area_level_1 = $("#administrative_area_level_1").val().trim(),
+              postal_code = $("#postal_code").val().trim(),
+              country = $("#country").val().trim();
+
+          var info = {
+                first_name: first_name,
+                last_name: last_name,
+                password: password,
+                email: email,
+                autocomplete: autocomplete,
+                street_number: street_number,
+                route:route,
+                locality: locality,
+                administrative_area_level_1: administrative_area_level_1,
+                postal_code: postal_code,
+                country: country
+          }
+          $.post("/humaninfo", info, function(data) {          console.log(data);
+
+          })
+
+                  }
+
+        $("#grabdata").on("click", grabData);
+
+        //ends grabData function
+
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete"
       async defer></script>
