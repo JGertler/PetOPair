@@ -10,8 +10,8 @@ module.exports = function (app) {
 		response.sendFile(path.join(__dirname + '/../../views/aboutMe.html'));
 	});
 
-	app.get("/aboutPets", function(request, response){
-		response.sendFile(path.join(__dirname + '/../../views/aboutPets.html'));
+	app.get("/sugar", function(request, response){
+		response.sendFile(path.join(__dirname + '/../../views/sugar.html'));
 	});
 
 

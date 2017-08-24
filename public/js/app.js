@@ -24,5 +24,9 @@ $(document).ready(function(){
       $('#slideThree').animate({width: 'toggle'});
     }); 
 
+    //numbers will have to dynamically tally in the sugar html when a user completes a sitter request
+
+
+
 }); //end doc ready
 
