@@ -41,14 +41,8 @@ $(document).ready(function() {
       width: 'toggle'
     });
   });
+    //numbers will have to dynamically tally in the sugar html when a user completes a sitter request
 
-  $('#next2').click(function() {
-    $('#slideTwo').animate({
-      width: 'toggle'
-    });
-    $('#slideThree').animate({
-      width: 'toggle'
-    });
-  });
+
 
 }); //end doc ready
