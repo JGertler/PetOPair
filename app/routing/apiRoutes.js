@@ -1,5 +1,5 @@
-var Human = require("../models/humanTable.js");
-var keys=require("../config/keys.js");
+// var Human = require("../models/humanTable.js");
+// var keys=require("../config/connection.js");
 var request = require("request");
 // Routes
 // =============================================================

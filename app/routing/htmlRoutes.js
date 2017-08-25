@@ -1,5 +1,9 @@
 var path= require("path");
+
+var db = require("../models");
+
 module.exports = function (app) {
+	
 	app.get("/", function(request, response){
 		response.sendFile(path.join(__dirname + '/../../views/index.html'));
 	});	
@@ -14,6 +18,24 @@ module.exports = function (app) {
 		response.sendFile(path.join(__dirname + '/../../views/sugar.html'));
 	});
 
+//path to post human info data to my terminal
+	app.post("/receive", function(req, res) {
+		
+		var info = req.body;
+
+		db.human.create(info)
+		.then(function(data) {
+			console.log("Data uploaded");
+		})
+		.catch(function (err) {
+			console.log("Data err with upload");
+			console.log(err);
+		})
+
+		console.log(info);
+
+		res.json("human info received");
+	});
 
 
 
