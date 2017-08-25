@@ -1,18 +1,50 @@
-module.exports = function(sequelize, Sequelize) {
+var Sequelize = require("sequelize");
+
+var sequelize = require("../config/connection.js");
 
   var Human = sequelize.define('human', {
 
-      first_name: Sequelize.TEXT,
-      last_name: Sequelize.TEXT,
-      password: Sequelize.TEXT,
-      email: Sequelize.TEXT,
-      autocomplete: Sequelize.TEXT,
-      street_number: Sequelize.TEXT,
-      route:Sequelize.TEXT,
-      locality:Sequelize.TEXT,
-      administrative_area_level_1:Sequelize.TEXT,
-      postal_code:Sequelize.TEXT
+      first_name: {
+        type:Sequelize.TEXT
+      },
+      last_name: {
+        type: Sequelize.TEXT
+      },
+      username: {
+        type: Sequelize.TEXT
+      },
+      password: {
+        type: Sequelize.TEXT
+      },
+      email: {
+        type: Sequelize.TEXT
+      },
+      autocomplete: {
+        type: Sequelize.TEXT
+      },
+      street_number: {
+        type: Sequelize.TEXT
+      },
+      route:{
+        type: Sequelize.TEXT
+      },
+      locality:{
+        type: Sequelize.TEXT
+      },
+      administrative_area_level_1:{
+        type: Sequelize.TEXT
+      },
+      postal_code:{
+        type: Sequelize.TEXT
+      },
+      address_lat: {
+    type: Sequelize.DECIMAL(18, 14)
+   },
+   address_lng: {
+     type: Sequelize.DECIMAL(18, 14)
+   }
   })
 
-  return Human;
-}
+  //Human.sync();
+
+  module.exports = Human;

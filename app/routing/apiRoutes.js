@@ -1,9 +1,28 @@
-// var Human = require("../models/humanTable.js");
-// var keys=require("../config/connection.js");
+var Human = require("../models/info.js");
+var keys=require("../config/keys.js");
 var request = require("request");
 // Routes
 // =============================================================
 module.exports = function(app) {
+
+  app.post("/receive", function(req, res) {
+
+    var info = req.body;
+
+    Human.create(info)
+    .then(function(data) {
+      console.log("Data uploaded");
+    })
+    .catch(function (err) {
+      console.log("Data err with upload");
+      console.log(err);
+    })
+
+    console.log(info);
+
+    res.json("human info received");
+  });
+
   // Get all books
   app.get("/api/userprofile", function(req, res) {
     Human.findAll({}).then(function(results) {
