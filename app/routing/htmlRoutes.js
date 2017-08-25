@@ -19,6 +19,17 @@ module.exports = function (app) {
 	});
 
 
+	app.get("/bulletin", function(request, response){
+		response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
+	});
+
+
+//path to post human info data to my terminal
+	app.post("/receive", function(req, res) {
+
+		var info = req.body;
+
+
 
 
 
