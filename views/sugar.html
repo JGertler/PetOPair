@@ -18,28 +18,34 @@
 
 <!-- navbar -->
 
-<ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
-  <li><div class="user-view">
-    <div class="background">
-      <img src="">
+<ul id="slide-out" class="side-nav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="">
+      </div>
+      <a href="#!user"><img class="circle" src=""></a>
+      <a href="#!name"><span class="green-text name">Susie Smith</span></a>
+      <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
     </div>
-    <a href="#!user"><img class="circle" src=""></a>
-    <a href="#!name"><span class="green-text name">Susie Smith</span></a>
-    <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
-  </div></li>
+  </li>
   <li><a href="#!"><i class="material-icons">account_circle</i>My Pet Profile</a></li>
-  <li><div class="divider"></div></li>
+  <li>
+    <div class="divider"></div>
+  </li>
   <li><a class="subheader">Activity</a></li>
   <li><a href="#!">Notifications</a></li>
   <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
   <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
 </ul>
 
+
 <!-- end navbar -->
 
 <body>
  <nav class="lighten-1" role="navigation">
-  <div class="nav-wrapper">
+  <div class="nav-wrapper" id="navbar">
+    <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">Profile</button>
     <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">
@@ -72,7 +78,7 @@
 </nav>
 
 <!-- end nav -->
-<!-- 
+<!--
   <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
 </div>
 </nav>
@@ -95,7 +101,7 @@
       </div>
         <div class="col s2">
           <p class="placeholderNumber"> You currently don't have any cups of sugar because you have not grabbed any requests from the bulletin. woof meow. </p>
-        </div>      
+        </div>
     </div>
   </div> <!--end section-->
 </div> <!--end container-->
