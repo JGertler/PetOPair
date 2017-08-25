@@ -25,12 +25,5 @@ module.exports = function (app) {
 
 
 //path to post human info data to my terminal
-	app.post("/receive", function(req, res) {
 
-		var info = req.body;
-
-
-
-
-
-}; //end exports
+}

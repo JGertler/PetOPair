@@ -5,7 +5,7 @@ var request = require("request");
 // =============================================================
 module.exports = function(app) {
 
-  app.post("/receive", function(req, res) {
+  app.post("/put_newuser_in_db", function(req, res) {
 
     var info = req.body;
 
@@ -23,8 +23,8 @@ module.exports = function(app) {
     res.json("human info received");
   });
 
-  // Get all books
-  app.get("/api/userprofile", function(req, res) {
+  // Get all user API
+  app.get("/api/users", function(req, res) {
     Human.findAll({}).then(function(results) {
       res.json(results);
     });
@@ -32,13 +32,8 @@ module.exports = function(app) {
 
 
 
-  // Add a human
   app.post("/api/userprofile", function(req, response) {
-    //console.log("Human Data:");
-    //console.log(req.body);
-  //  geocode(req.body.formatted_address, req.body)//.then(function(results) {
-    //  res.json("results");
-  //  });
+
     var address= req.body.formatted_address;
     var userInfo=req.body;
     var queryUrl ="https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+keys.mapKey;
