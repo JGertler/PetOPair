@@ -64,3 +64,29 @@ z-index: 2;
 #logo-container {
   margin-left: 40px;
 }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+label.treatment {
+  display: block;
+  width: 96%;
+
+}
+
+label.treatment .commoner {
+  display: block;
+  float: left;
+  
+}
+
+label.treatment .royal{
+  display: block;
+  float: right;
+  text-align: right;
+  
+}
+

@@ -14,6 +14,11 @@ module.exports = function (app) {
 		response.sendFile(path.join(__dirname + '/../../views/aboutPets.html'));
 	});
 
+	app.get("/bulletin", function(request, response){
+		response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
+	});
+
+
 
 
 
