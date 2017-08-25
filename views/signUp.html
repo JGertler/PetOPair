@@ -291,7 +291,9 @@
                 postal_code: postal_code,
                 country: country
           }
-          $.post("/receive", info, function(data) {          console.log(data);
+          
+          $.post("/receive", info, function(data) {         
+          console.log(data);
 
           })
 
