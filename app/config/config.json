@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "Banks2013!",
+    "password": "90099109",
     "database": "pop_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "90099109",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
