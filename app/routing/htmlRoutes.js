@@ -18,6 +18,11 @@ module.exports = function (app) {
 		response.sendFile(path.join(__dirname + '/../../views/sugar.html'));
 	});
 
+	app.get("/bulletin", function(request, response){
+		response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
+	});
+
+
 //path to post human info data to my terminal
 	app.post("/receive", function(req, res) {
 		
