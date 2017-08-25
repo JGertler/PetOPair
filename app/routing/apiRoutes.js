@@ -1,5 +1,5 @@
-var Human = require("../models/humanTable.js");
-var keys=require("../config/keys.js");
+// var Human = require("../models/humanTable.js");
+// var keys=require("../config/connection.js");
 var request = require("request");
 // Routes
 // =============================================================
@@ -15,8 +15,8 @@ module.exports = function(app) {
 
   // Add a human
   app.post("/api/userprofile", function(req, response) {
-    console.log("Human Data:");
-    console.log(req.body);
+    //console.log("Human Data:");
+    //console.log(req.body);
   //  geocode(req.body.formatted_address, req.body)//.then(function(results) {
     //  res.json("results");
   //  });

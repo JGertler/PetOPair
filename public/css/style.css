@@ -1,6 +1,6 @@
 
 body {
-	padding-left: 300px;
+	padding-left: 0px;
 };
 
 @media only screen and (min-width : 768px) {
@@ -34,12 +34,12 @@ nav {
    background-color: #dcdefa;
 }
 
-.petBackground {
+#blah {
     background-image: url("../media/petCartoon.png");
     background-repeat: no-repeat;
     background-position: right top;
 
-};  
+};
 
 
 td, th {
@@ -90,3 +90,23 @@ label.treatment .royal{
   
 }
 
+
+/*tally box for cups of sugar accrued */
+
+.tallyBox {
+  margin-top: 100px;
+  width: 60px;
+  height: 60px;
+  border-color: #3998e5;
+  border-style: solid;
+  font-size: 30px;
+}
+
+#cupofSugar {
+  margin-right: 100px;
+}
+
+.placeholderNumber {
+  font-size: 12px;
+}
+/*end tally styling*/
