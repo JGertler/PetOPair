@@ -9,11 +9,6 @@ body {
     }
 };
 
-#loginModel {
-  display: none;
-  background-color: #1820ac;
-}
-
 .mainLogo {
   padding: 0px;
 }
@@ -115,3 +110,5 @@ label.treatment .royal{
   font-size: 12px;
 }
 /*end tally styling*/
+
+
