@@ -196,9 +196,14 @@
 
 
 <script>
+
   //function which grab the user's input data from the sign up form and puts it into an object to route to the table
   function grabData(event) {
     event.preventDefault();
+    var address=$("#autocomplete").val().trim();
+    var queryUrl ="https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
+
+
 
     var first_name = $("#first_name").val().trim(),
       last_name = $("#last_name").val().trim(),
@@ -214,6 +219,7 @@
       postal_code = $("#postal_code").val().trim(),
       country = $("#country").val().trim();
 
+
     var info = {
       first_name: first_name,
       last_name: last_name,
@@ -227,14 +233,15 @@
       administrative_area_level_1: administrative_area_level_1,
       postal_code: postal_code,
       country: country
+
     }
 
     $.post("/put_newuser_in_db", info, function(data) {
       console.log(data);
 
     })
-
   }
+
 
   $("#grabdata").on("click", grabData);
 
@@ -293,8 +300,10 @@
       navigator.geolocation.getCurrentPosition(function(position) {
         var geolocation = {
           lat: position.coords.latitude,
+
           lng: position.coords.longitude
         };
+
         var circle = new google.maps.Circle({
           center: geolocation,
           radius: position.coords.accuracy
@@ -303,35 +312,8 @@
       });
     }
   }
-  $("#button-submit-profile").on("click", function(event) {
-    event.preventDefault();
 
-    // Make a newBook object
-    var newHuman = {
-      // first_name:userInfo.first_name,
-      // last_name:userInfo.last_name,
-      // email: userInfo.email,
-      // formatted_address: address,
-      first_name: $("#first_name").val().trim(),
-      last_name: $("#last_name").val().trim(),
-      email: $("#email").val().trim(),
-      formatted_address: $("#autocomplete").val().trim()
-    };
 
-    // Send an AJAX POST-request with jQuery
-    $.post("/api/userprofile", newHuman)
-      // On success, run the following code
-      .done(function(data) {
-        // Log the data we found
-        console.log(data);
-      });
-
-    // Empty each input box by replacing the value with an empty string
-    // $("#title").val("");
-    // $("#author").val("");
-    // $("#genre").val("");
-    // $("#pages").val("");
-
-  });
+  //});
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete" async defer></script>
