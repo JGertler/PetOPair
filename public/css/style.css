@@ -9,6 +9,11 @@ body {
     }
 };
 
+#loginModel {
+  display: none;
+  background-color: #1820ac;
+}
+
 .mainLogo {
   padding: 0px;
 }
