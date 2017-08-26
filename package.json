@@ -19,6 +19,7 @@
   "homepage": "https://github.com/JGertler/PetOPair#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dropify": "^0.2.2",
     "express": "^4.15.4",
     "mongoose": "^4.11.7",
     "mysql2": "^1.4.1",
