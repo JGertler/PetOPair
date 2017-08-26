@@ -41,49 +41,13 @@
         <li><a href="#!">Contact</a>|</li>
         <li><span>|</span></li>
         <li><a href="#!">Disclaimer</a></li>
-        <!-- Dropdown Trigger -->
-
-        <!-- modal goes here -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal"> Login </a>
-        <!-- Modal Structure -->
-        <div id="modal" class="modal open bottom-sheet">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-          </div>
-          <div class="modal-footer green">
-            <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
-          </div>
-        </div>
-        <!-- modal ends here -->
-        </li>
       </ul>
       <!--Added a place for the menu items to collapse into on smaller screens -->
       <ul class="right show-on-med-and-down hide-on-large-only  ">
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">menu</i></a></li>
       </ul>
 
-        <ul class="right hide-on-med-and-down">
-          <li><a href="badges.html">About</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li>
-            <!-- modal goes here -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal"> Login </a>
-            <!-- Modal Structure -->
-          <!--   <div id="modal" class="modal open bottom-sheet">
-              <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-              </div>
-              <div class="modal-footer green">
-                <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
-              </div>
-            </div> -->
-            <!-- modal ends here -->
-          </li>
-        </ul>
-   </div>
+    </div>
   </nav>
 
   <!-- end nav -->
@@ -177,164 +141,13 @@
           </div>
         </div>
 
-        <button class="btn waves-effect waves-light" id = "grabdata" type="submit" name="action">Submit
+        <button class="btn waves-effect waves-light" id="grabdata" type="submit" name="action">Submit
 <!--         <a href="/aboutMe"></a>
  -->           <i class="material-icons right">send</i>
         </button>
-  </form>
-
-                    <!-- end divs for container and section -->
-                  </div>
-                </div>
 
 
-                <br><br>
 
-
-                <footer class="page-footer">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col l6 s12">
-                        <h5 class="white-text">About Us</h5>
-                        <p class="grey-text text-lighten-4">Pet OPair is made up of four determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
-                      </div>
-                      <div class="col l3 s12">
-                        <h5 class="white-text">Adopt!</h5>
-                        <ul>
-                          <li><a class="white-text" href="http://www.rmfr-colorado.org">RMFR</a></li>
-                          <li><a class="white-text" href="http://www.ddfl.org">Dumb Friends League</a></li>
-                          <li><a class="white-text" href="https://maxfund.org">MaxFund</a></li>
-                        </ul>
-                      </div>
-                      <div class="col l3 s12">
-                        <h5 class="white-text">Contact</h5>
-                        <ul>
-                          <li><a class="white-text" href="#!">Email</a></li>
-                          <li><a class="white-text" href="#!">Phone</a></li>
-                          <li><a class="white-text" href="#!">Leasing Office</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="footer-copyright">
-                    <div class="container">
-                      Founded in <a class="orange-text text-lighten-3" href="https://github.com/JGertler">Denver, CO</a>
-                    </div>
-                  </div>
-                </footer>
-
-              </body>
-              </html>
-
-              <!-- autopopulated address, powered by google -->
-              <script>
-        // This example displays an address form, using the autocomplete feature
-        // of the Google Places API to help users fill in the information.
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-        var placeSearch, autocomplete;
-        var componentForm = {
-          street_number: 'short_name',
-          route: 'long_name',
-          locality: 'long_name',
-          administrative_area_level_1: 'short_name',
-          country: 'long_name',
-          postal_code: 'short_name'
-        };
-        function initAutocomplete() {
-          // Create the autocomplete object, restricting the search to geographical
-          // location types.
-          autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-            {types: ['geocode']});
-          // When the user selects an address from the dropdown, populate the address
-          // fields in the form.
-          autocomplete.addListener('place_changed', fillInAddress);
-        }
-        function fillInAddress() {
-          // Get the place details from the autocomplete object.
-          var place = autocomplete.getPlace();
-          for (var component in componentForm) {
-            document.getElementById(component).value = '';
-            document.getElementById(component).disabled = false;
-          }
-          // Get each component of the address from the place details
-          // and fill the corresponding field on the form.
-          for (var i = 0; i < place.address_components.length; i++) {
-            var addressType = place.address_components[i].types[0];
-            if (componentForm[addressType]) {
-              var val = place.address_components[i][componentForm[addressType]];
-              document.getElementById(addressType).value = val;
-            }
-          }
-        }
-        // Bias the autocomplete object to the user's geographical location,
-        // as supplied by the browser's 'navigator.geolocation' object.
-        function geolocate() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              var geolocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-              var circle = new google.maps.Circle({
-                center: geolocation,
-                radius: position.coords.accuracy
-              });
-              autocomplete.setBounds(circle.getBounds());
-            });
-          }
-        }
-//function which grab the user's input data from the sign up form and puts it into an object to route to the table
-        function grabData(event) {
-          event.preventDefault();
-
-          var first_name = $("#first_name").val().trim(),
-              last_name = $("#last_name").val().trim(),
-              username =
-              $("#username").val().trim(),
-              password = $("#password").val().trim(),
-              email = $("#email").val().trim(),
-              autocomplete = $("#autocomplete").val().trim(),
-              street_number= $("#street_number").val().trim(),
-              route = $("#route").val().trim(),
-              locality = $("#locality").val().trim(),
-              administrative_area_level_1 = $("#administrative_area_level_1").val().trim(),
-              postal_code = $("#postal_code").val().trim(),
-              country = $("#country").val().trim();
-
-          var info = {
-                first_name: first_name,
-                last_name: last_name,
-                username: username,
-                password: password,
-                email: email,
-                autocomplete: autocomplete,
-                street_number: street_number,
-                route:route,
-                locality: locality,
-                administrative_area_level_1: administrative_area_level_1,
-                postal_code: postal_code,
-                country: country
-          }
-
-          $.post("/receive", info, function(data) {
-          console.log(data);
-
-          })
-
-                  }
-
-        $("#grabdata").on("click", grabData);
-
-        //ends grabData function
-
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete"
-      async defer></script>
-
-        <button type="submit" class="submit waves-effect waves-light btn " id="button-submit-profile">Submit</button>
       </form>
 
       <!-- end divs for container and section -->
@@ -350,7 +163,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About Us</h5>
-          <p class="grey-text text-lighten-4">Pet OPair is made up of four determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, and Amber Orenstein</p>
+          <p class="grey-text text-lighten-4">Pet OPair is made up of five determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
         </div>
         <div class="col l3 s12">
           <h5 class="white-text">Adopt!</h5>
@@ -381,9 +194,61 @@
 
 </html>
 
-<!-- autopopulated address, powered by google -->
+
 <script>
-  // This example displays an address form, using the autocomplete feature
+
+  //function which grab the user's input data from the sign up form and puts it into an object to route to the table
+  function grabData(event) {
+    event.preventDefault();
+    var address=$("#autocomplete").val().trim();
+    var queryUrl ="https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
+
+
+
+    var first_name = $("#first_name").val().trim(),
+      last_name = $("#last_name").val().trim(),
+      username =
+      $("#username").val().trim(),
+      password = $("#password").val().trim(),
+      email = $("#email").val().trim(),
+      autocomplete = $("#autocomplete").val().trim(),
+      street_number = $("#street_number").val().trim(),
+      route = $("#route").val().trim(),
+      locality = $("#locality").val().trim(),
+      administrative_area_level_1 = $("#administrative_area_level_1").val().trim(),
+      postal_code = $("#postal_code").val().trim(),
+      country = $("#country").val().trim();
+
+
+    var info = {
+      first_name: first_name,
+      last_name: last_name,
+      username: username,
+      password: password,
+      email: email,
+      autocomplete: autocomplete,
+      street_number: street_number,
+      route: route,
+      locality: locality,
+      administrative_area_level_1: administrative_area_level_1,
+      postal_code: postal_code,
+      country: country
+
+    }
+
+    $.post("/put_newuser_in_db", info, function(data) {
+      console.log(data);
+
+    })
+  }
+
+
+  $("#grabdata").on("click", grabData);
+
+  //ends grabData function
+
+
+  // This displays an address form, using the autocomplete feature
   // of the Google Places API to help users fill in the information.
   // This example requires the Places library. Include the libraries=places
   // parameter when you first load the API. For example:
@@ -435,8 +300,10 @@
       navigator.geolocation.getCurrentPosition(function(position) {
         var geolocation = {
           lat: position.coords.latitude,
+
           lng: position.coords.longitude
         };
+
         var circle = new google.maps.Circle({
           center: geolocation,
           radius: position.coords.accuracy
@@ -445,35 +312,8 @@
       });
     }
   }
-  $("#button-submit-profile").on("click", function(event) {
-    event.preventDefault();
 
-    // Make a newBook object
-    var newHuman = {
-      // first_name:userInfo.first_name,
-      // last_name:userInfo.last_name,
-      // email: userInfo.email,
-      // formatted_address: address,
-      first_name: $("#first_name").val().trim(),
-      last_name: $("#last_name").val().trim(),
-      email: $("#email").val().trim(),
-      formatted_address: $("#autocomplete").val().trim()
-    };
 
-    // Send an AJAX POST-request with jQuery
-    $.post("/api/userprofile", newHuman)
-      // On success, run the following code
-      .done(function(data) {
-        // Log the data we found
-        console.log(data);
-      });
-
-    // Empty each input box by replacing the value with an empty string
-    // $("#title").val("");
-    // $("#author").val("");
-    // $("#genre").val("");
-    // $("#pages").val("");
-
-  });
+  //});
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete" async defer></script>

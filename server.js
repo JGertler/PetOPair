@@ -15,7 +15,7 @@ app.use(bodyParser.text({type: 'text/html'}))
 app.use(express.static('public'));
 
 
-var db = require("./app/models");
+var db = require("./app/models/info.js");
 
 require("./app/routing/apiRoutes.js")(app);
 require("./app/routing/htmlRoutes.js")(app);
@@ -32,4 +32,3 @@ db.sequelize.sync()
 .catch(function(err) {
 	console.log(err);
 })
-

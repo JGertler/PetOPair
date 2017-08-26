@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.js"></script>
-  <script type="text/javascript" src="/js/app.js"></script>         
+  <script type="text/javascript" src="/js/app.js"></script>
 
 </head>
 
@@ -62,19 +62,7 @@
         <!-- Dropdown Trigger -->
 
         <!-- modal goes here -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal"> Login </a>
-        <!-- Modal Structure -->
-        <div id="modal" class="modal open bottom-sheet">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-          </div>
-          <div class="modal-footer green">
-            <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
-          </div>
-        </div>
-        <!-- modal ends here -->
-        </li>
+        
       </ul>
       <!--Added a place for the menu items to collapse into on smaller screens -->
       <ul class="right show-on-med-and-down hide-on-large-only  ">
@@ -109,7 +97,7 @@
                 <span>Upload</span>
                 </div>
                 </div>
-                <input type="file" name="pic" accept="image/*" onchange="readURL(this);"/>        
+                <input type="file" name="pic" accept="image/*" onchange="readURL(this);"/>
                   <img class="materialboxed userPic" id="blah" src="#" alt="human img" width="200" height="200" style='border: dotted'} />
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -120,7 +108,7 @@
           <div class="col 3">
             <p> We recommend a picture of you smiling. You will upload pictures of your pets separately.</p>
 
-      
+
             <img class="materialboxed userPic" width="200" scr="../media/petCartoon.png" style='border: dotted'}>
           </div>
 
@@ -243,4 +231,3 @@ function readURL(input) {
     }
 }
 </script>
-
