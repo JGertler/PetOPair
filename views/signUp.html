@@ -198,6 +198,7 @@
 <script>
 
   //function which grab the user's input data from the sign up form and puts it into an object to route to the table
+  var userObject;
   function grabData(event) {
     event.preventDefault();
     var address=$("#autocomplete").val().trim();
@@ -236,8 +237,11 @@
 
     }
 
-    $.post("/put_newuser_in_db", info, function(data) {
-      console.log(data);
+    $.post("/put_newuser_in_db", info, function(userObject) {
+      console.log(userObject);
+
+    window.location.href ='/bulletin';
+
 
     })
   }
