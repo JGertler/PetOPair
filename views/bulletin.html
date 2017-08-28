@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="/css/style.css">
-  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
+
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
   <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/js/materialize.js"></script>
   <script type="text/javascript" src="/js/app.js"></script>
@@ -16,6 +19,7 @@
 
 
 <!-- navbar -->
+
 
 <ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
   <li><div class="user-view">
@@ -31,12 +35,13 @@
   <li><a class="subheader">Activity</a></li>
   <li><a href="#!">Notifications</a></li>
   <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
-  <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
+  <li><a class="waves-effect" href="#!">My Cups of Sugar</a></li>
 </ul>
 
 <!-- end navbar -->
 
 <body>
+
   <nav class="lighten-1" role="navigation">
     <div class="nav-wrapper" id="navbar">
       <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">Profile</button>
@@ -62,7 +67,7 @@
         <!-- Dropdown Trigger -->
 
         <!-- modal goes here -->
-        
+      
       </ul>
       <!--Added a place for the menu items to collapse into on smaller screens -->
       <ul class="right show-on-med-and-down hide-on-large-only  ">
@@ -73,13 +78,7 @@
 
   <!-- end nav -->
 
-
-  <!-- end nav -->
-<!--
-  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
-
   <div class="section no-pad-bot" id="index-banner">
-
     <h1 class="header center"><img class="mainLogo" src="/media/Petopair.png"></h1>
   </div>
 
@@ -87,99 +86,89 @@
   <div class="container">
     <div class="section">
 
+      <!-- Start Form -->
 
-      <!-- First Slide -->
-      <div class="row">
-        <div class="col s12 slideOne">
-          <form action="#">
-            <div class="file-field input-field">
-              <div class="btn uploadBtn" id ="humanImg" style="background-color:blue">
-                <span>Upload</span>
-                </div>
-                </div>
-                <input type="file" name="pic" accept="image/*" onchange="readURL(this);"/>
-                  <img class="materialboxed userPic" id="blah" src="#" alt="human img" width="200" height="200" style='border: dotted'} />
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
+      <form class="col s12" id="bulletin" style='color: #1820ac !important'>
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <img src="/media/petCartoon.png" alt="" class="circle">
+            <div class="input-field col s12">
+              <input id="pet_name" type="text" class="validate">
+              <label for="pet_name">Pet's Name</label>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="city_name" type="text" class="validate">
+                <label for="City">City</label>
               </div>
-          </form>
+              <div class="row">
+                <div class="input-field col s12">
+                  <br>
+                  <br>
+                  <label class="treatment clearfix" for="treatment">
+                  <span class="commoner">Commoner</span>
+                  <span class="royal">Royal Treatment</span>
+            </label>
+                  <form action="#">
+                    <p class="range-field">
+                      <input type="range" id="test5" min="0" max="10">
+                    </p>
+
+                  </form>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input id="start_date" type="text" class="validate datepicker">
+                    <label for="start_date">Start Date</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <input id="end_date" type="text" class="validate datepicker">
+                    <label for="end_date">End Date</label>
+
+                    <script>
+                      $('.datepicker').pickadate({
+                        selectMonths: true,
+                        // Creates a dropdown to control month
+                        selectYears: 15,
+                        // Creates a dropdown of 15 years to control year,
+                        today: 'Today',
+                        clear: 'Clear',
+                        close: 'Ok',
+                        closeOnSelect: false // Close upon selecting a date,
+                      });
+                    </script>
+                  </div>
+                </div>
+
+              </div>
+              <!--<form class="col s12" id="bulletin" style='color: #1820ac !important'>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="pet_name" type="text" class="validate">
+            <label for="pet_name">Pet's Name</label>
+          </div>
+
         </div>
 
-          <div class="col 3">
-            <p> We recommend a picture of you smiling. You will upload pictures of your pets separately.</p>
-
-
-            <img class="materialboxed userPic" width="200" scr="../media/petCartoon.png" style='border: dotted'}>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="city_name" type="text" class="validate">
+            <label for ="City">City</label>
           </div>
+        </div>-->
+              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
 
-            <div class="row">
-              <div class="waves-effect waves-light btn submitBtn col s12" id="next1" style="background-color:blue">
-                <span>Next</span>
-              </div>
-            </div>
-          </div>
-          </div> <!--end slideOne-->
+      </form>
 
-
-          <!-- Second Slide -->
-
-          <div class="col s12" id="slideTwo">
-
-            <div class="switch">
-             <p> Do you have any pets? </p>
-             <label>
-              No
-              <input type="checkbox">
-              <span class="lever"></span>
-              Yes
-            </label>
-          </div>
-
-          <div class="input-field" style="color: black">
-            <select multiple>
-              <option value="" disabled selected>If yes, what type of pet(s) live with you?</option>
-              <option value="1">Cat(s)</option>
-              <option value="2">Dog(s)</option>
-              <option value="3">Rabbit(s)</option>
-              <option value="3">Ferret(s)</option>
-              <option value="3">Bird(s)</option>
-              <option value="3">Rodent(s)</option>
-              <option value="3">Reptile(s)</option>
-              <option value="3">Fish</option>
-            </select>
-            <label>Your Pets</label>
-          </div>
-          <div class="row">
-            <div class="waves-effect waves-light btn submitBtn col s5" id="back1" style="background-color:blue">
-              <span>Back</span>
-            </div>
-            <div class="waves-effect waves-light btn submitBtn col s5 offset-s2" id="next2" style="background-color:blue">
-              <span>Next</span>
-            </div>
-          </div>
-        </div>  <!--end slideTwo-->
-
-        <!-- Third Slide -->
-
-<!--         <div class="col s12" id="slideTwo">
-
-          <div class="row">
-            <div class="waves-effect waves-light btn submitBtn col s5" id="back1" style="background-color:blue">
-              <span>Back</span>
-            </div>
-            <div class="waves-effect waves-light btn submitBtn col s5" id="next2" style="background-color:blue">
-              <span>Next</span>
-            </div>
-          </div>
-        </div>  --> <!--end Third Slide-->
-
-
-
-        <!-- end container and section -->
-
+      <!-- end divs for container and section -->
       </div>
     </div>
 
+
+    <br><br>
 
 
     <footer class="page-footer">
@@ -214,20 +203,6 @@
       </div>
     </footer>
 
-  </body>
-  </html>
+</body>
 
-
-  <script>
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            document.getElementById('blah').src =  e.target.result;
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
+</html>
