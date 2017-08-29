@@ -45,6 +45,6 @@ var sequelize = require("../config/connection.js");
    }
   })
 
-  //Human.sync();
 
-  module.exports = Human;
+module.exports = Human;
+

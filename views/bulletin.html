@@ -46,10 +46,7 @@
     <div class="nav-wrapper" id="navbar">
       <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">Profile</button>
       <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
-<<<<<<< HEAD
 
-=======
->>>>>>> master
       <!-- Dropdown Structure -->
 
 
@@ -96,28 +93,27 @@
         <ul class="collection">
           <li class="collection-item avatar">
             <img src="/media/petCartoon.png" alt="" class="circle">
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
             <div class="input-field col s12">
               <input id="pet_name" type="text" class="validate">
               <label for="pet_name">Pet's Name</label>
             </div>
+
             <div id="morePets">
-            <!--Put code to add pets-->
+              <a class="waves-effect waves-light btn" id="add">Add another Pet</a>
 
-           </div>
-            <a class="waves-effect waves-light btn" id="add">Add another Pet</a>
+              <script>
 
-            <script>
+              $("#add").click(function(){
+                $("#morePets").append('<input id="pet_name" type="text" class="validate" placeholder="Pet"><label for="pet_name">Pets Name</label>');
 
-            $("#add").click(function(){
-              $("#morePets").append('<input id="pet_name" type="text" class="validate"><label for="pet_name">Pets Name</label>');
+                  });
 
-
-                });
-
-
-            </script>
+              </script>
 
             </div>
+
             <br>
             <br>
             <div class="row">
@@ -125,6 +121,7 @@
                 <input id="city_name" type="text" class="validate">
                 <label for="City">City</label>
               </div>
+            </div>
               <div class="row">
                 <div class="input-field col s12">
                   <br>
@@ -135,16 +132,17 @@
                   </label>
                   <form action="#">
                     <p class="range-field">
-                      <input type="range" id="test5" min="0" max="10">
+                      <input type="range" id="treatment" min="0" max="10">
                     </p>
 
                   </form>
                 </div>
+              </div>
                 <div class="row">
                   <form class="col s12">
                     <div class="input-field col s12">
-                      <textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
-                      <label for="textarea1">Textarea</label>
+                      <textarea id="more_info" class="materialize-textarea" data-length="120"></textarea>
+                      <label for="textarea1">Please add enter any additional information here: </label>
                    </form>
                     </div>
                 </div>
@@ -158,40 +156,18 @@
                   <div class="input-field col s6">
                     <input id="end_date" type="text" class="validate datepicker">
                     <label for="end_date">End Date</label>
-
-                    <script>
-                      $('.datepicker').pickadate({
-                        selectMonths: true,
-                        // Creates a dropdown to control month
-                        selectYears: 15,
-                        // Creates a dropdown of 15 years to control year,
-                        today: 'Today',
-                        clear: 'Clear',
-                        close: 'Ok',
-                        closeOnSelect: false // Close upon selecting a date,
-                      });
-                    </script>
                   </div>
+
+                </div>
                 </div>
 
               </div>
-              <!--<form class="col s12" id="bulletin" style='color: #1820ac !important'>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="pet_name" type="text" class="validate">
-            <label for="pet_name">Pet's Name</label>
-          </div>
 
-        </div>
 
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="city_name" type="text" class="validate">
-            <label for ="City">City</label>
-          </div>
-        </div>-->
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-          </li>
+          <button class="btn waves-effect waves-light" id="grabpetdata" type="submit" name="action">Submit
+          <!--         <a href="/aboutMe"></a>
+          -->           <i class="material-icons right">send</i>
+          </button>
 
       </form>
 
@@ -235,6 +211,53 @@
       </div>
     </footer>
 
+
 </body>
+<script>
+  $('.datepicker').pickadate({
+    selectMonths: true,
+    // Creates a dropdown to control month
+    selectYears: 15,
+    // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+
+  function grabPetData(event) {
+    event.preventDefault();
+    console.log("grab pet data button works");
+    var pet_name = $("#pet_name").val().trim();
+    var city = $("#city_name").val().trim();
+    var treatment = $("#treatment").val().trim();
+    var moreInfo = $("#more_info").val().trim();
+    var startDate = $("#start_date").val().trim();
+    var endDate = $("#end_date").val().trim();
+
+
+    var petInfo = {
+      pet_name: pet_name,
+      city: city,
+      treatment: treatment,
+      moreInfo: moreInfo,
+      startDate: startDate,
+      endDate: endDate
+
+    }
+
+    $.post("/put_newpet_in_db", petInfo, function(data) {
+      console.log(data);
+
+    })
+  }
+
+
+  $("#grabpetdata").on("click", grabPetData);
+
+  //ends grabData function
+
+
+</script>
 
 </html>
