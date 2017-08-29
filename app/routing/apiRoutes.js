@@ -11,6 +11,25 @@ module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require('passport-local').Strategy;
 
+  app.get("/profile/:username", function(req, res) {
+
+  // If the user provides a specific character in the URL...
+//  if (req.params.characters) {
+
+    // Then display the JSON for ONLY that character.
+    // (Note how we're using the ORM here to run our searches)
+console.log(req.user.username);
+    Human.findOne({
+      where: {
+        username: req.user.username
+      }
+    }).then(function(result) {
+      return res.json(result);
+    });
+
+//}
+});
+
 
 
   // Get all user API

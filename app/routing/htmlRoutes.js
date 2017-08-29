@@ -9,6 +9,16 @@ var authredirect = require("../routing/apiRoutes.js");
 
 module.exports = function(app, passport) {
 
+	// app.get("/public/:folder/:file", function(req, res){
+	// 	var folder=req.params.folder;
+	// 	var file=req.params.file;
+	// 	res.sendFile(path.join(__dirname, "/../public",folder,file));
+	// });
+
+	app.get("/profile", isLoggedIn, function(req, res){
+			res.sendFile(path.join(__dirname + '/../../views/profile.html'));
+	});
+
   app.get("/", function(request, response) {
     response.sendFile(path.join(__dirname + '/../../views/index.html'));
   });
@@ -24,7 +34,7 @@ module.exports = function(app, passport) {
   });
 
 
-  app.get("/bulletin", isLoggedIn, function(request, response) {
+  app.get("/bulletin", function(request, response) {
     response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
   });
 
@@ -39,7 +49,14 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
   //});
+	app.post('/put_newuser_in_db',
+		passport.authenticate('local-signup'),
 
+		function(req, res) {
+			// If this function gets called, authentication was successful.
+			// `req.user` contains the authenticated user.
+			res.json(req.user);
+		});
   // app.post('/put_newuser_in_db', passport.authenticate('local-signup',  { successRedirect: '/bulletin', failureRedirect: '/signup'}));
 
   app.post('/put_newuser_in_db',
@@ -68,6 +85,7 @@ module.exports = function(app, passport) {
 
     res.redirect('/');
   }
+
 
 
 }
