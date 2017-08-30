@@ -68,6 +68,7 @@
       <!-- Start Form -->
 
       <form class="col s12" id="addressPopulate" style='color: #1820ac !important'>
+        <div id="error-div"></div>
         <div class="row">
           <div class="input-field col s6">
             <input id="first_name" type="text" class="validate">
@@ -237,12 +238,17 @@
     }
 
     $.post("/put_newuser_in_db", info, function(userObject) {
-      console.log(userObject);
-
-    window.location.href ='/bulletin';
-
-
-    })
+    //  console.log(userObject);
+    window.location.href ='/profile';
+  }).catch(function(data) {
+  //  window.location.href='/';
+    //JSON.stringify(data);
+    var message=$('<p>').text("Username is Taken");
+    message.css("color","red");
+    $("#error-div").empty();
+    $("#error-div").append(message);
+    //console.log(data);
+  })
   }
 
 

@@ -16,7 +16,6 @@ module.exports = function(passport, app, user) {
 
     // Then display the JSON for ONLY that character.
     // (Note how we're using the ORM here to run our searches)
-    console.log(req.user.username);
     Human.findOne({
       where: {
         username: req.user.username
@@ -92,13 +91,37 @@ module.exports = function(passport, app, user) {
               info.username = username;
               info.password = userPassword;
 
-              var address = req.body.autocomplete;
+        if (user) {
 
-              var queryUrl =
-                "https://maps.googleapis.com/maps/api/geocode/json?address=" +
-                address +
-                "&key=" +
-                keys.mapKey;
+          return done(null, false, {
+
+            message: 'That username is already taken'
+          });
+        } else {
+          //var info=req.body;
+          var userPassword = generateHash(password);
+
+
+          var userPassword = generateHash(password);
+          //console.log("!!!"+req.body.first_name);
+          var info = req.body;
+          info.username = username;
+          info.password = userPassword;
+
+          var address = req.body.autocomplete;
+
+          var queryUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + keys.mapKey;
+          //
+          request(queryUrl, function(error, res, body) {
+            //
+            if (!error && res.statusCode === 200) {
+              //
+              var bObject=JSON.parse(res.body);
+              var lat = bObject["results"][0].geometry.location.lat;
+              var lng = bObject["results"][0].geometry.location.lng;
+              info.address_lat = lat;
+              info.address_lng = lng;
+              //       console.log(info);
               //
               request(queryUrl, function(error, res, body) {
                 //
@@ -127,6 +150,51 @@ module.exports = function(passport, app, user) {
                 }
               });
             }
+
+          });
+
+        }
+
+
+      });
+
+
+
+    }
+
+
+
+  ));
+
+  //LOCAL SIGNIN
+  passport.use('local-signin', new LocalStrategy(
+
+    {
+    //  console.log("made it here1");
+      // by default, local strategy uses username and password, we will override with username
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true // allows us to pass back the entire request to the callback
+    },
+
+    function(req, username, password, done) {
+      //  console.log("made it here2");
+      var User = user;
+
+      var isValidPassword = function(userpass, password) {
+        return bCrypt.compareSync(password, userpass);
+      }
+
+      User.findOne({
+        where: {
+          username: username
+        }
+      }).then(function(user) {
+
+        if (!user) {
+
+          return done(null, false, {
+            message: 'username does not exist'
           });
         }
       )
