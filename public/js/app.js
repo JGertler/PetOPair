@@ -29,4 +29,15 @@ $(document).ready(function() {
     });
   });
 
+  function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
+  //js used in index
+
+
+    //js in profile
+
+
 }); //end doc ready
