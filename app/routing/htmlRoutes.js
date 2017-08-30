@@ -79,7 +79,7 @@ module.exports = function(app, passport) {
 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
-			console.log(req);
+		//	console.log(req);
       return next();
     }
 

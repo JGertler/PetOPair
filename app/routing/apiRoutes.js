@@ -19,7 +19,7 @@ module.exports = function(passport, app, user) {
 
     // Then display the JSON for ONLY that character.
     // (Note how we're using the ORM here to run our searches)
-console.log(req.user.username);
+
     Human.findOne({
       where: {
         username: req.user.username
@@ -82,7 +82,7 @@ passport.serializeUser(function(user, done) {
       }).then(function(user) {
 
         if (user) {
-          console.log("Wrong Place!!!");
+
           return done(null, false, {
 
             message: 'That username is already taken'
@@ -90,14 +90,7 @@ passport.serializeUser(function(user, done) {
         } else {
           //var info=req.body;
           var userPassword = generateHash(password);
-          console.log("!!!" + req.body.first_name);
-          // var info =
-          // { first_name: req.body.first_name,
-          // last_name: req.body.last_name,
-          //   username:username,
-          // password:userPassword
-          //
-          // };
+
 
           var userPassword = generateHash(password);
           //console.log("!!!"+req.body.first_name);
@@ -179,7 +172,7 @@ passport.serializeUser(function(user, done) {
       }).then(function(user) {
 
         if (!user) {
-          console.log("'username does not exist'");
+
           return done(null, false, {
             message: 'username does not exist'
           });

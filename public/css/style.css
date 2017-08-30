@@ -8,6 +8,19 @@ body {
     padding-left: 0;
     }
 };
+#about-me-div{
+
+}
+#username-h2{
+	margin:0px;
+}
+#profile-page-container{
+	margin-top:30px;
+}
+#main-profile-pic{
+	width: 100%;
+	height:auto;
+}
 
 .mainLogo {
   padding: 0px;
@@ -80,16 +93,21 @@ label.treatment {
 label.treatment .commoner {
   display: block;
   float: left;
-  
+
 }
 
 label.treatment .royal{
   display: block;
   float: right;
   text-align: right;
-  
-}
 
+}
+.petBackground {
+    background-image: url("../media/petCartoon.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+
+};
 
 /*tally box for cups of sugar accrued */
 
@@ -110,5 +128,3 @@ label.treatment .royal{
   font-size: 12px;
 }
 /*end tally styling*/
-
-
