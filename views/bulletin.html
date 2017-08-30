@@ -22,16 +22,20 @@
 
 
 <ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
-  <li><div class="user-view">
-    <div class="background">
-      <img src="">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="">
+      </div>
+      <a href="#!user"><img class="circle" src=""></a>
+      <a href="#!name"><span class="green-text name">Susie Smith</span></a>
+      <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
     </div>
-    <a href="#!user"><img class="circle" src=""></a>
-    <a href="#!name"><span class="green-text name">Susie Smith</span></a>
-    <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
-  </div></li>
+  </li>
   <li><a href="#!"><i class="material-icons">account_circle</i>My Pet Profile</a></li>
-  <li><div class="divider"></div></li>
+  <li>
+    <div class="divider"></div>
+  </li>
   <li><a class="subheader">Activity</a></li>
   <li><a href="#!">Notifications</a></li>
   <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
@@ -62,8 +66,10 @@
       </ul>
 
       <ul class="right hide-on-med-and-down">
-        <li><a href="badges.html">About</a></li><li><span>|</span></li>
-        <li><a href="#!">Contact</a>|</li><li><span>|</span></li>
+        <li><a href="badges.html">About</a></li>
+        <li><span>|</span></li>
+        <li><a href="#!">Contact</a>|</li>
+        <li><span>|</span></li>
         <li><a href="#!">Disclaimer</a></li>
         <!-- Dropdown Trigger -->
 
@@ -94,122 +100,121 @@
           <li class="collection-item avatar">
             <img src="/media/petCartoon.png" alt="" class="circle">
             <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-        </li>
-            <div class="input-field col s12">
-              <input id="pet_name" type="text" class="validate">
-              <label for="pet_name">Pet's Name</label>
-            </div>
+          </li>
+          <div class="input-field col s12">
+            <input id="pet_name" type="text" class="validate">
+            <label for="pet_name">Pet's Name</label>
+          </div>
 
-            <div id="morePets">
-              <a class="waves-effect waves-light btn" id="add">Add another Pet</a>
+          <div id="morePets">
+            <a class="waves-effect waves-light btn" id="add">Add another Pet</a>
 
-              <script>
-
-              $("#add").click(function(){
+            <script>
+              $("#add").click(function () {
                 $("#morePets").append('<input id="pet_name" type="text" class="validate" placeholder="Pet"><label for="pet_name">Pets Name</label>');
 
-                  });
+              });
+            </script>
 
-              </script>
+          </div>
 
+          <br>
+          <br>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="city_name" type="text" class="validate">
+              <label for="City">City</label>
             </div>
-
-            <br>
-            <br>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="city_name" type="text" class="validate">
-                <label for="City">City</label>
-              </div>
-            </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <br>
-                  <br>
-                  <label class="treatment clearfix" for="treatment">
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <br>
+              <br>
+              <label class="treatment clearfix" for="treatment">
                   <span class="commoner">Commoner (for the common pet)</span>
                   <span class="royal">Royal Treatment (for the most discrimintating pet)</span>
                   </label>
-                  <form action="#">
-                    <p class="range-field">
-                      <input type="range" id="treatment" min="0" max="10">
-                    </p>
+              <form action="#">
+                <p class="range-field">
+                  <input type="range" id="treatment" min="0" max="10">
+                </p>
 
-                  </form>
-                </div>
-              </div>
-                <div class="row">
-                  <form class="col s12">
-                    <div class="input-field col s12">
-                      <textarea id="more_info" class="materialize-textarea" data-length="120"></textarea>
-                      <label for="textarea1">Please add enter any additional information here: </label>
-                   </form>
-                    </div>
-                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="input-field col s12">
+                <textarea id="more_info" class="materialize-textarea" data-length="120"></textarea>
+                <label for="textarea1">Please add enter any additional information here: </label>
+            </form>
+            </div>
+          </div>
 
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input id="start_date" type="text" class="validate datepicker">
-                    <label for="start_date">Start Date</label>
-                  </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="start_date" type="text" class="validate datepicker">
+              <label for="start_date">Start Date</label>
+            </div>
 
-                  <div class="input-field col s6">
-                    <input id="end_date" type="text" class="validate datepicker">
-                    <label for="end_date">End Date</label>
-                  </div>
+            <div class="input-field col s6">
+              <input id="end_date" type="text" class="validate datepicker">
+              <label for="end_date">End Date</label>
+            </div>
 
-                </div>
-                </div>
+          </div>
+    </div>
 
-              </div>
+  </div>
 
 
-          <button class="btn waves-effect waves-light" id="grabpetdata" type="submit" name="action">Submit
+  <button class="btn waves-effect waves-light" id="grabpetdata" type="submit" name="action">Submit
           <!--         <a href="/aboutMe"></a>
           -->           <i class="material-icons right">send</i>
           </button>
 
-      </form>
+  </form>
 
-      <!-- end divs for container and section -->
+  <!-- end divs for container and section -->
+  </div>
+  </div>
+
+
+  <br><br>
+
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">About Us</h5>
+          <p class="grey-text text-lighten-4">Pet OPair is made up of five determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun,
+            Jennifer King, and Amber Orenstein</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Adopt!</h5>
+          <ul>
+            <li><a class="white-text" href="http://www.rmfr-colorado.org">RMFR</a></li>
+            <li><a class="white-text" href="http://www.ddfl.org">Dumb Friends League</a></li>
+            <li><a class="white-text" href="https://maxfund.org">MaxFund</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contact</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Email</a></li>
+            <li><a class="white-text" href="#!">Phone</a></li>
+            <li><a class="white-text" href="#!">Leasing Office</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
-
-    <br><br>
-
-
-    <footer class="page-footer">
+    <div class="footer-copyright">
       <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">About Us</h5>
-            <p class="grey-text text-lighten-4">Pet OPair is made up of five determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Adopt!</h5>
-            <ul>
-              <li><a class="white-text" href="http://www.rmfr-colorado.org">RMFR</a></li>
-              <li><a class="white-text" href="http://www.ddfl.org">Dumb Friends League</a></li>
-              <li><a class="white-text" href="https://maxfund.org">MaxFund</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Contact</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Email</a></li>
-              <li><a class="white-text" href="#!">Phone</a></li>
-              <li><a class="white-text" href="#!">Leasing Office</a></li>
-            </ul>
-          </div>
-        </div>
+        Founded in <a class="orange-text text-lighten-3" href="https://github.com/JGertler">Denver, CO</a>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-          Founded in <a class="orange-text text-lighten-3" href="https://github.com/JGertler">Denver, CO</a>
-        </div>
-      </div>
-    </footer>
+    </div>
+  </footer>
 
 
 </body>
@@ -246,9 +251,8 @@
 
     }
 
-    $.post("/put_newpet_in_db", petInfo, function(data) {
+    $.post("/put_newpet_in_db", petInfo, function (data) {
       console.log(data);
-
     })
   }
 
@@ -256,7 +260,6 @@
   $("#grabpetdata").on("click", grabPetData);
 
   //ends grabData function
-
 
 </script>
 
