@@ -1,5 +1,6 @@
 var Human = require("../models/info.js");
-var keys = require("../config/keys.js");
+var Pets = require("../models/petInfo.js")
+var keys=require("../config/keys.js");
 var request = require("request");
 var bCrypt = require('bcrypt-nodejs');
 
@@ -11,6 +12,25 @@ module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require('passport-local').Strategy;
 
+  app.get("/profile/:username", function(req, res) {
+
+  // If the user provides a specific character in the URL...
+//  if (req.params.characters) {
+
+    // Then display the JSON for ONLY that character.
+    // (Note how we're using the ORM here to run our searches)
+console.log(req.user.username);
+    Human.findOne({
+      where: {
+        username: req.user.username
+      }
+    }).then(function(result) {
+      return res.json(result);
+    });
+
+//}
+});
+
 
 
   // Get all user API
@@ -19,10 +39,12 @@ module.exports = function(passport, app, user) {
       res.json(results);
     });
   });
+//JK added
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+  app.post("/put_newuser_in_db", function(req, response) {
 
 
   // used to deserialize the user
@@ -189,5 +211,30 @@ module.exports = function(passport, app, user) {
     }
   ));
 
+
+
+
+// Get all user API
+  app.get("/api/pets", function(req, res) {
+    Pets.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+
+
+  app.post("/put_newpet_in_db", function(req, response) {
+console.log(req.body)
+
+  var petInfo = req.body
+   Pets.create(petInfo)
+      .then(function(results) {
+        response.json(results);
+      })
+      .catch(function (err) {
+        console.log("Data err with upload");
+        console.log(err);
+      })
+
+  });
 
 }
