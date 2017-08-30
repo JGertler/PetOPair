@@ -11,13 +11,16 @@ describe("PetOPair", function() {
     Nightmare({ show: true })
       .goto("http://localhost:8080/")
       .wait(signUp)
-      .click(SignUp)
+      .click(signUp)
       .evaluate(function() {
-        return document.path;
+        return document.title;
       })
-      .then(function(path){
-        expect(path).to.equal("http://localhost:8080/signup");
+      .then(function(title){
+        expect(title).to.equal("");
         done();
+      })
+      .catch(function(err){
+        console.log(err);
       });
 
   });
