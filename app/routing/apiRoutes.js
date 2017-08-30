@@ -1,5 +1,6 @@
 var Human = require("../models/info.js");
-var keys = require("../config/keys.js");
+var Pets = require("../models/petInfo.js")
+var keys=require("../config/keys.js");
 var request = require("request");
 var bCrypt = require('bcrypt-nodejs');
 
@@ -38,10 +39,12 @@ console.log(req.user.username);
       res.json(results);
     });
   });
+//JK added
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+  app.post("/put_newuser_in_db", function(req, response) {
 
 
   // used to deserialize the user
@@ -208,5 +211,30 @@ console.log(req.user.username);
     }
   ));
 
+
+
+
+// Get all user API
+  app.get("/api/pets", function(req, res) {
+    Pets.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+
+
+  app.post("/put_newpet_in_db", function(req, response) {
+console.log(req.body)
+
+  var petInfo = req.body
+   Pets.create(petInfo)
+      .then(function(results) {
+        response.json(results);
+      })
+      .catch(function (err) {
+        console.log("Data err with upload");
+        console.log(err);
+      })
+
+  });
 
 }
