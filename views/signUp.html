@@ -97,6 +97,12 @@
             <label for="email">Email</label>
           </div>
         </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="picture_url">Enter Picture URL</label>
+          </div>
+        </div>
 
         <!-- Google Autopopulate html -->
         <div class="row" id="address">
@@ -212,6 +218,7 @@
       username = $("#username").val().trim(),
       password = $("#password").val().trim(),
       email = $("#email").val().trim(),
+      //picture_url = $("#picture_url").val().trim(),
       autocomplete = $("#autocomplete").val().trim(),
       street_number = $("#street_number").val().trim(),
       route = $("#route").val().trim(),
@@ -224,6 +231,7 @@
     var info = {
       first_name: first_name,
       last_name: last_name,
+      //picture_url:picture_url,
       username: username,
       password: password,
       email: email,
