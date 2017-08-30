@@ -1,6 +1,6 @@
 
 body {
-	padding-left: 0px;
+  padding-left: 0px;
 };
 
 @media only screen and (min-width : 768px) {
@@ -12,15 +12,24 @@ body {
 
 }
 #username-h2{
-	margin:0px;
+  margin:0px;
 }
 #profile-page-container{
-	margin-top:30px;
+  margin-top:30px;
 }
 #main-profile-pic{
-	width: 100%;
-	height:auto;
+  width: 100%;
+  height:auto;
 }
+
+
+.petBackground {
+    background-image: url("../media/petCartoon.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+
+};
+
 
 .mainLogo {
   padding: 0px;
@@ -48,9 +57,12 @@ nav {
 }
 
 #blah {
-    background-image: url("../media/petCartoon.png");
+    background-image: url("../media/profPic.jpg");
     background-repeat: no-repeat;
-    background-position: right top;
+    margin: 0px;
+    background-position: center;
+    width: 200px;
+    height: auto;
 
 };
 
@@ -60,19 +72,14 @@ td, th {
 }
 
 
-#slideTwo {
+#slideTwo #slideThree {
 display: none;
-z-index: 2;
 }
 
-#next1 {
+#formNext {
   margin: 30px;
 }
 
-
-.uploadBtn, .submitBtn {
-  color: blue;
-}
 
 #logo-container {
   margin-left: 40px;
@@ -128,3 +135,90 @@ label.treatment .royal{
   font-size: 12px;
 }
 /*end tally styling*/
+
+
+
+/.progressBar Bar Styling*/
+*, *:after, *:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Form.progressBar */
+.progressBar {
+  width: 100%;
+  text-align: center;
+}
+.progressBar .circle,
+.progressBar .bar {
+  display: inline-block;
+  background: #fff;
+  width: 40px; height: 40px;
+  border-radius: 40px;
+  border: 1px solid #d5d5da;
+}
+.progressBar .bar {
+  position: relative;
+  width: 80px;
+  height: 6px;
+  top: -33px;
+  margin-left: -5px;
+  margin-right: -5px;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+.progressBar .circle .label {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 32px;
+  margin-top: 3px;
+  color: #b5b5ba;
+}
+.progressBar .circle .title {
+  color: #b5b5ba;
+  font-size: 10px;
+  line-height: 1px;
+
+}
+
+/* Done / Active */
+.progressBar .bar.done,
+.progressBar .circle.done {
+  background: #eee;
+}
+.progressBar .bar.active {
+  background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+}
+.progressBar .circle.done .label {
+  color: #FFF;
+  background: #8bc435;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progressBar .circle.done .title {
+  color: #444;
+}
+.progressBar .circle.active .label {
+  color: #FFF;
+  background: #0c95be;
+  box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.progressBar .circle.active .title {
+  color: #0c95be;
+}
+
+/*end.progressBar bar styling*/
+
+#slideOne {
+margin-left: 10%;
+}
+
+p {
+  color: black;
+}
+
+
