@@ -3,6 +3,7 @@ $(document).ready(function() {
   $("select").material_select();
   ///This toggles the profile view onOpen/onClose functions move the
   //button around
+
   $('#button-toggle-profile').sideNav({
     menuWidth: 300, // Default is 300
     edge: 'left', // Choose the horizontal origin
@@ -21,18 +22,15 @@ $(document).ready(function() {
   });
 
 
-  $('#next1').click(function() {
-    $('#slideOne').animate({
-      width: 'toggle'
-    });
-    $('#slideTwo').animate({
-      width: 'toggle'
-    });
-  });
 
   function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+
+
+
+
 
 
 var i = 1;
