@@ -16,7 +16,7 @@ $(document).ready(function() {
     }, // A function to be called when sideNav is opened
     onClose: function(el) {
       $('#button-toggle-profile').css('float', 'none');
-      $('#button-toggle-profile').text('Profile')
+      $('#button-toggle-profile').text('actions')
       $('#button-toggle-profile').prependTo("#navbar");
     }, // A function to be called when sideNav is closed
   });
@@ -38,17 +38,17 @@ var i = 1;
   $('.progressBar .bar').removeClass().addClass('bar');
   setInterval(function() {
     $('.progressBar .circle:nth-of-type(' + i + ')').addClass('active');
-    
+
     $('.progressBar .circle:nth-of-type(' + (i-1) + ')').removeClass('active').addClass('done');
-    
+
     $('.progressBar .circle:nth-of-type(' + (i-1) + ') .label').html('&#10003;');
-    
+
     $('.progressBar .bar:nth-of-type(' + (i-1) + ')').addClass('active');
-    
+
     $('.progressBar .bar:nth-of-type(' + (i-2) + ')').removeClass('active').addClass('done');
-    
+
     i++;
-    
+
     if (i==0) {
       $('.progressBar .bar').removeClass().addClass('bar');
       $('.progressBar div.circle').removeClass().addClass('circle');

@@ -40,7 +40,7 @@
     <li><a href="#!">Notifications</a></li>
     <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
     <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
-    <li><a class="waves-effect" href="/sugar">Log Out</a></li>
+    <li><a class="waves-effect" href="/logout">Log Out</a></li>
   </ul>
 
   <!-- end navbar -->
@@ -48,8 +48,8 @@
   <body>
     <nav class="lighten-1" role="navigation">
       <div class="nav-wrapper" id="navbar">
-        <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">profile</button>
-        <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
+        <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">Actions</button>
+        <a id="logo-container" href="/" class="brand-logo">Pet OPair </a>
 
 
 
@@ -102,17 +102,20 @@
 
       <div class="section">
         <div class="row">
-          <h2 class="header center col s12 light">Cups of Sugar</h2>
-        </div>
-        <div class="row">
-          <div id="cupofSugar" class="col s4">
+          <h2 class="header center light col m12">Cups of Sugar</h2>
+
+          <div  class=" col m1 col l2">
+
+          </div>
+
+          <div id="cupofSugar" class=" col s12 col m2" style="text-align:center">
             <img src="/media/sugar.jpg">
           </div>
-          <div class="tallyBox col s1 offset s3">
-            <p>0</p>
+          <div class="tallyBox col s12 col m2">
+            <h1 id= "sugar_cups" style="text-align:center">0</h1>
           </div>
-            <div class="col s2">
-              <p class="placeholderNumber"> You currently don't have any cups of sugar because you have not grabbed any requests from the bulletin. woof meow. </p>
+            <div class=" col s12 col m4">
+              <h4> Gain more sugar by taking jobs from the bulletin! <a href="/bulletinboard.handlebars">Bulletin Board</a> </h4>
             </div>
         </div>
       </div>
@@ -193,7 +196,7 @@
       $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
 
       $("#about-me-div").append(dataString);
-
+      $("#sugar_cups").append(data.cups_of_sugar);
     });
 
 

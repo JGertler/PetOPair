@@ -9,10 +9,7 @@ module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require("passport-local").Strategy;
   app.get("/profile/:username", function(req, res) {
-    // If the user provides a specific character in the URL...
-    //  if (req.params.characters) {
-    // Then display the JSON for ONLY that character.
-    // (Note how we're using the ORM here to run our searches)
+    // finds the currently logged in user and returns their info to the profile page
     console.log(req.user.username);
     Human.findOne({
       where: {
@@ -177,4 +174,27 @@ module.exports = function(passport, app, user) {
         console.log(err);
       });
   });
+
+  app.post('/upload', function(req, res) {
+  	if (!req.files) {
+  		return res.status(400).send('No files were uploaded.');
+  	}
+    Console.log("HHHIIHI")
+  	// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  	var profilePic = req.files.profilePic;
+  	console.log(req.files.profilePic.name +"99999");
+
+  	// Use the mv() method to place the file somewhere on your server
+  	profilePic.mv('uploads/' + req.files.profilePic.name, function(err) {
+  		if (err) {
+  			return res.status(500).send(err);
+  		}
+  		  //res.write("<h1>Uploaded from file</h2><img style='max-width:20%' src='uploads/" + req.files.profilePic.name + "'/>");
+
+  		res.end();
+  	});
+  });
+
+
+
 };
