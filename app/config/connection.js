@@ -3,7 +3,7 @@
 
 var Sequelize = require("sequelize");
 // var keys=require("keys.js");
-var keys=require("./keys.js");
+//var keys=require("./keys.js");
 *Username*: root
 *Password*: rootroot
 *Port*: 3306

@@ -1,6 +1,6 @@
 var Human = require("../models/info.js");
 var Pets = require("../models/petInfo.js");
-var keys = require("../config/keys.js");
+//var keys = require("../config/keys.js");
 var request = require("request");
 var bCrypt = require("bcrypt-nodejs");
 // Routes
@@ -81,8 +81,8 @@ module.exports = function(passport, app, user) {
             var queryUrl =
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
               address +
-              "&key=" +
-              keys.mapKey;
+              "&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
+            //  keys.mapKey;
             //
             request(queryUrl, function(error, res, body) {
               //
@@ -179,7 +179,7 @@ module.exports = function(passport, app, user) {
   	if (!req.files) {
   		return res.status(400).send('No files were uploaded.');
   	}
-    Console.log("HHHIIHI")
+    Console.log("HHHIIHI");
   	// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   	var profilePic = req.files.profilePic;
   	console.log(req.files.profilePic.name +"99999");
