@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
-
+var fileUpload = require('express-fileupload');
 var passport   = require('passport')
 var session    = require('cookie-session')
 
@@ -21,7 +21,7 @@ app.use(bodyParser.raw({type: 'application/vnd.custom-type'}))
 app.use(bodyParser.text({type: 'text/html'}))
 // app.use(express.static('public'));
 //commented out the above line and added line13 instead-JB
-
+app.use(fileUpload());
 
 app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
 app.use(passport.initialize());

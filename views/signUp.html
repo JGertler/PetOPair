@@ -64,7 +64,30 @@
 
   <div class="container">
     <div class="section">
+      <div id="error-div2"></div>
+      <!-- action="/upload" method="post" -->
+      <!-- <form ref="uploadForm"  enctype="multipart/form-data">
+        <div class="row">
+          <div class="col m2 col s1"></div>
+          <div class="col s4" style="align: right">
+            <img class="materialboxed userPic" id="blah" src="#" alt="User img" width="200" height="200" />
+          </div>
 
+          <div class="col m6 s12">
+            <h4>Upload an Image</h4>
+              <p> We recommend posting a picture of you smiling. You will upload pictures of your pets separately. </p>
+            <input type="file" id="profile_url" name="profilePic" />
+            <br><br>
+            <input type="submit" id="picture_upload" value="Upload!" />
+          </div>
+        </div>
+      </form> -->
+
+      <!-- <div class="col s6">
+        <input type="file" name="profilePic" accept="image/*" onchange="readURL(this);"/>
+        <img class="materialboxed userPic" id="sampleProfileView" src="#" alt="User img" width="200" height="200"/>
+      </div> -->
+      <!-- <img src="uploads/barn_and_trees.jpg" /> -->
       <!-- Start Form -->
 
       <form class="col s12" id="addressPopulate" style='color: #1820ac !important'>
@@ -95,6 +118,12 @@
           <div class="input-field col s12">
             <input id="email" type="email" class="validate">
             <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="picture_url">Enter Picture URL</label>
           </div>
         </div>
 
@@ -197,13 +226,13 @@
 
 
 <script>
-
   //function which grab the user's input data from the sign up form and puts it into an object to route to the table
   var userObject;
+
   function grabData(event) {
     event.preventDefault();
-    var address=$("#autocomplete").val().trim();
-    var queryUrl ="https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
+    var address = $("#autocomplete").val().trim();
+    var queryUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
 
 
 
@@ -212,6 +241,7 @@
       username = $("#username").val().trim(),
       password = $("#password").val().trim(),
       email = $("#email").val().trim(),
+      //picture_url = $("#picture_url").val().trim(),
       autocomplete = $("#autocomplete").val().trim(),
       street_number = $("#street_number").val().trim(),
       route = $("#route").val().trim(),
@@ -224,6 +254,8 @@
     var info = {
       first_name: first_name,
       last_name: last_name,
+      cups_of_sugar: 0,
+      //picture_url:picture_url,
       username: username,
       password: password,
       email: email,
@@ -238,21 +270,37 @@
     }
 
     $.post("/put_newuser_in_db", info, function(userObject) {
-    //  console.log(userObject);
-    window.location.href ='/profile';
-  }).catch(function(data) {
-  //  window.location.href='/';
-    //JSON.stringify(data);
-    var message=$('<p>').text("Username is Taken");
-    message.css("color","red");
-    $("#error-div").empty();
-    $("#error-div").append(message);
-    //console.log(data);
-  })
+      //  console.log(userObject);
+      window.location.href = '/profile';
+    }).catch(function(data) {
+      //  window.location.href='/';
+      //JSON.stringify(data);
+      var message = $('<p>').text("Username is Taken");
+      message.css("color", "red");
+      $("#error-div").empty();
+      $("#error-div").append(message);
+      //console.log(data);
+    })
   }
 
-
+  $("#picture_upload").on('click', loadPic);
   $("#grabdata").on("click", grabData);
+
+  function loadPic(){
+    var profile_url=$("#profile_url").val.trim()
+    $.post("/upload", profile_url, function() {
+      //  console.log(userObject);
+      window.location.href = '/';
+    }).catch(function(data) {
+      //  window.location.href='/';
+      //JSON.stringify(data);
+      var message = $('<p>').text("Error in picture upload");
+      message.css("color", "red");
+      $("#error-div2").empty();
+      $("#error-div2").append(message);
+      //console.log(data);
+    })
+  }
 
   //ends grabData function
 
