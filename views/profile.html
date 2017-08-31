@@ -3,6 +3,7 @@
 
 <body onload="showProfile();">
 
+
   <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,18 +29,19 @@
           <img src="">
         </div>
         <a href="#!user"><img class="circle" src=""></a>
-        <a href="#!name"><span class="green-text name">Susie Smith</span></a>
-        <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
+        <a href="#!name"><span class="green-text name" id="side_nav_name">Susie Smith</span></a>
+        <a href="#!email"><span class="green-text email" id="side_nav_email">meowcatmeow@gmail.com</span></a>
       </div>
     </li>
-    <li><a href="#!"><i class="material-icons">account_circle</i>My Pet Profile</a></li>
+    <li><a href="#!"><i class="material-icons" >account_circle</i>My Pet Profile</a></li>
     <li>
       <div class="divider"></div>
     </li>
     <li><a class="subheader">Activity</a></li>
     <li><a href="#!">Notifications</a></li>
-    <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
-    <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
+    <li><a class="waves-effect" href="/bulletinboard">My Neighborhood Bulletin</a></li>
+    <li><a class="waves-effect" href="/bulletin">Post to Bullletin</a></li>
+    <li><a class="waves-effect" href="/aboutme">Expand you profile</a></li>
     <li><a class="waves-effect" href="/logout">Log Out</a></li>
   </ul>
 
@@ -178,6 +180,7 @@
 </html> -->
 
 <script>
+var current_user_info;
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -194,8 +197,9 @@
       $("#username-quote").text(data.username);
       $("#username-h1").text(first + '  ' + last);
       $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
-
-      $("#about-me-div").append(dataString);
+      $("#side-nav-name").text(first + '  ' + last);
+      $("#side-nav-email").text(data.email);
+      $("#about-me-div").append("ABOUT ME TEXT HERE");
       $("#sugar_cups").append(data.cups_of_sugar);
     });
 

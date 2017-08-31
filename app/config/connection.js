@@ -3,14 +3,14 @@
 
 var Sequelize = require("sequelize");
 // var keys=require("keys.js");
-//var keys=require("./keys.js");
+// var keys=require("./keys.js");
 // *Username*: root
 // *Password*: rootroot
 // *Port*: 3306
 // *Database*: petladiez
 // Creates mySQL connection using Sequelize
-//var sequelize = new Sequelize("POP_db", "root", keys.sqlKey, {
 var sequelize = new Sequelize("petladiez", "root", "rootroot", {
+//var sequelize = new Sequelize("POP_db", "root", "90099109", {
   host: "ducodingbootcamp1project2.c8q4eqibbjyw.us-west-2.rds.amazonaws.com",
   dialect: "mysql",
   pool: {

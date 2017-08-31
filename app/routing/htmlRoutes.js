@@ -42,6 +42,10 @@ module.exports = function(app, passport) {
     response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
   });
 
+	app.get("/bulletinboard", function(request, response) {
+    response.sendFile(path.join(__dirname + '/../../views/bulletinboard.html'));
+  });
+
 
 
   //app.get('/dashboard',isLoggedIn, authController.dashboard);

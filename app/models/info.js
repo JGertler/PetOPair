@@ -19,6 +19,9 @@ var sequelize = require("../config/connection.js");
       email: {
         type: Sequelize.TEXT
       },
+      // cups_of_sugar: {
+      //   type: Sequelize.INTEGER
+      // },
       autocomplete: {
         type: Sequelize.TEXT
       },
@@ -47,4 +50,3 @@ var sequelize = require("../config/connection.js");
 
 
 module.exports = Human;
-
