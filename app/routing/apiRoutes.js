@@ -195,6 +195,31 @@ module.exports = function(passport, app, user) {
   	});
   });
 
-
+  app.post("/put_newpet_in_db", function(req, response) {
+     console.log(req.body);
+     var petInfo = req.body;
+     Pets.create(petInfo)
+       .then(function(results) {
+         response.json(results);
+       })
+       .catch(function(err) {
+         console.log("Data err with upload");
+         console.log(err);
+       });
+   });
+   app.get("/api/pets", function(req, res) {
+     Pets.findAll({}).then(function(results) {
+       res.json(results);
+     });
+   });
+   app.post("/put_newpet_in_db", function(req, res) {
+     Pets.create({
+       pet_name: req.body.pet_name,
+       treatment: req.body.treatment,
+       moreInfo: req.body.moreInfo,
+       startDate: req.body.startDate,
+       endDate: req.body.endDate
+     });
+   });
 
 };
