@@ -120,14 +120,15 @@
       </div>
       <!--end progressbar-->
 
-      <!-- First Slide -->
-      <form>
+
+      <!-- First Slide -->   
+      <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data">
         <div class="row" id="slideOne">
           <div class="col s6">
             <p> We recommend posting a picture of you smiling. You will upload pictures of your pets separately. </p>
           </div>
           <div class="col s6">
-            <input type="file" name="pic" accept="image/*" onchange="readURL(this);"/>
+            <input type="file" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
             <img class="materialboxed userPic" id="blah" src="#" alt="User img" width="200" height="200"/>
           </div>
         </div> <!-- end row -->
@@ -195,17 +196,16 @@
               <span class="commoner">Commoner</span>
               <span class="royal">Royal Treatment</span>
             </label>
-            <form action="#">
               <p class="range-field">
                 <input type="range" id="treatment" min="0" max="10">
               </p>
-            </form>
           </div>
         </div>
 
         <div class="row">
           <div class="col 1 offset-s8">
             <div class="waves-effect waves-light btn" id="formNext" style="background-color:blue">
+            <input type="submit" value="Upload"/>
               <span>Next</span>
             </div>
           </div>
