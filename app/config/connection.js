@@ -10,6 +10,7 @@ var keys=require("./keys.js");
 // *Database*: petladiez
 // Creates mySQL connection using Sequelize
 
+
 //below is the local configuration when running locally
 var sequelize = new Sequelize("POP_db", "root", "", {
 
