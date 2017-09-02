@@ -67,7 +67,10 @@ nav {
 
 };
 
-
+#bulletinHeader {
+  text-align: center;
+  font-family: "Shadows Into Light", cursive;
+}
 td, th {
   color: #1820ac !important;
 }

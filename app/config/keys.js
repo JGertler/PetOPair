@@ -1,2 +1,10 @@
-exports.mapKey="AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
-exports.sqlKey="90099109";
+var keys = {
+	"mapKey":"AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw",
+	"sqlKey": "",
+	"s3bucket": "petopair-west",
+	"s3accesskey": "AKIAJHBYKFFAP3AEQOAA",
+	"s3secretaccesskey": "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",
+};
+
+module.exports = keys;
+
