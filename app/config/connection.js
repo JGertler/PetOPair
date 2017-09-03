@@ -13,7 +13,7 @@ var keys=require("./keys.js");
 
 //below is the local configuration when running locally
 var sequelize = new Sequelize("POP_db", "root", "", {
-
+ host:"localhost",
   dialect: "mysql",
   pool: {
     max: 5,
