@@ -1,57 +1,49 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
   <!--Import Google Icon Font-->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
-
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="/css/style.css">
-
-  <!-- load fontawesome -->
-
-
-
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script type="text/javascript" src="/js/app.js"></script>
 </head>
 
-<!-- Slide-out Profile piece-->
-<ul id="slide-out" class="side-nav">
-  <li>
-    <div class="user-view">
-      <div class="background">
-        <img src="">
-      </div>
-      <a href="#!user"><img class="circle" src=""></a>
-      <a href="#!name"><span class="green-text name">Susie Smith</span></a>
-      <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
+
+<!-- navbar -->
+
+<ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
+  <li><div class="user-view">
+    <div class="background">
+      <img src="">
     </div>
-  </li>
+    <a href="#!user"><img class="circle" src=""></a>
+    <a href="#!name"><span class="green-text name">Susie Smith</span></a>
+    <a href="#!email"><span class="green-text email">meowcatmeow@gmail.com</span></a>
+  </div></li>
   <li><a href="#!"><i class="material-icons">account_circle</i>My Pet Profile</a></li>
-  <li>
-    <div class="divider"></div>
-  </li>
+  <li><div class="divider"></div></li>
   <li><a class="subheader">Activity</a></li>
   <li><a href="#!">Notifications</a></li>
   <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
   <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
-  <li><a class="waves-effect" href="/sugar">Log Out</a></li>
 </ul>
 
-
-
+<!-- end navbar -->
 
 <body>
-  <!--navbar-->
   <nav class="lighten-1" role="navigation">
     <div class="nav-wrapper" id="navbar">
       <button data-activates="slide-out" class="button-toggle-profile waves-effect waves-light btn " id="button-toggle-profile">Profile</button>
-      <a id="logo-container" href="/" class="brand-logo">Pet OPair</a>
+      <a id="logo-container" href="/" class="brand-logo"><img src="/media/Petopair.png" style="width: 300px; position: relative; bottom: 43px"></a>
       <!-- Dropdown Structure -->
 
 
@@ -64,75 +56,59 @@
       </ul>
 
       <ul class="right hide-on-med-and-down">
-        <li><a href="badges.html">About</a></li>
-        <li><span>|</span></li>
-        <li><a href="#!">Contact</a>|</li>
-        <li><span>|</span></li>
+        <li><a href="badges.html">About</a></li><li><span>|</span></li>
+        <li><a href="#!">Contact</a>|</li><li><span>|</span></li>
         <li><a href="#!">Disclaimer</a></li>
         <!-- Dropdown Trigger -->
 
         <!-- modal goes here -->
-
-      </ul>
-      <!--Added a place for the menu items to collapse into on smaller screens -->
-      <ul class="right show-on-med-and-down hide-on-large-only  ">
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">menu</i></a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- end nav -->
-
-
-  <div class="section no-pad-bot petBackground" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center col s6"><img class="mainLogo" src="/media/Petopair.png"></h1>
-      </div>
+        <button type="button" class="btn-large waves-effect waves-light" data-toggle="modal" data-target="#myModal">Login</button>
+        <!-- Modal Structure -->
+        <div id="modal" class="modal open bottom-sheet">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer green">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat">Close</a>
+          </div>
+        </div>
+        <!-- modal ends here -->
+      </li>
+    </ul>
+    <!--Added a place for the menu items to collapse into on smaller screens -->
+    <ul class="right show-on-med-and-down hide-on-large-only  ">
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">menu</i></a></li>
+    </ul>
   </div>
+</nav>
+
+<!-- end nav -->
 
 
-  <div class="container">
-    <div class="section">
-      <div id="error-div2"></div>
-      <!-- action="/upload" method="post" -->
-      <!-- <form ref="uploadForm"  enctype="multipart/form-data">
-        <div class="row">
-          <div class="col m2 col s1"></div>
-          <div class="col s4" style="align: right">
-            <img class="materialboxed userPic" id="blah" src="#" alt="User img" width="200" height="200" />
-          </div>
+<!--
+  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
 
-          <div class="col m6 s12">
-            <h4>Upload an Image</h4>
-              <p> We recommend posting a picture of you smiling. You will upload pictures of your pets separately. </p>
-            <input type="file" id="profile_url" name="profilePic" />
-            <br><br>
-            <input type="submit" id="picture_upload" value="Upload!" />
-          </div>
-        </div>
-      </form> -->
 
-      <!-- <div class="col s6">
-        <input type="file" name="profilePic" accept="image/*" onchange="readURL(this);"/>
-        <img class="materialboxed userPic" id="sampleProfileView" src="#" alt="User img" width="200" height="200"/>
-      </div> -->
-      <!-- <img src="uploads/barn_and_trees.jpg" /> -->
-      <!-- Start Form -->
+<div class="container">
 
-      <form class="col s12" id="addressPopulate" style='color: #1820ac !important'>
+    <div class="section carouselSection" style="font-family: 'Gloria Hallelujah', cursive;">
+
+<div class="carousel carousel-slider center" data-indicators="true" style="height: 600px">
+    <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data" id="addressPopulate">
+      <div class="carousel-item" style="background-color: #edfadc; padding: 30px;" href="#one!">
         <div id="error-div"></div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name" type="text" class="validate">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">Last Name</label>
+            </div>
           </div>
-          <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
-        </div>
-        <div class="row">
+          <div class="row">
           <div class="input-field col s12">
             <input id="username" type="text" class="validate">
             <label for="username">Username</label>
@@ -150,13 +126,8 @@
             <label for="email">Email</label>
           </div>
         </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="picture_url">Enter Picture URL</label>
-          </div>
-        </div>
-
+      </div> <!-- end carousel slide 1 -->
+        <div class="carousel-item" style="background-color: #faf8dc; padding: 30px;" href="#two!">
         <!-- Google Autopopulate html -->
         <div class="row" id="address">
           <div class="col s12" id="locationField">
@@ -164,60 +135,139 @@
           </div>
         </div>
         <div class="row">
-          <div class="col s12">
-            <p class="label">Street address</p>
+          <div class="col s6">
+            <p class="label" style="color: purple;">Street address</p>
             <p class="slimField"><input class="field" id="street_number" disabled="true"></input>
             </p>
             <p class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <p class="label">City</p>
+          <div class="col s4">
+            <p class="label" style="color: purple;">City</p>
             <p class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input>
             </p>
           </div>
         </div>
         <div class="row">
-          <div class="col s12">
-            <p class="label">State</p>
+          <div class="col s3">
+            <p class="label" style="color: purple;">State</p>
             <p class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <p class="label">Zip code</p>
+          <div class="col s6">
+            <p class="label" style="color: purple;">Zip code</p>
             <p class="wideField"><input class="field" id="postal_code" disabled="true"></input>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <p class="label">Country</p>
+          <div class="col s3">
+            <p class="label" style="color: purple;">Country</p>
             <p class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input>
             </p>
           </div>
         </div>
-
         <button class="btn waves-effect waves-light" id="grabdata" type="submit" name="action">Submit
-<!--         <a href="/aboutMe"></a>
- -->           <i class="material-icons right">send</i>
+         <i class="material-icons right">send</i>
         </button>
+          </div> <!-- end carousel slide 2 -->
+          <div class="carousel-item" style="background-color: #dcdefa; padding: 30px;" href="#three!">
+            <div class="row" id="slideOne">
+              <div class="col s6">
+                <p> We recommend posting a picture of you smiling. You will upload pictures of your pets separately. </p>
+              </div>
+              <div class="col s6">
+                <input type="file" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
+                <img class="materialboxed userPic" id="blah" src="#" alt="User img" width="200" height="200"/>
+              </div>
+            </div> <!-- end row -->
+          </div> <!-- end carousel slide 3 -->
+          <div class="carousel-item" style="background-color: #faf8dc; padding: 30px;" href="#four!">
+                    <!-- does user have pets? -->
+        <div class="row">
+          <div col s6>
+            <p> So, introduce your pets! </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s8">
+            <input id="pet_name" type="text" class="validate">
+            <label for="pet_name">Pet Name</label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s5 petTypes1" style="color: black; width: 300px;">
+              <select multiple>
+                <option value="" disabled selected>schweetie</option>
+                <option value="1">Cat</option>
+                <option value="2">Dog</option>
+                <option value="3">Rabbit</option>
+                <option value="4">Ferret</option>
+                <option value="5">Bird</option>
+                <option value="6">Rodent</option>
+                <option value="7">Reptile</option>
+                <option value="8">Fish</option>
+              </select>
+              <label>Pet Type</label>
+            </div>
+        </div>
+        <div class="row">
+          <div id="morePets">
+            <a class="waves-effect waves-light btn" id="addPet">Add another Pet</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s5 petTypes" style="color: black; width: 300px;">
+          <!-- this will fill dynamically -->
+          </div>
+        </div>
+      </div> <!-- end carousel slide 4 -->
+      <div class="carousel-item lastSlide" style="background-color: #edfadc;" href="#five!">
+        <div class="row">
+          <div class="col s8 offset-s2">
+            <h5 style="font-family: 'Gloria Hallelujah', cursive;"> On average, how much royal treatment do your pet(s) require? </h5>
+            <p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">For example, a pure commoner hardly begs for food, has all the chill, rarely makes a mess, and doesn't have any strict regimens. Commoners are commonly adorable. A pet requiring the ultimate royal treatment will likely make a mess if left alone too long, makes a lot of noise, requires medicine of sorts, and has special regimens. These pets are royalty in their own right, but you get pretty embarassed by the list of things your petsitter has to be aware of.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s10 offset-s1">
+            <label class="treatment" for="treatment">
+            <br>
+              <span class="commoner">Commoner</span>
+              <span class="royal">Royal Treatment</span>
+            </label>
+              <p class="range-field">
+                <input type="range" id="treatment" min="0" max="10">
+              </p>
+          </div>
+        </div>
 
-      </form>
+        <div class="row">
+          <div class="col 1 offset-s8">
+            <div class="waves-effect waves-light btn" id="formNext" style="background-color:blue">
+            <!-- this button will post to aws -->
+            <input type="submit" value="Submit"/>
+            </div>
+          </div>
+        </div>
+        </div> <!--end carousel slide 5-->
 
-      <!-- end divs for container and section -->
+    </form>
+</div>
+
+
+
+        <!-- end container and section -->
+      </div>
     </div>
-  </div>
+
+
+
+
 
     <footer class="page-footer">
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text">About Us</h5>
-            <p class="grey-text text-lighten-4">Pet OPair is made up of four determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, and Amber Orenstein</p>
             <p class="grey-text text-lighten-4">Pet OPair is made up of five determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
           </div>
           <div class="col l3 s12">
@@ -238,13 +288,14 @@
           </div>
         </div>
       </div>
-
       <div class="footer-copyright">
         <div class="container">
           Founded in <a class="orange-text text-lighten-3" href="https://github.com/JGertler">Denver, CO</a>
         </div>
       </div>
     </footer>
+
+
 
     <!--model start-->
     <div class="container">
@@ -275,51 +326,37 @@
     </div>
 
     <!--model end-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/js/materialize.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script>
-    var currentUser;
-      $("#login-btn").on("click", loginData);
 
-      function loginData(event) {
-        event.preventDefault();
+  </body>
+  </html>
 
 
-        var username = $("#login-name").val().trim();
-        var password = $("#login-password").val().trim();
-
-
-
-        var info = {
-          username: username,
-          password: password
-        }
-
-        $.post("/signin", info, function(userObject) {
-          //console.log(userObject);
-          currentUser=JSON.stringify(userObject);
-          //  window.location.href ='/bulletin';
-          window.location.href = '/profile';
-
-        }).catch(function(data) {
-        //  window.location.href='/';
-          JSON.stringify(data);
-          var message=$('<p>').text("Wrong user name or password!");
-          message.css("color","red");
-          $("#error-div").empty();
-          $("#error-div").append(message);
-          //console.log(data);
-        })
-      }
-    </script>
-</body>
-
-
-</html>
 
 <script>
+
+$('.carousel.carousel-slider').carousel({fullWidth: true});
+
+// this allows picture uploads to display on page 
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('blah').src =  e.target.result;
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+//this allows user to add more pets with pet type in the form
+
+$("#addPet").click(function () {
+  $("select").material_select();
+  $("#morePets").prepend("<input id='pet_name' type='text' class='validate col s8' placeholder='Pet Name'><label for='pet_name'></label> <div class='input-field col s5 petTypes' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div>");
+  $("select").material_select();
+  
+  $(".carousel").css({"height": "+=100px"});
+});
+
+
   //function which grab the user's input data from the sign up form and puts it into an object to route to the table
   var userObject;
 
@@ -468,4 +505,10 @@
   //});
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete" async defer></script>
+
+
+
+
+
+
 
