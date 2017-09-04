@@ -4,16 +4,12 @@
 var Sequelize = require("sequelize");
 
 var keys=require("./keys.js");
-// *Username*: root
-// *Password*: rootroot
-// *Port*: 3306
-// *Database*: petladiez
-// Creates mySQL connection using Sequelize
+
 
 
 //below is the local configuration when running locally
-var sequelize = new Sequelize("POP_db", "root", "", {
- host:"localhost",
+var sequelize = new Sequelize("mayatsmolnik", "mayatsmolnik", keys.sqlKey, {
+ host:"codeflink.net",
   dialect: "mysql",
   pool: {
     max: 5,
