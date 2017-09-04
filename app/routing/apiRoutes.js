@@ -69,13 +69,6 @@ module.exports = function(passport, app, user) {
             //var info=req.body;
             var userPassword = generateHash(password);
             console.log("!!!" + req.body.first_name);
-            // var info =
-            // { first_name: req.body.first_name,
-            // last_name: req.body.last_name,
-            //   username:username,
-            // password:userPassword
-            //
-            // };
             var userPassword = generateHash(password);
             //console.log("!!!"+req.body.first_name);
             var info = req.body;
@@ -86,8 +79,7 @@ module.exports = function(passport, app, user) {
               "https://maps.googleapis.com/maps/api/geocode/json?address=" +
               address +
               "&key=AIzaSyBaw-4l7qS4b_L7kXhuHViE2smEu1k34Dw";
-            //  keys.mapKey;
-            //
+
             request(queryUrl, function(error, res, body) {
               //
               if (!error && res.statusCode === 200) {
@@ -97,8 +89,7 @@ module.exports = function(passport, app, user) {
                 var lng = bObject["results"][0].geometry.location.lng;
                 info.address_lat = lat;
                 info.address_lng = lng;
-                //       console.log(info);
-                //
+
                 User.create(info).then(function(newUser, created) {
                   if (!newUser) {
                     return done(null, false);
@@ -107,8 +98,7 @@ module.exports = function(passport, app, user) {
                     return done(null, newUser);
                   }
                 });
-                //
-                //
+
               } else {
                 console.log(error);
               }
@@ -165,40 +155,8 @@ module.exports = function(passport, app, user) {
     )
   );
 
-  app.post("/put_newpet_in_db", function(req, response) {
-    console.log(req.body);
 
-    var petInfo = req.body;
-    Pets.create(petInfo)
-      .then(function(results) {
-        response.json(results);
-      })
-      .catch(function(err) {
-        console.log("Data err with upload");
-        console.log(err);
-      });
-  });
-
-
-  app.post('/upload', function(req, res) {
-  	if (!req.files) {
-  		return res.status(400).send('No files were uploaded.');
-  	}
-    Console.log("HHHIIHI");
-  	// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  	var profilePic = req.files.profilePic;
-  	console.log(req.files.profilePic.name +"99999");
-
-  	// Use the mv() method to place the file somewhere on your server
-  	profilePic.mv('uploads/' + req.files.profilePic.name, function(err) {
-  		if (err) {
-  			return res.status(500).send(err);
-  		}
-  		  //res.write("<h1>Uploaded from file</h2><img style='max-width:20%' src='uploads/" + req.files.profilePic.name + "'/>");
-
-  		res.end();
-  	});
-  });
+// put a new petsitting request in the pets table from the bulletin 
 
   app.post("/put_newpet_in_db", function(req, response) {
      console.log(req.body);
@@ -212,21 +170,13 @@ module.exports = function(passport, app, user) {
          console.log(err);
        });
    });
+
+//gets all the bulletin posts from the pets table and posts them to the api/pets route which is grabbed from the front end bulletin board
    app.get("/api/pets", function(req, res) {
      Pets.findAll({}).then(function(results) {
        res.json(results);
      });
    });
-   app.post("/put_newpet_in_db", function(req, res) {
-     Pets.create({
-       pet_name: req.body.pet_name,
-       treatment: req.body.treatment,
-       moreInfo: req.body.moreInfo,
-       startDate: req.body.startDate,
-       endDate: req.body.endDate
-     });
-   });
-
 
 
   // amazon aws route
@@ -248,7 +198,6 @@ console.log(keys);
         // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
       },
     });
-    console.log(req);
     if (!req.files) {
       return res.status(400).send('No files were uploaded.');
     }
@@ -277,8 +226,9 @@ console.log(keys);
         res.status(500).send(err.stack);
       });
       uploader.on('end', function() {
-        console.log("done uploading");
-        res.send('File uploaded!');
+        console.log('File uploaded!');
+        res.sendFile(path.join(__dirname +
+          '/../../views/profile.html'));
       });
     }); 
   }); //end post route

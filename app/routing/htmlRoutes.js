@@ -84,7 +84,7 @@ module.exports = function(app, passport) {
       res.json(req.user);
     });
 
-
+//makes sure user is signed in 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 		//	console.log(req);
