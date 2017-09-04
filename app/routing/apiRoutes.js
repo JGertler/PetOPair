@@ -6,7 +6,7 @@ var bCrypt = require("bcrypt-nodejs");
 var path = require('path');
 var fileUpload = require('express-fileupload');
 var s3 = require('s3');
-
+var keys=require("../config/keys.js")
 // Routes
 // =============================================================
 module.exports = function(passport, app, user) {
@@ -248,6 +248,7 @@ console.log(keys);
         // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
       },
     });
+    console.log(req);
     if (!req.files) {
       return res.status(400).send('No files were uploaded.');
     }
