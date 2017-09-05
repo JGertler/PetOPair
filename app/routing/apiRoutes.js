@@ -220,6 +220,7 @@ console.log(keys);
           Key: req.files.uploadedPic.name, // File path of location on S3
         },
       };
+
       var uploader = client.uploadFile(params);
       uploader.on('error', function(err) {
         console.error("unable to upload:", err.stack);
@@ -233,9 +234,8 @@ console.log(keys);
     }); 
   }); //end post route
 
-
-
 };
+
 
 
 
