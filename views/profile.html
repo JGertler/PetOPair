@@ -28,12 +28,12 @@
         <div class="background">
           <img src="">
         </div>
-        <a href="#!user"><img class="circle" src=""></a>
-        <a href="#!name"><span class="green-text name" id="side_nav_name">Susie Smith</span></a>
-        <a href="#!email"><span class="green-text email" id="side_nav_email">meowcatmeow@gmail.com</span></a>
+        <a href="#!user"><img class="miniUserPic" src="/media/profPic.jpg" style="width: 100px"></a>
+        <a href="#!name"><span class="green-text name" id="side-nav-name">Susie Smith</span></a>
+        <a href="#!email"><span class="green-text email" id="side-nav-email">meowcatmeow@gmail.com</span></a>
       </div>
     </li>
-    <li><a href="#!"><i class="material-icons" >account_circle</i>My Pet Profile</a></li>
+    <li><a href="/profile"><i class="material-icons" >account_circle</i>My Pet Profile</a></li>
     <li>
       <div class="divider"></div>
     </li>
@@ -85,11 +85,11 @@
 
     <div class="container" id="profile-page-container">
       <div class="row">
-        <div class="col l6 col m12">
-          <img id="main-profile-pic" src='https://pixnio.com/free-images/2017/05/17/2017-05-17-09-49-13-900x600.jpg' alt="main profile picture" />
+        <div class="col m4 col s12">
+        <!-- this will be replaced by the picture from aws -->
+          <img id="main-profile-pic" src="/media/profPic.jpg" alt="main profile picture"/>
         </div>
-        <div class="col l6 col m12">
-          <h2><q id="username-quote"></q></h2>
+        <div class="col m6 col s12">
           <h2 id="username-h1"></h2>
           <h3 id="city-state-h3"></h3>
 
@@ -164,21 +164,6 @@
 </html>
 
 
-
-
-
-<!-- <html>
-
-<head>
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-</head>
-<body>
-
-  <button id="get-btn">GET</button>
-
-</body>
-</html> -->
-
 <script>
 var current_user_info;
   function capitalizeFirstLetter(string) {
@@ -188,21 +173,29 @@ var current_user_info;
   function showProfile() {
     event.preventDefault();
 
-
     $.get("/profile/user", function(data) {
 
       var dataString = JSON.stringify(data);
       var first = capitalizeFirstLetter(data.first_name);
-      var last = capitalizeFirstLetter(data.last_name);
+      var last = capitalizeFirstLetter(data.last_name)
+//this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
+      var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
       $("#username-quote").text(data.username);
-      $("#username-h1").text(first + '  ' + last);
+      $("#username-h1").text(first + '  ' + lastInitial);
       $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
       $("#side-nav-name").text(first + '  ' + last);
       $("#side-nav-email").text(data.email);
-      $("#about-me-div").append("ABOUT ME TEXT HERE");
+      $("#about-me-div").append("About user's pets here");
       $("#sugar_cups").append(data.cups_of_sugar);
+
     });
-
-
+//replace 'uploadedPic' within the src html with the actual uploadedPic variable exported from apiRoutes.js (which is the actual aws link to photo)
+      var srcpath = $('#main-profile-pic').attr('src');
+      srcpath = srcpath.replace('/media/profPic.jpg','https://s3-us-west-2.amazonaws.com/petopair-west/' + uploadedPic);
+      $('#main-profile-pic').attr('src',srcpath);
   };
+
+
+
 </script>
+
