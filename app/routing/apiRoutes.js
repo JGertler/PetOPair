@@ -1,5 +1,6 @@
 var Human = require("../models/info.js");
 var Pets = require("../models/petInfo.js");
+var Image= require("../models/images.js")
 //var keys = require("../config/keys.js");
 var request = require("request");
 var bCrypt = require("bcrypt-nodejs");
@@ -14,16 +15,30 @@ module.exports = function(passport, app, user) {
   var LocalStrategy = require("passport-local").Strategy;
   app.get("/profile/:username", function(req, res) {
     // finds the currently logged in user and returns their info to the profile page
-    console.log(req.user.username);
+  //  return JSON.parse(req.user);
+    // console.log(req.user);
     Human.findOne({
       where: {
         username: req.user.username
       }
     }).then(function(result) {
+
       return res.json(result);
     });
     //}
   });
+
+  app.get("/profile_pic", function(req, res){
+    console.log(req.user);
+    Image.findOne({
+      where:{
+        human_id:req.user.id
+      }
+    }).then(function(result){
+      //console.log("HEEEY"+result);
+      return res.json(result);
+    });
+  })
   // Get all user API
   app.get("/api/users", function(req, res) {
     Human.findAll({}).then(function(results) {
@@ -156,11 +171,15 @@ module.exports = function(passport, app, user) {
   );
 
 
-// put a new petsitting request in the pets table from the bulletin 
+// put a new petsitting request in the pets table from the bulletin
 
   app.post("/put_newpet_in_db", function(req, response) {
      console.log(req.body);
+     console.log(req.user);
      var petInfo = req.body;
+     //put the humans id in with the pet to grab human data
+     petInfo.human_id=req.user.id;
+     console.log(petInfo);
      Pets.create(petInfo)
        .then(function(results) {
          response.json(results);
@@ -184,28 +203,39 @@ module.exports = function(passport, app, user) {
 app.use(fileUpload());
 
   app.post("/uploadForm", function(req, res) {
-console.log(keys);
+//console.log(keys);
     var client = s3.createClient({
-      maxAsyncS3: 20, // this is the default 
-      s3RetryCount: 3, // this is the default 
-      s3RetryDelay: 1000, // this is the default 
-      multipartUploadThreshold: 20971520, // this is the default (20 MB) 
-      multipartUploadSize: 15728640, // this is the default (15 MB) 
+      maxAsyncS3: 20, // this is the default
+      s3RetryCount: 3, // this is the default
+      s3RetryDelay: 1000, // this is the default
+      multipartUploadThreshold: 20971520, // this is the default (20 MB)
+      multipartUploadSize: 15728640, // this is the default (15 MB)
       s3Options: {
         accessKeyId: keys.s3accesskey,
         secretAccessKey: keys.s3secretaccesskey,
-        // any other options are passed to new AWS.S3() 
-        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
+        // any other options are passed to new AWS.S3()
+        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
       },
     });
     if (!req.files) {
       return res.status(400).send('No files were uploaded.');
     }
+    console.log(req.body);
 
-    // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file 
+    var imageInfo={img_url:"https://s3-us-west-2.amazonaws.com/petopair-s3-bucket/"+req.files.uploadedPic.name, human_id: req.user.id}
+
+    Image.create(imageInfo)
+      .then(function(results) {
+        response.json(results);
+      })
+      .catch(function(err) {
+        console.log("Data err with upload");
+        console.log(err);
+      });
+    // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file
     var uploadedPic = req.files.uploadedPic;
 
-    // Use the mv() method to place the file somewhere on your server 
+    // Use the mv() method to place the file somewhere on your server
     uploadedPic.mv('uploads/' + req.files.uploadedPic.name, function(err) {
       if (err) {
         return res.status(500).send(err);
@@ -231,12 +261,7 @@ console.log(keys);
         res.sendFile(path.join(__dirname +
           '/../../views/profile.html'));
       });
-    }); 
+    });
   }); //end post route
 
 };
-
-
-
-
-

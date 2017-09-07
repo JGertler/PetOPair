@@ -10,7 +10,7 @@
     <!--Import materialize.css-->
 
     <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
-      <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -28,7 +28,7 @@
         <div class="background">
           <img src="">
         </div>
-        <a href="#!user"><img class="miniUserPic" src="/media/profPic.jpg" style="width: 100px"></a>
+        <a href="#!user"><img class="miniUserPic" id="nav-profile-pic" src="/media/profPic.jpg" style="width: 100px"></a>
         <a href="#!name"><span class="green-text name" id="side-nav-name">Susie Smith</span></a>
         <a href="#!email"><span class="green-text email" id="side-nav-email">meowcatmeow@gmail.com</span></a>
       </div>
@@ -86,8 +86,8 @@
     <div class="container" id="profile-page-container">
       <div class="row">
         <div class="col m4 col s12">
-        <!-- this will be replaced by the picture from aws -->
-          <img id="main-profile-pic" src="/media/profPic.jpg" alt="main profile picture"/>
+          <!-- this will be replaced by the picture from aws -->
+          <img id="main-profile-pic" src="/media/profPic.jpg" alt="main profile picture" />
         </div>
         <div class="col m6 col s12">
           <h2 id="username-h1"></h2>
@@ -97,16 +97,16 @@
       </div>
       <div class="row">
         <div class="col s12">
-        <div id="about-me-div">
+          <div id="about-me-div">
+          </div>
         </div>
-      </div>
       </div>
 
       <div class="section">
         <div class="row">
           <h2 class="header center light col m12">Cups of Sugar</h2>
 
-          <div  class=" col m1 col l2">
+          <div class=" col m1 col l2">
 
           </div>
 
@@ -114,12 +114,13 @@
             <img src="/media/sugar.jpg">
           </div>
           <div class="tallyBox col s12 col m2">
-            <h1 id= "sugar_cups" style="text-align:center">0</h1>
+            <h1 id="sugar_cups" style="text-align:center">0</h1>
           </div>
-            <div class=" col s12 col m4">
-              <h4> Gain more sugar by taking jobs from the bulletin! <a href="/bulletinboard.handlebars">Bulletin Board</a> </h4>
-            </div>
+          <div class=" col s12 col m4">
+            <h4> Gain more sugar by taking jobs from the bulletin! <a href="/bulletinboard">Bulletin Board</a> </h4>
+          </div>
         </div>
+
       </div>
 
     </div>
@@ -132,7 +133,7 @@
         <div class="row">
           <div class="col l6 s12">
             <h5 class="white-text">About Us</h5>
-            <p class="grey-text text-lighten-4">Pet OPair is made up of four determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
+            <p class="grey-text text-lighten-4">Pet OPair is made up of five determined coding bootcamp students: Jessica Gertler, Mayat Smolnik, Julie Braun, Jennifer King, and Amber Orenstein</p>
           </div>
           <div class="col l3 s12">
             <h5 class="white-text">Adopt!</h5>
@@ -165,7 +166,8 @@
 
 
 <script>
-var current_user_info;
+  var current_user_info;
+
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -173,12 +175,25 @@ var current_user_info;
   function showProfile() {
     event.preventDefault();
 
+    //grab the url of the profile pic from /profile_pic route. The profile pic url is stored in the images table in mySQL with a user id associated with it. The src url is the url of the image which is stored in the aws bucket
+
+        $.get("/profile_pic", function(imgObj) {
+         console.log(imgObj.img_url);
+
+          if (imgObj.img_url) {
+            var img_src = imgObj.img_url;
+
+            $('#main-profile-pic').attr('src', img_src);
+            $('#nav-profile-pic').attr('src', img_src);
+          }
+        })
+
     $.get("/profile/user", function(data) {
 
       var dataString = JSON.stringify(data);
       var first = capitalizeFirstLetter(data.first_name);
       var last = capitalizeFirstLetter(data.last_name)
-//this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
+      //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
       var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
       $("#username-quote").text(data.username);
       $("#username-h1").text(first + '  ' + lastInitial);
@@ -189,13 +204,14 @@ var current_user_info;
       $("#sugar_cups").append(data.cups_of_sugar);
 
     });
-//replace 'uploadedPic' within the src html with the actual uploadedPic variable exported from apiRoutes.js (which is the actual aws link to photo)
-      var srcpath = $('#main-profile-pic').attr('src');
-      srcpath = srcpath.replace('/media/profPic.jpg','https://s3-us-west-2.amazonaws.com/petopair-west/' + uploadedPic);
-      $('#main-profile-pic').attr('src',srcpath);
+
+
+
+        //replace 'uploadedPic' within the src html with the actual uploadedPic variable exported from apiRoutes.js (which is the actual aws link to photo)
+    // var srcpath = $('#main-profile-pic').attr('src');
+    // srcpath = srcpath.replace('/media/profPic.jpg', 'https://s3-us-west-2.amazonaws.com/petopair-west/' + uploadedPic);
+    // $('#main-profile-pic').attr('src', srcpath);
   };
 
 
-
 </script>
-
