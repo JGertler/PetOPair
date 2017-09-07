@@ -21,7 +21,14 @@ var Pet = sequelize.define('Pet', {
     },
     endDate: {
       type: Sequelize.TEXT
+    },
+    human_id: {
+      type: Sequelize.INTEGER
     }
   })
-
+  // Pet.destroy({ where: { id: [1] }})
+  // Pet.all().then(projects => {
+  //   console.log(projects);
+  // })
+//Pet.destroy({ where: { id: [1,2,3,4] }})
 module.exports = Pet;

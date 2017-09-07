@@ -44,8 +44,8 @@ var db = require("./app/models/info.js");
 require("./app/routing/apiRoutes.js")(passport, app, db);
 require("./app/routing/htmlRoutes.js")(app, passport);
 
-
 db.sequelize.sync()
+//db.sequelize.sync({ force:true })
 .then(function() {
 
 	app.listen(PORT,function() {
