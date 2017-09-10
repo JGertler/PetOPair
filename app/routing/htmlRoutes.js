@@ -14,7 +14,9 @@ module.exports = function(app, passport) {
 	// 	var file=req.params.file;
 	// 	res.sendFile(path.join(__dirname, "/../public",folder,file));
 	// });
-
+	app.get("/test", function(request, response) {
+    response.sendFile(path.join(__dirname + '/../../views/pictest.html'));
+  });
 	app.get("/profile", isLoggedIn, function(req, res){
 			res.sendFile(path.join(__dirname + '/../../views/profile.html'));
 	});
@@ -31,6 +33,10 @@ module.exports = function(app, passport) {
 
 	app.get('/uploads/:pic_name', function(req, res){
 		res.sendFile(path.join(__dirname, '/../../uploads', req.params.pic_name));
+	})
+
+	app.get('/downloads/:pic_name', function(req, res){
+		res.sendFile(path.join(__dirname, '/../../downloads', req.params.pic_name));
 	})
 
   app.get("/sugar", function(request, response) {
@@ -84,7 +90,7 @@ module.exports = function(app, passport) {
       res.json(req.user);
     });
 
-//makes sure user is signed in 
+//makes sure user is signed in
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 		//	console.log(req);
