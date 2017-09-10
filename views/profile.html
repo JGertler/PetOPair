@@ -175,14 +175,14 @@
   function showProfile() {
     event.preventDefault();
 
-    //grab the url of the profile pic from /profile_pic route. The profile pic url is stored in the images table in mySQL with a user id associated with it. The src url is the url of the image which is stored in the aws bucket
+    //grab the name of the profile pic from /profile_pic route. The profile pic name is stored in the images table in mySQL with a user id associated with it. In api routes /profile_pic the name of the file with the matching name is downloaded from aws s3 and saved in downloads folder. Here we use the pic name (called img_url) to load the image from /downloads/picname
 
         $.get("/profile_pic", function(imgObj) {
-         console.log(imgObj.img_url);
+         console.log(imgObj);
 
           if (imgObj.img_url) {
-            var img_src = imgObj.img_url;
-
+            var img_src = "../downloads/"+imgObj.img_url;
+// var img_src ="../downloads/pic";
             $('#main-profile-pic').attr('src', img_src);
             $('#nav-profile-pic').attr('src', img_src);
           }

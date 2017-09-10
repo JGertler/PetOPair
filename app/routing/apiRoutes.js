@@ -1,21 +1,35 @@
 var Human = require("../models/info.js");
 var Pets = require("../models/petInfo.js");
-var Image= require("../models/images.js")
+var Image = require("../models/images.js")
 //var keys = require("../config/keys.js");
 var request = require("request");
 var bCrypt = require("bcrypt-nodejs");
 var path = require('path');
 var fileUpload = require('express-fileupload');
 var s3 = require('s3');
-var keys=require("../config/keys.js")
-// Routes
-// =============================================================
+var keys = require("../config/keys.js")
+
+//config variables for up/download from s3
+var client = s3.createClient({
+  maxAsyncS3: 20, // this is the default
+  s3RetryCount: 3, // this is the default
+  s3RetryDelay: 1000, // this is the default
+  multipartUploadThreshold: 20971520, // this is the default (20 MB)
+  multipartUploadSize: 15728640, // this is the default (15 MB)
+  s3Options: {
+    accessKeyId: keys.s3accesskey,
+    secretAccessKey: keys.s3secretaccesskey,
+    // any other options are passed to new AWS.S3()
+    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
+  },
+});
+
 module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require("passport-local").Strategy;
   app.get("/profile/:username", function(req, res) {
     // finds the currently logged in user and returns their info to the profile page
-  //  return JSON.parse(req.user);
+    //  return JSON.parse(req.user);
     // console.log(req.user);
     Human.findOne({
       where: {
@@ -28,17 +42,42 @@ module.exports = function(passport, app, user) {
     //}
   });
 
-  app.get("/profile_pic", function(req, res){
+  app.get("/profile_pic", function(req, res) {
     console.log(req.user);
     Image.findOne({
-      where:{
-        human_id:req.user.id
+      where: {
+        human_id: req.user.id
       }
-    }).then(function(result){
-      //console.log("HEEEY"+result);
-      return res.json(result);
-    });
-  })
+    }).then(function(result) {
+      picObject=result.toJSON();
+      console.log(picObject.img_url);
+
+      var params = {
+        localFile: "downloads/"+picObject.img_url,//destination folder
+
+        s3Params: {
+          Bucket: keys.s3bucket,
+          Key: picObject.img_url, //name of photo to reference in aws
+
+        },
+      };
+      //download from aws to downloads folder
+      var downloader = client.downloadFile(params);
+      downloader.on('error', function(err) {
+        console.error("unable to download:", err.stack);
+      });
+      downloader.on('progress', function() {
+        console.log("progress", downloader.progressAmount, downloader.progressTotal);
+      });
+      downloader.on('end', function() {
+        console.log("done downloading");
+        return res.json(result);
+      });
+
+    })
+  });
+
+
   // Get all user API
   app.get("/api/users", function(req, res) {
     Human.findAll({}).then(function(results) {
@@ -60,8 +99,7 @@ module.exports = function(passport, app, user) {
   });
   passport.use(
     "local-signup",
-    new LocalStrategy(
-      {
+    new LocalStrategy({
         usernameField: "username",
         passwordField: "password",
         passReqToCallback: true // allows us to pass back the entire request to the callback
@@ -126,8 +164,7 @@ module.exports = function(passport, app, user) {
   //LOCAL SIGNIN
   passport.use(
     "local-signin",
-    new LocalStrategy(
-      {
+    new LocalStrategy({
         //  console.log("made it here1");
         // by default, local strategy uses username and password, we will override with username
         usernameField: "username",
@@ -141,10 +178,10 @@ module.exports = function(passport, app, user) {
           return bCrypt.compareSync(password, userpass);
         };
         User.findOne({
-          where: {
-            username: username
-          }
-        })
+            where: {
+              username: username
+            }
+          })
           .then(function(user) {
             if (!user) {
               console.log("'username does not exist'");
@@ -171,62 +208,54 @@ module.exports = function(passport, app, user) {
   );
 
 
-// put a new petsitting request in the pets table from the bulletin
+  // put a new petsitting request in the pets table from the bulletin
 
   app.post("/put_newpet_in_db", function(req, response) {
-     console.log(req.body);
-     console.log(req.user);
-     var petInfo = req.body;
-     //put the humans id in with the pet to grab human data
-     petInfo.human_id=req.user.id;
-     console.log(petInfo);
-     Pets.create(petInfo)
-       .then(function(results) {
-         response.json(results);
-       })
-       .catch(function(err) {
-         console.log("Data err with upload");
-         console.log(err);
-       });
-   });
+    console.log(req.body);
+    console.log(req.user);
+    var petInfo = req.body;
+    //put the humans id in with the pet to grab human data
+    petInfo.human_id = req.user.id;
+    console.log(petInfo);
+    Pets.create(petInfo)
+      .then(function(results) {
+        response.json(results);
+      })
+      .catch(function(err) {
+        console.log("Data err with upload");
+        console.log(err);
+      });
+  });
 
-//gets all the bulletin posts from the pets table and posts them to the api/pets route which is grabbed from the front end bulletin board
-   app.get("/api/pets", function(req, res) {
-     Pets.findAll({}).then(function(results) {
-       res.json(results);
-     });
-   });
+  //gets all the bulletin posts from the pets table and posts them to the api/pets route which is grabbed from the front end bulletin board
+  app.get("/api/pets", function(req, res) {
+    Pets.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
 
 
   // amazon aws route
 
-app.use(fileUpload());
+  app.use(fileUpload());
 
   app.post("/uploadForm", function(req, res) {
-//console.log(keys);
-    var client = s3.createClient({
-      maxAsyncS3: 20, // this is the default
-      s3RetryCount: 3, // this is the default
-      s3RetryDelay: 1000, // this is the default
-      multipartUploadThreshold: 20971520, // this is the default (20 MB)
-      multipartUploadSize: 15728640, // this is the default (15 MB)
-      s3Options: {
-        accessKeyId: keys.s3accesskey,
-        secretAccessKey: keys.s3secretaccesskey,
-        // any other options are passed to new AWS.S3()
-        // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
-      },
-    });
+    //console.log(keys);
+
     if (!req.files) {
       return res.status(400).send('No files were uploaded.');
     }
     console.log(req.body);
 
-    var imageInfo={img_url:"https://s3-us-west-2.amazonaws.com/petopair-s3-bucket/"+req.files.uploadedPic.name, human_id: req.user.id}
+    var imageInfo = {
+      img_url: req.files.uploadedPic.name,
+      //name:req.files.uploadedPic.name,
+      human_id: req.user.id
+    }
 
     Image.create(imageInfo)
       .then(function(results) {
-        response.json(results);
+        //  res.json(results);
       })
       .catch(function(err) {
         console.log("Data err with upload");
