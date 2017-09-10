@@ -4,6 +4,7 @@
 <head>
 
   <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
 
@@ -38,7 +39,7 @@
   </li>
   <li><a class="subheader">Activity</a></li>
   <li><a href="#!">Notifications</a></li>
-  <li><a class="waves-effect" href="#!">My Neighborhood Bulletin</a></li>
+  <li><a class="waves-effect" href="/bulletinboard">My Neighborhood Bulletin</a></li>
   <li><a class="waves-effect" href="/sugar">My Cups of Sugar</a></li>
   <li><a class="waves-effect" href="/sugar">Log Out</a></li>
 </ul>
@@ -178,10 +179,10 @@
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-          <div class="wrapper">
+          <div class="wrapper modalContainer">
             <form class="form-signin">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="form-signin-heading">Please login</h2>
+              <h2 class="form-signin-heading" style="font-family: 'Gloria Hallelujah'">Please login</h2>
               <div id="error-div"></div>
               <input type="text" class="form-control" name="username" placeholder="Username" id="login-name" required="" autofocus="" />
               <input type="password" class="form-control" name="password" id="login-password" placeholder="Password" required="" />
