@@ -22,6 +22,10 @@ body {
   height:auto;
 }
 
+.modalContainer {
+  width: 500px;
+  padding-left: 35px;
+}
 
 .petBackground {
     background-image: url("../media/petCartoon.png");
@@ -37,7 +41,7 @@ body {
 
 .page-footer {
    background-color: #6aac18;
-};
+}
 
 nav {
    background-color: #1820ac !important;
@@ -135,4 +139,15 @@ label.treatment .royal{
 
 p {
   color: black;
+}
+
+#main-profile-pic {
+  padding: 30px 10px 55px 10px;
+  background-color: white;
+}
+
+.profileContainer {
+  /*background-color: #dcdefa;*/
+  background-image: url("../media/brickwall.jpg");
+  padding-top: 20px;
 }

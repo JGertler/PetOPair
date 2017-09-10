@@ -92,8 +92,21 @@
 
 <div class="container">
 
-    <div class="section carouselSection" style="font-family: 'Gloria Hallelujah', cursive;">
 
+    <div class="section carouselSection" style="font-family: 'Gloria Hallelujah', cursive;">
+<!-- indicates "breadcrumbs," where user currently is located in the form -->
+<!--   <nav>
+    <div class="nav-wrapper">
+      <div class="col s12" style="background-color: #cccb">
+        <a href="#!" style="color: black" class="breadcrumb">Basic Info</a>
+        <a href="#!" style="color: black" class="breadcrumb">Address</a>
+        <a href="#!" style="color: black" class="breadcrumb">Pet Intro</a>
+        <a href="#!" style="color: black" class="breadcrumb">Pet Royalty</a>
+      </div>
+    </div>
+  </nav>
+ -->
+<!-- end breadcrumbs -->
 <div class="carousel carousel-slider center" data-indicators="true" style="height: 600px">
     <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data" id="addressPopulate">
       <div class="carousel-item" style="background-color: #edfadc; padding: 30px;" href="#one!">
@@ -303,10 +316,10 @@
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-          <div class="wrapper">
+          <div class="wrapper modalContainer">
             <form class="form-signin">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h2 class="form-signin-heading">Please login</h2>
+              <h2 class="form-signin-heading" style="font-family: 'Gloria Hallelujah'">Please login </h2>
               <div id="error-div"></div>
               <input type="text" class="form-control" name="username" placeholder="Username" id="login-name" required="" autofocus="" />
               <input type="password" class="form-control" name="password" id="login-password" placeholder="Password" required="" />
