@@ -178,9 +178,6 @@
             </p>
           </div>
         </div>
-        <button class="btn waves-effect waves-light" id="grabdata" type="submit" name="action">Submit
-         <i class="material-icons right">send</i>
-        </button>
           </div> <!-- end carousel slide 2 -->
           <div class="carousel-item" style="background-color: #dcdefa; padding: 30px;" href="#three!">
             <div class="row" id="slideOne">
@@ -255,10 +252,10 @@
 
         <div class="row">
           <div class="col 1 offset-s8">
-            <div class="waves-effect waves-light btn" id="formNext" style="background-color:blue">
             <!-- this button will post to aws -->
-            <input type="submit" value="Submit"/>
-            </div>
+            <button class="btn waves-effect waves-light" id="grabdata" type="submit" name="action">Submit
+             <i class="material-icons right">send</i>
+            </button>
           </div>
         </div>
         </div> <!--end carousel slide 5-->
@@ -349,7 +346,7 @@
 
 $('.carousel.carousel-slider').carousel({fullWidth: true});
 
-// this allows picture uploads to display on page 
+// this allows picture uploads to display on page
 function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -365,7 +362,7 @@ $("#addPet").click(function () {
 
   $("#morePets").prepend("<input id='pet_name' type='text' class='validate col s8' placeholder='Pet Name'><label for='pet_name'></label> <div class='input-field col s5 petTypes' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div>");
   $("select").material_select();
-  
+
   $(".carousel").css({"height": "+=100px"});
 });
 
@@ -518,10 +515,3 @@ $("#addPet").click(function () {
   //});
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Zeq_ONgdAnTqmMn9n4sD94vTut2WIeY&libraries=places&callback=initAutocomplete" async defer></script>
-
-
-
-
-
-
-
