@@ -23,8 +23,7 @@ body {
 }
 
 .modalContainer {
-  width: 500px;
-  padding-left: 35px;
+  margin: 0 auto;
 }
 
 .petBackground {
