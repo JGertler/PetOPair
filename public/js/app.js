@@ -28,33 +28,4 @@ $(document).ready(function() {
   }
 
 
-
-
-
-
-
-var i = 1;
-  $('.progressBar .circle').removeClass().addClass('circle');
-  $('.progressBar .bar').removeClass().addClass('bar');
-  setInterval(function() {
-    $('.progressBar .circle:nth-of-type(' + i + ')').addClass('active');
-
-    $('.progressBar .circle:nth-of-type(' + (i-1) + ')').removeClass('active').addClass('done');
-
-    $('.progressBar .circle:nth-of-type(' + (i-1) + ') .label').html('&#10003;');
-
-    $('.progressBar .bar:nth-of-type(' + (i-1) + ')').addClass('active');
-
-    $('.progressBar .bar:nth-of-type(' + (i-2) + ')').removeClass('active').addClass('done');
-
-    i++;
-
-    if (i==0) {
-      $('.progressBar .bar').removeClass().addClass('bar');
-      $('.progressBar div.circle').removeClass().addClass('circle');
-        i = 1;
-      }
-    }, 1000);
-
-
 }); //end doc ready

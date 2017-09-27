@@ -1,13 +1,14 @@
 var Human = require("../models/info.js");
 var Pets = require("../models/petInfo.js");
-var Image = require("../models/images.js")
+var Image = require("../models/images.js");
 //var keys = require("../config/keys.js");
 var request = require("request");
 var bCrypt = require("bcrypt-nodejs");
 var path = require('path');
 var fileUpload = require('express-fileupload');
 var s3 = require('s3');
-var keys = require("../config/keys.js")
+var keys = require("../config/keys.js");
+var loginAuth =require("./userSignInAuth.js");
 
 //config variables for up/download from s3
 var client = s3.createClient({
@@ -24,13 +25,13 @@ var client = s3.createClient({
   },
 });
 
+
+
 module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require("passport-local").Strategy;
-  app.get("/profile/:username", function(req, res) {
+  app.get("/profile/:username", loginAuth.isLoggedIn, function(req, res) {
     // finds the currently logged in user and returns their info to the profile page
-    //  return JSON.parse(req.user);
-    // console.log(req.user);
     Human.findOne({
       where: {
         username: req.user.username
@@ -42,24 +43,23 @@ module.exports = function(passport, app, user) {
     //}
   });
 
-  app.get("/profile_pic", function(req, res) {
+  app.get("/profile_pic", loginAuth.isLoggedIn, function(req, res) {
     console.log(req.user);
+
     Image.findOne({
       where: {
         human_id: req.user.id
       }
     }).then(function(result) {
       if (result !== null) {
-        picObject=result.toJSON();
+        var picObject=result.toJSON();
         console.log(picObject.img_url);
 
         var params = {
           localFile: "downloads/"+picObject.img_url,//destination folder
-
           s3Params: {
             Bucket: keys.s3bucket,
             Key: picObject.img_url, //name of photo to reference in aws
-
           },
         };
         //download from aws to downloads folder
@@ -72,24 +72,24 @@ module.exports = function(passport, app, user) {
         });
         downloader.on('end', function() {
           console.log("done downloading");
-          res.sendFile("downloads/"+picObject.img_url);
+          // this plasters the downloaded aws picture onto the UI
+          return res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
         });
       } else {
-        //this snippet below might be wrong but we need to ensure the server doesn't crash if a picture isn't uploaded to aws
-        res.sendFile('public/media/profPic.jpg');
-      }
+        //we need to ensure the server doesn't crash if a picture isn't uploaded to aws
+        console.log("Image not uploaded to AWS")
+      };
 
-
-    })
+    });
   });
 
 
   // Get all user API
-  app.get("/api/users", function(req, res) {
-    Human.findAll({}).then(function(results) {
-      res.json(results);
-    });
-  });
+  // app.get("/api/users", function(req, res) {
+  //   Human.findAll({}).then(function(results) {
+  //     res.json(results);
+  //   });
+  // });
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
@@ -216,8 +216,7 @@ passport.use(
 
 
 // put a new petsitting request in the pets table from the bulletin
-
-app.post("/put_newpet_in_db", function(req, response) {
+app.post("/request_sitter_in_db", loginAuth.isLoggedIn, function(req, response) {
   console.log(req.body);
   console.log(req.user);
   var petInfo = req.body;
@@ -235,7 +234,7 @@ app.post("/put_newpet_in_db", function(req, response) {
 });
 
 //gets all the bulletin posts from the pets table and posts them to the api/pets route which is grabbed from the front end bulletin board
-app.get("/api/pets", function(req, res) {
+app.get("/api/pets", loginAuth.isLoggedIn, function(req, res) {
   Pets.findAll({}).then(function(results) {
     res.json(results);
   });
@@ -246,8 +245,7 @@ app.get("/api/pets", function(req, res) {
 
 app.use(fileUpload());
 
-app.post("/uploadForm", function(req, res) {
-  //console.log(keys);
+app.post("/uploadForm", loginAuth.isLoggedIn, function(req, res) {
 
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
@@ -255,25 +253,32 @@ app.post("/uploadForm", function(req, res) {
   console.log(req.body);
 
   var imageInfo = {
-    img_url: req.files.uploadedPic.name,
-    //name:req.files.uploadedPic.name,
+    img_url: req.files.uploadedPic.name, //TODO generate random number so that someone's profpic file-name doesn't override someone else's
     human_id: req.user.id
   }
 
-  Image.create(imageInfo)
-  .then(function(results) {
-    //  res.json(results);
-  })
-  .catch(function(err) {
-    console.log("Data err with upload");
-    console.log(err);
-  });
+//delete any previous versions of prof pic that user had stored in database
+Image.destroy({
+  where: {
+    human_id: req.user.id
+  }
+}).then(
+    Image.create(imageInfo)
+    .then(function(results) {
+      //  res.json(results);
+    })
+    .catch(function(err) {
+      console.log("Data err with upload");
+      console.log(err);
+    })
+  );
   // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file
   var uploadedPic = req.files.uploadedPic;
 
   // Use the mv() method to place the file somewhere on your server
   uploadedPic.mv('uploads/' + req.files.uploadedPic.name, function(err) {
     if (err) {
+      console.log(err);
       return res.status(500).send(err);
     }
 
@@ -297,6 +302,7 @@ app.post("/uploadForm", function(req, res) {
       res.redirect('/profile');
     });
   });
-}); //end post route
+
+}); //end aws post route
 
 }; //end module.exports
