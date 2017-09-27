@@ -17,10 +17,6 @@ body {
 #profile-page-container{
   margin-top:30px;
 }
-#main-profile-pic{
-  width: 100%;
-  height:auto;
-}
 
 .modalContainer {
   margin: 0 auto;
@@ -59,7 +55,7 @@ nav {
    background-color: #dcdefa;
 }
 
-#blah {
+#preview {
     background-image: url("../media/profPic.jpg");
     background-repeat: no-repeat;
     margin: 0px;
@@ -140,7 +136,7 @@ p {
   color: black;
 }
 
-#main-profile-pic {
+.main-profile-pic {
   padding: 30px 10px 55px 10px;
   background-color: white;
 }

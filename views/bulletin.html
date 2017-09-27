@@ -256,7 +256,7 @@
 
     }
 
-    $.post("/put_newpet_in_db", petInfo, function (data) {
+    $.post("/request_sitter_in_db", petInfo, function (data) {
       console.log(data);
       window.location.href = '/bulletinboard';
     })
