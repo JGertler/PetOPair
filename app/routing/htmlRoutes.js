@@ -8,18 +8,15 @@ var loginAuth =require("./userSignInAuth.js");
 
 module.exports = function(app, passport) {
 
-	app.get("/test", function(request, response) {
-    response.sendFile(path.join(__dirname + '/../../views/pictest.html'));
-  });
 	app.get("/profile", loginAuth.isLoggedIn, function(req, res){
-			res.sendFile(path.join(__dirname + '/../../views/profile.html'));
+			response.render('pages/profile');
 	});
 
   app.get("/", function(request, response) {
-    response.sendFile(path.join(__dirname + '/../../views/index.html'));
+    response.render('pages/index');
   });
   app.get("/signup", function(request, response) {
-    response.sendFile(path.join(__dirname + '/../../views/signUp.html'));
+    response.render('pages/signUp');
   });
 
 	app.get('/uploads/:pic_name', function(req, res){
@@ -31,11 +28,11 @@ module.exports = function(app, passport) {
 	})
 
   app.get("/bulletin", loginAuth.isLoggedIn, function(request, response) {
-    response.sendFile(path.join(__dirname + '/../../views/bulletin.html'));
+    response.render('pages/bulletin');
   });
 
 	app.get("/bulletinboard", loginAuth.isLoggedIn, function(request, response) {
-    response.sendFile(path.join(__dirname + '/../../views/bulletinboard.html'));
+  response.render('pages/bulletinboard');;
   });
 
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="showProfile();">
+
+  <head>
+  <% include ../partials/head %>
+  </head>
+
+
+  <body>
+    <!--navigation-->
+    <% include ../partials/navigation %>
+
+    <div class="container" id="profile-page-container">
+      <div class="row profileContainer">
+        <!--where user uploads profile picture -->
+        <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data">
+          <div class="col m4 col s12">
+              <p> Say Cheese! </p>
+              <input type="file" id="file-input" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
+              <img class="materialboxed userPic" id="preview" class="main-profile-pic" src="/profile_pic" alt="User img"/>
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+          </div>
+        </form>
+        <div class="col m6 col s12">
+          <h2 id="username-h1"></h2>
+          <h3 id="city-state-h3"></h3>
+          <img src="/media/sugar.jpg" style="width: 50px">
+            <p> Gain more sugar by taking jobs from the bulletin! <a href="/bulletinboard">Bulletin Board</a> </>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div id="about-me-div">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <footer class="page-footer">
+    <% include ../partials/footer%>
+    </footer>
+
+  </body>
+
+</html>
+
+
+<script>
+
+
+// this allows picture uploads to display on page
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById('preview').src =  e.target.result;
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+
+  var current_user_info;
+
+// generate's user's name at top of profile i.e. Jessica G.
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function showProfile() {
+    event.preventDefault();
+
+    $.get("/profile/user", function(data) {
+
+      var dataString = JSON.stringify(data);
+      var first = capitalizeFirstLetter(data.first_name);
+      var last = capitalizeFirstLetter(data.last_name)
+      //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
+      var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
+      $("#username-quote").text(data.username);
+      $("#username-h1").text(first + '  ' + lastInitial);
+      $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
+      $("#side-nav-name").text(first + '  ' + last);
+      $("#side-nav-email").text(data.email);
+      $("#about-me-div").append("About user's pets here");
+      $("#sugar_cups").append(data.cups_of_sugar);
+
+    });
+
+  };
+
+
+</script>

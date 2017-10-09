@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../partials/head %>
+</head>
+
+<body>
+  <!--navigation-->
+  <% include ../partials/navigation %>
+    <!-- end nav -->
+
+    <div class="col 1g10 m10 s10">
+        <div class="well" id="well-section">
+        </div>
+    </div>
+
+    <footer class="page-footer">
+    <% include ../partials/footer%>
+    </footer>
+</body>
+</html>
+<script>
+    // $(document).on("cick", "button.delete", handlePostDelete);
+    // $(document).on("click", "button.edit", handlePostEdit);
+    // var pets;
+    // function getPets() {
+    //     $.get("api/pets", function (data) {
+    //         console.log("Pet data is: " + data);
+    //         pets = data;
+    //         if (!Pets || !Pets.length) {
+    //             displayEmpty();
+    //         }
+    //         else {
+    //             initializeRows();
+    //         }
+    //     });
+    // }
+    // getPets();
+    $.get("/api/pets", function (data) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            var wellSection = $("<div>");
+            wellSection.addClass("well");
+            wellSection.attr("id", "pet-well-" + i);
+            $("#well-section").append(wellSection);
+
+            $("#pet-well-" + i).append("<h4>Pet's Name: " + data[i].pet_name + "</h4>");
+            $("#pet-well-" + i).append("<h6>City: " + data[i].city + "</h6>");
+            $("#pet-well-" + i).append("<h6>Treatment Level (1 is Commoner - 10 is Royal Treatment): " + data[i].treatment + "</h6>");
+            $("#pet-well-" + i).append("<h6>Additional Pet Info: " + data[i].petInfo + "</h6>");
+            $("#pet-well-" + i).append("<h6>Start Date: " + data[i].startDate + "</h6>");
+            $("#pet-well-" + i).append("<h6>End Date: " + data[i].endDate + "</h6>");
+        }
+    });
+</script>
