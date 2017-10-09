@@ -27,8 +27,8 @@ app.use(passport.session()); // persistent login sessions
 
 var db = require("./app/models/info.js");
 
-
-
+//enables ejs partials
+app.set('view engine', 'ejs');
 
 require("./app/routing/apiRoutes.js")(passport, app, db);
 require("./app/routing/htmlRoutes.js")(app, passport);
