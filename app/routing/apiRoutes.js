@@ -60,7 +60,7 @@ module.exports = function(passport, app, user) {
           s3Params: {
             Bucket: keys.s3bucket,
             Key: picObject.img_url, //name of photo to reference in aws
-          },
+          }
         };
         //download from aws to downloads folder
         var downloader = client.downloadFile(params);
@@ -76,7 +76,7 @@ module.exports = function(passport, app, user) {
           return res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
         });
       } else {
-        //we need to ensure the server doesn't crash if a picture isn't uploaded to aws
+        //ensures the server doesn't crash if a picture isn't uploaded to aws
         console.log("Image not uploaded to AWS")
       };
 
@@ -84,12 +84,13 @@ module.exports = function(passport, app, user) {
   });
 
 
-  // Get all user API
-  // app.get("/api/users", function(req, res) {
-  //   Human.findAll({}).then(function(results) {
-  //     res.json(results);
-  //   });
-  // });
+  // Get all user API -- maybe comment out the below if things get fucky
+  app.get("/api/users", function(req, res) {
+    Human.findAll({}).then(function(results) {
+      res.json(results);
+    });
+  });
+  //
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });

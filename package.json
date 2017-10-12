@@ -39,6 +39,6 @@
     "passport-local": "^1.0.0",
     "request": "^2.81.0",
     "s3": "^4.4.0",
-    "sequelize": "^4.10.2"
+    "sequelize": "^4.13.8"
   }
 }

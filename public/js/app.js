@@ -19,7 +19,10 @@ $(document).ready(function() {
   }
 );
 
-
+//this image will be used in sidebar before user has uploaded a picture or if user is not logged in
+// $(".backup_picture").on("error", function(){
+//     $(this).attr('src', './images/profile_pic');
+// });
 
   $('#button-toggle-profile').sideNav({
     menuWidth: 300, // Default is 300
@@ -39,7 +42,7 @@ $(document).ready(function() {
   });
 
 
-
+// TODO figure out if i need the below since it's also in profile.ejs
   function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -56,26 +59,22 @@ $(document).ready(function() {
       var password = $("#login-password").val().trim();
 
 
-
       var info = {
         username: username,
         password: password
       }
-
+console.log(info);
       $.post("/signin", info, function(userObject) {
         //console.log(userObject);
         currentUser=JSON.stringify(userObject);
-        //  window.location.href ='/bulletin';
         window.location.href = '/profile';
 
       }).catch(function(data) {
-      //  window.location.href='/';
         JSON.stringify(data);
         var message=$('<p>').text("Wrong user name or password!");
         message.css("color","red");
         $("#error-div").empty();
         $("#error-div").append(message);
-        //console.log(data);
       })
     }
 

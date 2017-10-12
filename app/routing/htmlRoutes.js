@@ -8,7 +8,7 @@ var loginAuth =require("./userSignInAuth.js");
 
 module.exports = function(app, passport) {
 
-	app.get("/profile", loginAuth.isLoggedIn, function(req, res){
+	app.get("/profile", loginAuth.isLoggedIn, function(req, response) {
 			response.render('pages/profile');
 	});
 
@@ -35,6 +35,10 @@ module.exports = function(app, passport) {
   response.render('pages/bulletinboard');;
   });
 
+	app.get("/uploadForm", function(req,res){
+		res.redirect('/profile');
+	})
+
 
 
   //app.get('/dashboard',isLoggedIn, authController.dashboard);
@@ -53,16 +57,8 @@ module.exports = function(app, passport) {
 			// `req.user` contains the authenticated user.
 			res.json(req.user);
 		});
+
   // app.post('/put_newuser_in_db', passport.authenticate('local-signup',  { successRedirect: '/bulletin', failureRedirect: '/signup'}));
-
-  app.post('/put_newuser_in_db',
-    passport.authenticate('local-signup'),
-
-    function(req, res) {
-      // If this function gets called, authentication was successful.
-      // `req.user` contains the authenticated user.
-      res.json(req.user);
-    });
 
   app.post('/signin',
     passport.authenticate('local-signin'),
@@ -71,8 +67,6 @@ module.exports = function(app, passport) {
       // `req.user` contains the authenticated user.
       res.json(req.user);
     });
-
-
 
 
 }
