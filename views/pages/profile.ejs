@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<body onload="showProfile();">
+<body>
 
   <head>
   <% include ../partials/head %>
@@ -61,14 +61,13 @@
   };
 
   function showProfile() {
-    event.preventDefault();
 
 //ajax calling user data from apiRoutes
     $.get("/profile/user", function(data) {
 
       var dataString = JSON.stringify(data);
-      var first = capitalizeFirstLetter(data.first_name);
-      var last = capitalizeFirstLetter(data.last_name)
+        var first = capitalizeFirstLetter(data.first_name);
+        var last = capitalizeFirstLetter(data.last_name)
       //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
       var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
       $("#username-quote").text(data.username);
@@ -82,6 +81,8 @@
     });
 
   };
+
+  showProfile();
 
   // this allows picture uploads to display on page
   function readURL(input) {

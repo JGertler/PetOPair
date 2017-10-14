@@ -9,7 +9,7 @@ var fileUpload = require('express-fileupload');
 var s3 = require('s3');
 var keys = require("../config/keys.js");
 var loginAuth =require("./userSignInAuth.js");
-
+var fs = require("fs");
 //config variables for up/download from s3
 var client = s3.createClient({
   maxAsyncS3: 20, // this is the default
@@ -30,14 +30,15 @@ var client = s3.createClient({
 module.exports = function(passport, app, user) {
   var User = user;
   var LocalStrategy = require("passport-local").Strategy;
-  app.get("/profile/:username", loginAuth.isLoggedIn, function(req, res) {
+  app.get("/profile/user", loginAuth.isLoggedIn, function(req, res) {
     // finds the currently logged in user and returns their info to the profile page
+console.log("LALA"+req.user)
     Human.findOne({
       where: {
         username: req.user.username
       }
     }).then(function(result) {
-
+console.log(result);
       return res.json(result);
     });
     //}
@@ -96,11 +97,11 @@ module.exports = function(passport, app, user) {
   });
   // used to deserialize the user
   passport.deserializeUser(function(id, done) {
-    User.findById(id).then(function(user) {
+    User.findById(id).then(function(user, errors) {
       if (user) {
-        done(null, user.get());
+        done(null, user);
       } else {
-        done(user.errors, null);
+        done(errors, null);
       }
     });
   });
@@ -303,7 +304,16 @@ Image.destroy({
       res.redirect('/profile');
     });
   });
+  // setTimeout(function () {
+  //     if (fs.existsSync("uploads/" + req.files.uploadedPic.name)) { // check to ensure file still exists on file system
+  //         fs.unlink("uploads/" + req.files.uploadedPic.name); // delete file from server file system after 60 seconds
+  //     }
+  // }, 60000);
 
 }); //end aws post route
+
+//delete pictures from local storage after pushing and pulling to and from aws
+
+
 
 }; //end module.exports
