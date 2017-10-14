@@ -63,9 +63,7 @@
     background-repeat: no-repeat;
     margin: 0px;
     background-position: center;
-    width: 200px;
-    height: auto;
-    min-height:200px;
+    max-height: 200px;
 
 }
 
