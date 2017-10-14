@@ -19,6 +19,11 @@ module.exports = function(app, passport) {
     response.render('pages/signUp');
   });
 
+	// test
+	app.get("/signupper", loginAuth.isLoggedIn, function(req, response) {
+				response.render('pages/signInForm');
+		});
+
 	app.get('/uploads/:pic_name', function(req, res){
 		res.sendFile(path.join(__dirname, '/../../uploads', req.params.pic_name));
 	})
