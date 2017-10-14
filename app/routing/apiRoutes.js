@@ -74,7 +74,14 @@ console.log(result);
         downloader.on('end', function() {
           console.log("done downloading");
           // this plasters the downloaded aws picture onto the UI
-          return res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
+          res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
+          //delete pictures from local storage after pushing and pulling to and from aws
+          setTimeout(function () {
+            console.log("blahblah")
+              if (fs.existsSync(path.resolve(__dirname +"/../../downloads/"+picObject.img_url))) { // check to ensure file still exists on file system
+                  fs.unlink(path.resolve(__dirname +"/../../downloads/"+picObject.img_url)); // delete file from server file system after 60 seconds
+              }
+          }, 60000);
         });
       } else {
         //ensures the server doesn't crash if a picture isn't uploaded to aws
@@ -302,17 +309,14 @@ Image.destroy({
     uploader.on('end', function() {
       console.log('File uploaded!');
       res.redirect('/profile');
+      //delete pictures from local storage after pushing and pulling to and from aws
+      if (fs.existsSync("uploads/" + req.files.uploadedPic.name)) { // check to ensure file still exists on file system
+          fs.unlink("uploads/" + req.files.uploadedPic.name); // delete file from server file system after 60 seconds
+      }
     });
   });
-  // setTimeout(function () {
-  //     if (fs.existsSync("uploads/" + req.files.uploadedPic.name)) { // check to ensure file still exists on file system
-  //         fs.unlink("uploads/" + req.files.uploadedPic.name); // delete file from server file system after 60 seconds
-  //     }
-  // }, 60000);
 
 }); //end aws post route
-
-//delete pictures from local storage after pushing and pulling to and from aws
 
 
 
