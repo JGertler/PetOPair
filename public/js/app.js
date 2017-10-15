@@ -50,14 +50,14 @@ $(document).ready(function() {
 
       var username = $("#login-name").val().trim();
       var password = $("#login-password").val().trim();
-
+      console.log("lalala");
       var info = {
         username: username,
         password: password
       }
 
       $.post("/signin", info, function(userObject) {
-        // console.log(userObject);
+        console.log("lalala" + userObject);
         currentUser=JSON.stringify(userObject);
         window.location.href = '/profile';
 
@@ -93,13 +93,12 @@ function showProfile() {
           $("#about-me-div").append("About user's pets here");
           $("#sugar_cups").append(data.cups_of_sugar);
           $("#petNames").append(data.pet_name);
-
+          console.log(data.pet_name);
         });
 
       };
 
 showProfile();
-
 
       //profpic upload UI functionality
       $('.materialboxed').materialbox();

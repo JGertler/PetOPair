@@ -89,14 +89,6 @@
           </div>
         </div> <!-- end carousel slide 2 -->
 
-        <div class="carousel-item" style="background-color: #dcdefa; padding: 30px;" href="#three!">
-          <div class="row" id="slideOne">
-
-            <!-- TODO: add space for users to enter information about their pets -->
-
-          </div> <!-- end row -->
-        </div> <!-- end carousel slide 3 -->
-
         <div class="carousel-item" style="background-color: #faf8dc; padding: 30px;" href="#four!">
           <!-- does user have pets? -->
           <div class="row">
@@ -136,7 +128,7 @@
               <!-- this will fill dynamically -->
             </div>
           </div>
-        </div> <!-- end carousel slide 4 -->
+        </div> <!-- end carousel slide 3 -->
 
         <div class="carousel-item lastSlide" style="background-color: #edfadc;" href="#five!">
           <div class="row">
@@ -165,7 +157,7 @@
               </button>
             </div>
           </div>
-        </div> <!--end carousel slide 5-->
+        </div> <!--end carousel slide 4-->
 
       </form>
     </div>
@@ -218,7 +210,9 @@ function grabData(event) {
   locality = $("#locality").val().trim(),
   administrative_area_level_1 = $("#administrative_area_level_1").val().trim(),
   postal_code = $("#postal_code").val().trim(),
-  country = $("#country").val().trim();
+  country = $("#country").val().trim(),
+  pet_name = $("#pet_name").val().trim();
+
 
   var info = {
     first_name: first_name,
@@ -236,6 +230,7 @@ function grabData(event) {
     postal_code: postal_code,
     country: country
   }
+
 // ajax call because this is on the frontend
   $.post("/put_newuser_in_db", info, function(userObject) {
     //  console.log(userObject);

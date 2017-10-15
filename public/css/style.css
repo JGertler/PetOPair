@@ -156,8 +156,11 @@ button{
 
 
 
-.userPic {
+.defaultPic {
     background-image: url("../media/profPic.jpg");
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
 }
 
 #preview {
