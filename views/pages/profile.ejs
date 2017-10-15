@@ -17,7 +17,7 @@
         <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data">
           <div class="col m4 col s12">
               <input type="file" id="file-input" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
-              <img class="materialboxed userPic" id="preview" class="main-profile-pic" src="/profile_pic" alt="User img"/>
+              <img class="materialboxed defaultPic" id="preview" class="main-profile-pic" src="/profile_pic" alt="User img"/>
               <button id="profBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
                 <i class="material-icons right">camera_alt</i>
               </button>
