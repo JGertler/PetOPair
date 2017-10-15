@@ -32,13 +32,11 @@ module.exports = function(passport, app, user) {
   var LocalStrategy = require("passport-local").Strategy;
   app.get("/profile/user", loginAuth.isLoggedIn, function(req, res) {
     // finds the currently logged in user and returns their info to the profile page
-console.log("LALA"+req.user)
     Human.findOne({
       where: {
         username: req.user.username
       }
     }).then(function(result) {
-console.log(result);
       return res.json(result);
     });
     //}
