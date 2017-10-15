@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
-  $("select").material_select();
   ///This toggles the profile view onOpen/onClose functions move the
   //button around
+
+  $("select").material_select();
+
 
   $('.modal').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -19,10 +21,8 @@ $(document).ready(function() {
   }
 );
 
-//this image will be used in sidebar before user has uploaded a picture or if user is not logged in
-// $(".backup_picture").on("error", function(){
-//     $(this).attr('src', './images/profile_pic');
-// });
+
+//sidebar functionality
 
   $('#button-toggle-profile').sideNav({
     menuWidth: 300, // Default is 300
@@ -42,30 +42,22 @@ $(document).ready(function() {
   });
 
 
-// TODO figure out if i need the below since it's also in profile.ejs
-  function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-
   var currentUser;
     $("#login-btn").on("click", loginData);
 
     function loginData(event) {
       event.preventDefault();
 
-
       var username = $("#login-name").val().trim();
       var password = $("#login-password").val().trim();
-
 
       var info = {
         username: username,
         password: password
       }
-console.log(info);
+
       $.post("/signin", info, function(userObject) {
-        //console.log(userObject);
+        // console.log(userObject);
         currentUser=JSON.stringify(userObject);
         window.location.href = '/profile';
 
@@ -77,5 +69,41 @@ console.log(info);
         $("#error-div").append(message);
       })
     }
+
+
+// function will be used to generate user's name at top of profile i.e. Jessica G.
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      };
+
+function showProfile() {
+
+    //ajax calling user data from apiRoutes
+        $.get("/profile/user", function(data) {
+          var dataString = JSON.stringify(data);
+            var first = capitalizeFirstLetter(data.first_name);
+            var last = capitalizeFirstLetter(data.last_name)
+          //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
+          var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
+          $("#username-quote").text(data.username);
+          $("#username-h1").text(first + '  ' + lastInitial);
+          $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
+          $("#side-nav-name").text(first + '  ' + last);
+          $("#side-nav-email").text(data.email);
+          $("#about-me-div").append("About user's pets here");
+          $("#sugar_cups").append(data.cups_of_sugar);
+          $("#petNames").append(data.pet_name);
+
+        });
+
+      };
+
+showProfile();
+
+
+      //profpic upload UI functionality
+      $('.materialboxed').materialbox();
+
+
 
 }); //end doc ready
