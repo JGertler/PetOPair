@@ -50,28 +50,7 @@
 
 
 <script>
-// function will be used to generate user's name at top of profile i.e. Jessica G.
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-  function showProfile() {
-//ajax calling user data from apiRoutes
-    $.get("/profile/user", function(data) {
-      var dataString = JSON.stringify(data);
-        var first = capitalizeFirstLetter(data.first_name);
-        var last = capitalizeFirstLetter(data.last_name)
-      //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
-      var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
-      $("#username-quote").text(data.username);
-      $("#username-h1").text(first + '  ' + lastInitial);
-      $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
-      $("#side-nav-name").text(first + '  ' + last);
-      $("#side-nav-email").text(data.email);
-      $("#about-me-div").append("About user's pets here");
-      $("#sugar_cups").append(data.cups_of_sugar);
-    });
-  };
-  showProfile();
+
   // this allows picture uploads to display on page
   function readURL(input) {
     if (input.files && input.files[0]) {
