@@ -43,54 +43,54 @@ module.exports = function(passport, app, user) {
   });
 
   app.get("/profile_pic", loginAuth.isLoggedIn, function(req, res) {
-    console.log(req.user);
+     console.log(req.user);
 
-    Image.findOne({
-      where: {
-        human_id: req.user.id
-      }
-    }).then(function(result) {
-      if (result !== null) {
-        var picObject=result.toJSON();
-        console.log(picObject.img_url);
+     Image.findOne({
+       where: {
+         human_id: req.user.id
+       }
+     }).then(function(result) {
+       if (result !== null) {
+         var picObject=result.toJSON();
+         console.log(picObject.img_url);
 
-        var params = {
-          localFile: "downloads/"+picObject.img_url,//destination folder
-          s3Params: {
-            Bucket: keys.s3bucket,
-            Key: picObject.img_url, //name of photo to reference in aws
-          }
-        };
-        //download from aws to downloads folder
-        var downloader = client.downloadFile(params);
-        downloader.on('error', function(err) {
-          console.error("unable to download:", err.stack);
-        });
-        downloader.on('progress', function() {
-          console.log("progress", downloader.progressAmount, downloader.progressTotal);
-        });
-        downloader.on('end', function() {
-          console.log("done downloading");
-          // this plasters the downloaded aws picture onto the UI
-          res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
-          //delete pictures from local storage after pushing and pulling to and from aws
-          setTimeout(function () {
-            console.log("blahblah")
-              if (fs.existsSync(path.resolve(__dirname +"/../../downloads/"+picObject.img_url))) { // check to ensure file still exists on file system
-                  fs.unlink(path.resolve(__dirname +"/../../downloads/"+picObject.img_url)); // delete file from server file system after 60 seconds
-              }
-          }, 60000);
-        });
-      } else {
-        //ensures the server doesn't crash if a picture isn't uploaded to aws
-        console.log("Image not uploaded to AWS")
-      };
+         var params = {
+           localFile: "downloads/"+picObject.img_url,//destination folder
+           s3Params: {
+             Bucket: keys.s3bucket,
+             Key: picObject.img_url, //name of photo to reference in aws
+           }
+         };
+         //download from aws to downloads folder
+         var downloader = client.downloadFile(params);
+         downloader.on('error', function(err) {
+           console.error("unable to download:", err.stack);
+         });
+         downloader.on('progress', function() {
+           console.log("progress", downloader.progressAmount, downloader.progressTotal);
+         });
+         downloader.on('end', function() {
+           console.log("done downloading");
+           // this plasters the downloaded aws picture onto the UI
+           res.sendFile(path.resolve(__dirname +"/../../downloads/"+picObject.img_url));
+           //delete pictures from local storage after pushing and pulling to and from aws
+           setTimeout(function () {
+             console.log("blahblah")
+               if (fs.existsSync(path.resolve(__dirname +"/../../downloads/"+picObject.img_url))) { // check to ensure file still exists on file system
+                   fs.unlink(path.resolve(__dirname +"/../../downloads/"+picObject.img_url)); // delete file from server file system after 60 seconds
+               }
+           }, 60000);
+         });
+       } else {
+         //ensures the server doesn't crash if a picture isn't uploaded to aws
+         console.log("Image not uploaded to AWS")
+       };
 
-    });
-  });
+     });
+   });
 
 
-  // Get all user API -- maybe comment out the below if things get fucky
+  // Get all user API -- maybe comment out the below if things get funky
   app.get("/api/users", function(req, res) {
     Human.findAll({}).then(function(results) {
       res.json(results);
@@ -250,6 +250,8 @@ app.get("/api/pets", loginAuth.isLoggedIn, function(req, res) {
 
 // amazon aws route
 
+// amazon aws route
+
 app.use(fileUpload());
 
 app.post("/uploadForm", loginAuth.isLoggedIn, function(req, res) {
@@ -314,8 +316,73 @@ Image.destroy({
     });
   });
 
-}); //end aws post route
+}); //end human aws post route
 
+// TODO edit the below code to upload pictures per pet
+// app.post("/uploadForm_Pets", loginAuth.isLoggedIn, function(req, res) {
+//
+//   if (!req.files) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
+//   console.log(req.body);
+//
+//   var imageInfo_Pets = {
+//     img_url: req.files.uploadedPic.name, //TODO generate random number so that someone's profpic file-name doesn't override someone else's
+//     human_id: req.user.id
+//   }
+//
+// //delete any previous versions of pet pic that user had stored in database
+// Pets.destroy({
+//   where: {
+//     human_id: req.user.id
+//     pet_name: req.user.pet_name;
+//   }
+// }).then(
+//     Pets.create(imageInfo_Pets)
+//     .then(function(results) {
+//       //  res.json(results);
+//     })
+//     .catch(function(err) {
+//       console.log("Data err with upload");
+//       console.log(err);
+//     })
+//   );
+//   // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file
+//   var uploadedPic = req.files.uploadedPic;
+//
+//   // Use the mv() method to place the file somewhere on your server
+//   uploadedPic.mv('uploads/' + req.files.uploadedPic.name, function(err) {
+//     if (err) {
+//       console.log(err);
+//       return res.status(500).send(err);
+//     }
+//
+//     // Upload to S3
+//     var params = {
+//       localFile: 'uploads/' + req.files.uploadedPic.name,
+//
+//       s3Params: {
+//         Bucket: keys.s3bucket,
+//         Key: req.files.uploadedPic.name, // File path of location on S3
+//       },
+//     };
+//
+//     var uploader = client.uploadFile(params);
+//     uploader.on('error', function(err) {
+//       console.error("unable to upload:", err.stack);
+//       res.status(500).send(err.stack);
+//     });
+//     uploader.on('end', function() {
+//       console.log('File uploaded!');
+//       res.redirect('/profile');
+//       //delete pictures from local storage after pushing and pulling to and from aws
+//       if (fs.existsSync("uploads/" + req.files.uploadedPic.name)) { // check to ensure file still exists on file system
+//           fs.unlink("uploads/" + req.files.uploadedPic.name); // delete file from server file system after 60 seconds
+//       }
+//     });
+//   });
+//
+// }); //end pets aws post route
 
 
 }; //end module.exports

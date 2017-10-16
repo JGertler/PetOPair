@@ -19,6 +19,10 @@ module.exports = function(app, passport) {
     response.render('pages/signUp');
   });
 
+	app.get("/pets", function(request, response) {
+    response.render('pages/pets');
+  });
+
 	app.get('/uploads/:pic_name', function(req, res){
 		res.sendFile(path.join(__dirname, '/../../uploads', req.params.pic_name));
 	})
@@ -39,26 +43,25 @@ module.exports = function(app, passport) {
 		res.redirect('/profile');
 	})
 
+	app.get("/uploadForm_Pets", function(req,res){
+		res.redirect('/profile');
+	})
 
-
-  //app.get('/dashboard',isLoggedIn, authController.dashboard);
 
 
   app.get('/logout', exports.logout = function(req, res) {
     req.logOut();
     res.redirect('/');
   });
-  //});
+
 	app.post('/put_newuser_in_db',
 		passport.authenticate('local-signup'),
-
 		function(req, res) {
 			// If this function gets called, authentication was successful.
 			// `req.user` contains the authenticated user.
 			res.json(req.user);
 		});
 
-  // app.post('/put_newuser_in_db', passport.authenticate('local-signup',  { successRedirect: '/bulletin', failureRedirect: '/signup'}));
 
   app.post('/signin',
     passport.authenticate('local-signin'),
@@ -68,5 +71,11 @@ module.exports = function(app, passport) {
       res.json(req.user);
     });
 
+		//this may be all wrong - JG
+				app.post('/put_pet_in_db',
+					function(req, res) {
+						// `req.user` contains the authenticated pet.
+						res.json(req.user);
+					});
 
 }

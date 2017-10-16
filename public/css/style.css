@@ -6,9 +6,15 @@
 #about-me-div{
 
 }
-#username-h2{
+#username-h1{
+  font-family: 'Gloria Hallelujah';
   margin:0px;
 }
+
+#city-state-h3 {
+  font-family: 'Concert One';
+}
+
 #profile-page-container{
   margin-top:30px;
 }
@@ -22,11 +28,14 @@
 }
 .petBackground {
     background-image: url("../media/petCartoon.png");
-    background-repeat: no-repeat;
-    background-position: right top;
+    background-repeat: repeat;
 
 }
 
+button.grabDataBtn  {
+  position: relative;
+  bottom: 24px;
+}
 
 .mainLogo {
   padding: 0px;
@@ -114,15 +123,27 @@ p {
   background-color: white;
 }
 
+#profile-page-container {
+  background-image: url("../media/profBackground.jpg") !important;
+  background-repeat: repeat;
+}
+
 .profileContainer {
-  background-image: url("../media/brickwall.jpg");
-  padding-top: 20px;
+  background-color: #FFDBB5 !important;
 }
 
 /*these all contain our pallet colors */
 .side-nav {
   background-color: #F4D35E !important;
   font-family: 'Concert One' !important;
+
+}
+.side-nav li>a{
+  font-size: 18px !important;
+}
+
+nav ul a {
+  font-size: 18px !important;
 }
 
 .user-view {
