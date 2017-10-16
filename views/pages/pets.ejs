@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<% include ../partials/head %>
+</head>
+
+
+<body>
+  <!--navigation-->
+  <% include ../partials/navigation %>
+
+<div class="container petBox" style="background-color: #faf8dc; padding: 30px;" href="#four!">
+  <!-- does user have pets? -->
+  <div class="row">
+    <div col s6>
+      <p> Introduce your pets! </p>
+    </div>
+  </div>
+  <form ref="uploadForm_Pets" action="/uploadForm_Pets" method="post" enctype="multipart/form-data">
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input id="pet_name" type="text" class="validate">
+      <label for="pet_name">Pet Name</label>
+    </div>
+    <div class="input-field col s4" id="pet_type" style="color: black; width: 300px;">
+      <select multiple>
+        <option value="" disabled selected>schweetie</option>
+        <option value="1">Cat</option>
+        <option value="2">Dog</option>
+        <option value="3">Rabbit</option>
+        <option value="4">Ferret</option>
+        <option value="5">Bird</option>
+        <option value="6">Rodent</option>
+        <option value="7">Reptile</option>
+        <option value="8">Fish</option>
+      </select>
+      <label>Pet Type</label>
+    </div>
+  </div>
+    <div class="input-field col s4">
+
+    </div>
+
+  <div class="row">
+    <div id="morePets">
+      <a class="waves-effect waves-light btn" id="addPet">Add another Pet</a>
+    </div>
+  </div>
+  <div class="row">
+      <!-- this will fill dynamically when new pets are added -->
+  </div>
+
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <h5 style="font-family: 'Gloria Hallelujah', cursive;"> On average, how much royal treatment do your pet(s) require? </h5>
+      <p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+        For example, a pure commoner hardly begs for food, has all the chill, rarely makes a mess, and doesn't have any strict regimens. Commoners are commonly adorable. A pet requiring the ultimate royal treatment will likely make a mess if left alone too long, makes a lot of noise, requires medicine of sorts, and has special regimens. These pets are royalty in their own right, but you get pretty embarassed by the list of things your petsitter has to be aware of.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s10 offset-s1">
+      <label id="treatment" for="treatment">
+        <span class="commoner">0=Commoner, 10=Royal Treatment</span>
+      </label>
+      <p class="range-field">
+        <input type="range" id="treatment" min="0" max="10">
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s10 offset-s1">
+        <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">snooze</i>This pet's breakfast.</div>
+        <div class="collapsible-body">
+          <span>
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label id="morning" for="textarea1"></label>
+          </span>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">wb_sunny</i>This pet's midday food, if applicable.</div>
+        <div class="collapsible-body">
+          <span>
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label id="midday" for="textarea1"></label>
+          </span>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">cake</i>This pet's dinner.</div>
+        <div class="collapsible-body">
+          <span>
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label id="night" for="textarea1"></label>
+          </span>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">event_note</i>The normal notes I leave my petsitters.</div>
+        <div class="collapsible-body">
+          <span>
+          <textarea id="textarea1" class="materialize-textarea" placeholder="Don't be embarassed about the royal treatment your pet might require. Be honest and embrace your pet's royalty."></textarea>
+          <label id="notes" for="textarea1"></label>
+          </span>
+        </div>
+      </li>
+      </ul>
+  </div>
+</div>
+  <button class="btn waves-effect waves-light" id="grabdata_pets" type="submit" name="action">Submit<i class="material-icons right">send</i>
+  </button>
+
+</form>
+</div>
+
+
+    <footer class="page-footer">
+    <% include ../partials/footer%>
+    </footer>
+
+  </body>
+
+</html>
+
+
+<script>
+
+var petObject;
+
+function grabData_Pets(event) {
+  event.preventDefault();
+  $('#notes').trigger('autoresize');
+  var pet_name = $("#pet_name").val().trim(),
+  pet_type = $("#pet_type").val().trim(),
+  treatment= $("#treatment").val().trim(),
+  morning= $("#morning").val().trim(),
+  midday= $("#midday").val().trim(),
+  night= $("#night").val().trim(),
+  notes= $("#notes").val().trim();
+
+
+  var petInfo = {
+    pet_name: pet_name,
+    pet_type: pet_type,
+    treatment: treatment,
+    morning: morning,
+    midday: midday,
+    night: night,
+    notes: notes
+  }
+
+// ajax call because this is on the frontend
+  $.post("/put_pet_in_db", petInfo, function(petObject) {
+    //  console.log(userObject);
+    window.location.href = '/profile';
+  }).catch(function(data) {
+    //  window.location.href='/';
+    //JSON.stringify(data);
+    var message = $('<p>').text("Must add Pet Name");
+    message.css("color", "red");
+    $("#error-div").empty();
+    $("#error-div").append(message);
+    //console.log(data);
+  })
+}
+//ends grabData function
+//on click of "Submit" button, the grabdata function occurs
+$("#grabdata_pets").on("click", grabData_Pets);
+
+
+</script>

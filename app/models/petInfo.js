@@ -7,20 +7,28 @@ var Pet = sequelize.define('Pet', {
     pet_name: {
       type: Sequelize.TEXT
     },
-    city: {
+    pet_type: {
       type: Sequelize.TEXT
     },
     treatment: {
-      type: Sequelize.TEXT
+      type: Sequelize.INTEGER,
+      allowNull: true
     },
-    moreInfo: {
-      type: Sequelize.TEXT
+    morning: {
+      type: Sequelize.TEXT,
+      allowNull: true
     },
-    startDate: {
-      type: Sequelize.TEXT
+    midday: {
+      type: Sequelize.TEXT,
+      allowNull: true
     },
-    endDate: {
-      type: Sequelize.TEXT
+    night: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
+    notes: {
+      type: Sequelize.TEXT,
+      allowNull: true
     },
     human_id: {
       type: Sequelize.INTEGER

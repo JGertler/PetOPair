@@ -1,10 +1,11 @@
 $(document).ready(function() {
 
-  ///This toggles the profile view onOpen/onClose functions move the
-  //button around
-
+//initiates materialize UI functions
   $("select").material_select();
 
+  $('.materialboxed').materialbox();
+
+  $('.collapsible').collapsible();
 
   $('.modal').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
@@ -20,6 +21,16 @@ $(document).ready(function() {
       console.log("modal closed")} // Callback for Modal close
   }
 );
+
+//this allows user to add more pets with pet type in the form
+
+$("#addPet").click(function () {
+
+  $("#morePets").prepend("<input id='pet_name' type='text' class='validate col s8' placeholder='Pet Name'><label for='pet_name'></label> <div class='input-field col s5' id='petType' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div>");
+  $("select").material_select();
+
+  $(".petBox").css({"height": "+=100px"});
+});
 
 
 //sidebar functionality
@@ -91,8 +102,7 @@ function showProfile() {
           $("#side-nav-name").text(first + '  ' + last);
           $("#side-nav-email").text(data.email);
           $("#about-me-div").append("About user's pets here");
-          $("#sugar_cups").append(data.cups_of_sugar);
-          $("#petNames").append(data.pet_name);
+          // $("#sugar_cups").append(data.cups_of_sugar);
           console.log(data.pet_name);
         });
 
@@ -100,8 +110,7 @@ function showProfile() {
 
 showProfile();
 
-      //profpic upload UI functionality
-      $('.materialboxed').materialbox();
+
 
 
 

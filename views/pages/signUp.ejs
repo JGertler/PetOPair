@@ -87,81 +87,13 @@
               </p>
             </div>
           </div>
-        </div> <!-- end carousel slide 2 -->
+          <button class="btn waves-effect waves-light grabDataBtn" id="grabdata" type="submit" name="action">Submit<i class="material-icons right">send</i>
+          </button>
 
-        <div class="carousel-item" style="background-color: #faf8dc; padding: 30px;" href="#four!">
-          <!-- does user have pets? -->
-          <div class="row">
-            <div col s6>
-              <p> So, introduce your pets! </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s8">
-              <input id="pet_name" type="text" class="validate">
-              <label for="pet_name">Pet Name</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s5 petTypes1" style="color: black; width: 300px;">
-              <select multiple>
-                <option value="" disabled selected>schweetie</option>
-                <option value="1">Cat</option>
-                <option value="2">Dog</option>
-                <option value="3">Rabbit</option>
-                <option value="4">Ferret</option>
-                <option value="5">Bird</option>
-                <option value="6">Rodent</option>
-                <option value="7">Reptile</option>
-                <option value="8">Fish</option>
-              </select>
-              <label>Pet Type</label>
-            </div>
-          </div>
-          <div class="row">
-            <div id="morePets">
-              <a class="waves-effect waves-light btn" id="addPet">Add another Pet</a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s5 petTypes" style="color: black; width: 300px;">
-              <!-- this will fill dynamically -->
-            </div>
-          </div>
-        </div> <!-- end carousel slide 3 -->
-
-        <div class="carousel-item lastSlide" style="background-color: #edfadc;" href="#five!">
-          <div class="row">
-            <div class="col s8 offset-s2">
-              <h5 style="font-family: 'Gloria Hallelujah', cursive;"> On average, how much royal treatment do your pet(s) require? </h5>
-              <p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">For example, a pure commoner hardly begs for food, has all the chill, rarely makes a mess, and doesn't have any strict regimens. Commoners are commonly adorable. A pet requiring the ultimate royal treatment will likely make a mess if left alone too long, makes a lot of noise, requires medicine of sorts, and has special regimens. These pets are royalty in their own right, but you get pretty embarassed by the list of things your petsitter has to be aware of.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s10 offset-s1">
-              <label class="treatment" for="treatment">
-                <br>
-                <span class="commoner">Commoner</span>
-                <span class="royal">Royal Treatment</span>
-              </label>
-              <p class="range-field">
-                <input type="range" id="treatment" min="0" max="10">
-              </p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col s1 offset-s8">
-              <!-- this button will post to aws -->
-              <button class="btn waves-effect waves-light" id="grabdata" type="submit" name="action">Submit<i class="material-icons right">send</i>
-              </button>
-            </div>
-          </div>
-        </div> <!--end carousel slide 4-->
-
-      </form>
+        </div>
+      </div><!-- end carousel slide 2 -->
     </div>
-
+    </form>
     <!-- end container and section -->
   </div>
 </div>
@@ -178,16 +110,6 @@
 
 <script>
 $('.carousel.carousel-slider').carousel({fullWidth: true});
-
-//this allows user to add more pets with pet type in the form
-
-$("#addPet").click(function () {
-
-  $("#morePets").prepend("<input id='pet_name' type='text' class='validate col s8' placeholder='Pet Name'><label for='pet_name'></label> <div class='input-field col s5 petTypes' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div>");
-  $("select").material_select();
-
-  $(".carousel").css({"height": "+=100px"});
-});
 
 
 //function which grab the user's input data from the sign up form and puts it into an object to route to the table
@@ -210,8 +132,7 @@ function grabData(event) {
   locality = $("#locality").val().trim(),
   administrative_area_level_1 = $("#administrative_area_level_1").val().trim(),
   postal_code = $("#postal_code").val().trim(),
-  country = $("#country").val().trim(),
-  pet_name = $("#pet_name").val().trim();
+  country = $("#country").val().trim();
 
 
   var info = {
