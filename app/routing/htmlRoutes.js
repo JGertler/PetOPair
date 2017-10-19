@@ -19,7 +19,7 @@ module.exports = function(app, passport) {
     response.render('pages/signUp');
   });
 
-	app.get("/pets", function(request, response) {
+	app.get("/pets", loginAuth.isLoggedIn, function(request, response) {
     response.render('pages/pets');
   });
 
@@ -71,11 +71,7 @@ module.exports = function(app, passport) {
       res.json(req.user);
     });
 
-		//this may be all wrong - JG
-				app.post('/put_pet_in_db',
-					function(req, res) {
-						// `req.user` contains the authenticated pet.
-						res.json(req.user);
-					});
+
+
 
 }
