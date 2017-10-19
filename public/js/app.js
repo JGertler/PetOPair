@@ -22,15 +22,7 @@ $(document).ready(function() {
   }
 );
 
-//this allows user to add more pets with pet type in the form
 
-$("#addPet").click(function () {
-
-  $("#morePets").prepend("<input id='pet_name' type='text' class='validate col s8' placeholder='Pet Name'><label for='pet_name'></label> <div class='input-field col s5' id='petType' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div>");
-  $("select").material_select();
-
-  $(".petBox").css({"height": "+=100px"});
-});
 
 
 //sidebar functionality

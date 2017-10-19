@@ -201,3 +201,34 @@ box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 #profBtn {
   display: none;
 }
+
+
+
+.circle {
+border: solid;
+border-color: white;
+background-color: orange;
+border-radius: 360px;
+padding: 0;
+margin: 0;
+height: 300px;
+width: 300px;
+
+}
+
+.switch {
+  font-size: 30px;
+  font-family: Concert One;
+  position: relative;
+  left: 35px;
+  top: 50px;
+}
+
+.yesno {
+  position: relative;
+  left: 40px;
+}
+
+.petForm {
+  display: none;
+}

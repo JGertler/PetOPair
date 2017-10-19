@@ -2,13 +2,13 @@ var Sequelize = require("sequelize");
 
 var sequelize = require("../config/connection.js");
 
-//  Pet table
+
 var Image = sequelize.define('Image', {
     img_url: {
       type: Sequelize.TEXT
     },
     human_id: {
-      type: Sequelize.TEXT
+      type: Sequelize.INTEGER
     }
   })
   // Pet.destroy({ where: { id: [1] }})
