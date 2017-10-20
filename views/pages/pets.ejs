@@ -9,12 +9,25 @@
 <body>
   <!--navigation-->
   <% include ../partials/navigation %>
+  <!-- does user have pets? -->
+
 
 <div class="container petBox" style="background-color: #faf8dc; padding: 30px;" href="#four!">
-  <!-- does user have pets? -->
+  <div class="circle">
+    <div class="switch">
+    <p class='animated wobble'> Do you have pets? </p>
+      <label class="yesno" style="color: white; font-size: 20px">
+        No
+        <input id="switch" type="checkbox">
+        <span class="lever"></span>
+        Yes
+      </label>
+    </div>
+  </div>
+<div class="petForm">
   <div class="row">
     <div col s6>
-      <p> Introduce your pets! </p>
+      <p> Introduce your pet(s)! </p>
     </div>
   </div>
   <form ref="uploadForm_Pets" action="/uploadForm_Pets" method="post" enctype="multipart/form-data">
@@ -24,6 +37,12 @@
       <input id="pet_name" type="text" class="validate">
       <label for="pet_name">Pet Name</label>
     </div>
+
+    <div class="input-field col s4">
+    <input type="file" id="file-input" name="pet_uploadedPic" accept="image/*" onchange="readURL(this);"/>
+    <img class="materialboxed defaultPic" id="petPreview" class="main-profile-pic" src="/pet_pic" alt="User img"/>
+    </div>
+
     <div class="input-field col s4" id="pet_type" style="color: black; width: 300px;">
       <select multiple>
         <option value="" disabled selected>schweetie</option>
@@ -43,31 +62,12 @@
 
     </div>
 
-  <div class="row">
-    <div id="morePets">
-      <a class="waves-effect waves-light btn" id="addPet">Add another Pet</a>
-    </div>
-  </div>
-  <div class="row">
-      <!-- this will fill dynamically when new pets are added -->
+  <div class="row" id="morePets">
+        <!-- this will fill dynamically when new pets are added -->
   </div>
 
   <div class="row">
-    <div class="col s8 offset-s2">
-      <h5 style="font-family: 'Gloria Hallelujah', cursive;"> On average, how much royal treatment do your pet(s) require? </h5>
-      <p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-        For example, a pure commoner hardly begs for food, has all the chill, rarely makes a mess, and doesn't have any strict regimens. Commoners are commonly adorable. A pet requiring the ultimate royal treatment will likely make a mess if left alone too long, makes a lot of noise, requires medicine of sorts, and has special regimens. These pets are royalty in their own right, but you get pretty embarassed by the list of things your petsitter has to be aware of.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s10 offset-s1">
-      <label id="treatment" for="treatment">
-        <span class="commoner">0=Commoner, 10=Royal Treatment</span>
-      </label>
-      <p class="range-field">
-        <input type="range" id="treatment" min="0" max="10">
-      </p>
-    </div>
+      <a class="waves-effect waves-light btn" id="addPet">Add another Pet<i class="material-icons">pets</i></a>
   </div>
   <div class="row">
     <div class="input-field col s10 offset-s1">
@@ -116,6 +116,7 @@
 
 </form>
 </div>
+</div>
 
 
     <footer class="page-footer">
@@ -128,35 +129,80 @@
 
 
 <script>
+//allows pet pics to display
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    console.log($('#petPreview').src)
+    reader.onload = function (e) {
+      document.getElementById('petPreview' + numPets).src =  e.target.result;
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+
+//this allows user to add more pets with pet type in the form
+var numPets = 1;
+
+var yesPets= $('#switch').is(":checked");
+$('#notes').trigger('autoresize');
+$("#switch").on('change', function() {
+      $(".petForm").toggle();
+});
+
+$("#addPet").click(function () {
+  numPets++;
+  $("#morePets").prepend("<div class='input-field col s4'> <input id='pet_name_" + numPets + "' type='text' class='validate' placeholder='Pet Name'><label for='pet_name'></label> </div> <div class='input-field col s4' id='petType' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div> <div class='input-field col s4'> <img class='materialboxed defaultPic' id='petPreview_" + numPets + "' class='main-profile-pic' src='/pet_pic' alt='User img'/> </div>");
+
+  $("select").material_select();
+
+  $(".petBox").css({"height": "+=100px"});
+});
+
 
 var petObject;
 
 function grabData_Pets(event) {
   event.preventDefault();
-  $('#notes').trigger('autoresize');
-  var pet_name = $("#pet_name").val().trim(),
-  pet_type = $("#pet_type").val().trim(),
-  treatment= $("#treatment").val().trim(),
-  morning= $("#morning").val().trim(),
-  midday= $("#midday").val().trim(),
-  night= $("#night").val().trim(),
-  notes= $("#notes").val().trim();
+
+  var petArray = [];
 
 
-  var petInfo = {
-    pet_name: pet_name,
-    pet_type: pet_type,
-    treatment: treatment,
-    morning: morning,
-    midday: midday,
-    night: night,
-    notes: notes
+  for (var i=1; i<numPets; i++){
+    // get variables
+    var pet_name = $("#pet_name_"+i).val().trim(),
+    pet_pic= $("#petPreview_" +i).val().trim(),
+    pet_type = $("#pet_type_"+i).val().trim(),
+    morning= $("#morning_"+i).val().trim(),
+    midday= $("#midday_"+i).val().trim(),
+    night= $("#night_"+i).val().trim(),
+    notes= $("#notes_"+i).val().trim();
+
+    var petInfo = {
+      pet_name: pet_name,
+      pet_pic: pet_pic,
+      pet_type: pet_type,
+      morning: morning,
+      midday: midday,
+      night: night,
+      notes: notes
+    };
+
+    // push to array
+    petArray.push(petInfo);
+
+
   }
 
+
 // ajax call because this is on the frontend
-  $.post("/put_pet_in_db", petInfo, function(petObject) {
+  $.post("/put_pet_in_db", petArray, function(petObject) {
     //  console.log(userObject);
     window.location.href = '/profile';
+    if (petObject == "data not entered correctly") {
+      console.log("error -- this error will be more descript later depending on UX decisions")
+    }
   }).catch(function(data) {
     //  window.location.href='/';
     //JSON.stringify(data);
@@ -166,8 +212,9 @@ function grabData_Pets(event) {
     $("#error-div").append(message);
     //console.log(data);
   })
-}
+} // end grabdata function
 //ends grabData function
+
 //on click of "Submit" button, the grabdata function occurs
 $("#grabdata_pets").on("click", grabData_Pets);
 

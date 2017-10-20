@@ -10,7 +10,7 @@ var keys=require("./keys.js");
 //below is the local configuration when running locally
 //var sequelize = new Sequelize("mayatsmolnik", "mayatsmolnik", keys.sqlKey, {
 //host:"codeflink.net",
-var sequelize = new Sequelize("POP_db", "root", "",  {
+var sequelize = new Sequelize("POP_db", "root", "1026",  {
   operatorsAliases: false,
   host:"localhost",
   dialect: "mysql",

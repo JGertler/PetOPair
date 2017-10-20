@@ -19,7 +19,7 @@ var sequelize = require("../config/connection.js");
       email: {
         type: Sequelize.TEXT
       },
-      // cups_of_sugar: {
+      // TODO, generate a cups_of_sugar field for users: {
       //   type: Sequelize.INTEGER
       // },
       autocomplete: {

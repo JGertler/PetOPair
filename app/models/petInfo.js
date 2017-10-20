@@ -7,12 +7,11 @@ var Pet = sequelize.define('Pet', {
     pet_name: {
       type: Sequelize.TEXT
     },
-    pet_type: {
+    pet_pic: {
       type: Sequelize.TEXT
     },
-    treatment: {
-      type: Sequelize.INTEGER,
-      allowNull: true
+    pet_type: {
+      type: Sequelize.TEXT
     },
     morning: {
       type: Sequelize.TEXT,

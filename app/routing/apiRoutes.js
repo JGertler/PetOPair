@@ -10,6 +10,7 @@ var s3 = require('s3');
 var keys = require("../config/keys.js");
 var loginAuth =require("./userSignInAuth.js");
 var fs = require("fs");
+
 //config variables for up/download from s3
 var client = s3.createClient({
   maxAsyncS3: 20, // this is the default
@@ -89,6 +90,54 @@ module.exports = function(passport, app, user) {
      });
    });
 
+   app.get("/pet_pic", loginAuth.isLoggedIn, function(req, res) {
+      console.log(req.user);
+
+      Pets.findOne({
+        where: {
+          human_id: req.user.id,
+          // pet_name: req.user.pet_name
+        }
+      }).then(function(result) {
+        if (result !== null) {
+          var petPicObject=result.toJSON();
+          console.log(petPicObject.pet_pic);
+
+          var params = {
+            localFile: "downloads/"+petPicObject.pet_pic,//destination folder
+            s3Params: {
+              Bucket: keys.s3bucket,
+              Key: petPicObject.pet_pic, //name of photo to reference in aws
+            }
+          };
+          //download from aws to downloads folder
+          var downloader = client.downloadFile(params);
+          downloader.on('error', function(err) {
+            console.error("unable to download:", err.stack);
+          });
+          downloader.on('progress', function() {
+            console.log("progress", downloader.progressAmount, downloader.progressTotal);
+          });
+          downloader.on('end', function() {
+            console.log("done downloading");
+            // this plasters the downloaded aws picture onto the UI
+            res.sendFile(path.resolve(__dirname +"/../../downloads/"+petPicObject.pet_pic));
+            //delete pictures from local storage after pushing and pulling to and from aws
+            setTimeout(function () {
+              console.log("blahblah")
+                if (fs.existsSync(path.resolve(__dirname +"/../../downloads/"+petPicObject.pet_pic))) { // check to ensure file still exists on file system
+                    fs.unlink(path.resolve(__dirname +"/../../downloads/"+petPicObject.pet_pic)); // delete file from server file system after 60 seconds
+                }
+            }, 60000);
+          });
+        } else {
+          //ensures the server doesn't crash if a picture isn't uploaded to aws
+          console.log("Pet Image not uploaded to AWS")
+        };
+
+      });
+    });
+
 
   // Get all user API -- maybe comment out the below if things get funky
   app.get("/api/users", function(req, res) {
@@ -135,7 +184,6 @@ module.exports = function(passport, app, user) {
           //var info=req.body;
           var userPassword = generateHash(password);
           console.log("!!!" + req.body.first_name);
-          var userPassword = generateHash(password);
           //console.log("!!!"+req.body.first_name);
           var info = req.body;
           info.username = username;
@@ -318,71 +366,99 @@ Image.destroy({
 
 }); //end human aws post route
 
+app.post('/put_pet_in_db', loginAuth.isLoggedIn, function(req, res) {
+    // `req.user` contains the authenticated pet.
+    //check that data is valid
+
+    var pets = req.body;
+    console.log("sup"+ req.body);
+    for (var i=0; i<pets.length; i++){
+      var pet = pets[i];
+      if (pet.pet_name == "" || pet.pet_type == "") {
+        return res.send("data not entered correctly");
+
+      }
+    }
+    for (var i=0; i<pets.length; i++) {
+      //for every pet sumbitted they will be assigned the same human_id
+      var pet = pets[i];
+      pet.human_id = req.user.id;
+      Pets.create(pet).then(function(newPet, created) {
+        if (!newPet) {
+          console.log ("error");
+        }
+        if (newPet) {
+          console.log("yay a pet was added to the database");
+        }
+      });
+    }
+});
+
 // TODO edit the below code to upload pictures per pet
-// app.post("/uploadForm_Pets", loginAuth.isLoggedIn, function(req, res) {
-//
-//   if (!req.files) {
-//     return res.status(400).send('No files were uploaded.');
-//   }
-//   console.log(req.body);
-//
-//   var imageInfo_Pets = {
-//     img_url: req.files.uploadedPic.name, //TODO generate random number so that someone's profpic file-name doesn't override someone else's
-//     human_id: req.user.id
-//   }
-//
-// //delete any previous versions of pet pic that user had stored in database
-// Pets.destroy({
-//   where: {
-//     human_id: req.user.id
-//     pet_name: req.user.pet_name;
-//   }
-// }).then(
-//     Pets.create(imageInfo_Pets)
-//     .then(function(results) {
-//       //  res.json(results);
-//     })
-//     .catch(function(err) {
-//       console.log("Data err with upload");
-//       console.log(err);
-//     })
-//   );
-//   // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file
-//   var uploadedPic = req.files.uploadedPic;
-//
-//   // Use the mv() method to place the file somewhere on your server
-//   uploadedPic.mv('uploads/' + req.files.uploadedPic.name, function(err) {
-//     if (err) {
-//       console.log(err);
-//       return res.status(500).send(err);
-//     }
-//
-//     // Upload to S3
-//     var params = {
-//       localFile: 'uploads/' + req.files.uploadedPic.name,
-//
-//       s3Params: {
-//         Bucket: keys.s3bucket,
-//         Key: req.files.uploadedPic.name, // File path of location on S3
-//       },
-//     };
-//
-//     var uploader = client.uploadFile(params);
-//     uploader.on('error', function(err) {
-//       console.error("unable to upload:", err.stack);
-//       res.status(500).send(err.stack);
-//     });
-//     uploader.on('end', function() {
-//       console.log('File uploaded!');
-//       res.redirect('/profile');
-//       //delete pictures from local storage after pushing and pulling to and from aws
-//       if (fs.existsSync("uploads/" + req.files.uploadedPic.name)) { // check to ensure file still exists on file system
-//           fs.unlink("uploads/" + req.files.uploadedPic.name); // delete file from server file system after 60 seconds
-//       }
-//     });
-//   });
-//
-// }); //end pets aws post route
+app.post("/uploadForm_Pets", loginAuth.isLoggedIn, function(req, res) {
+
+  if (!req.files) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  console.log(req.body);
+
+  var imageInfo_Pets = {
+    img_url: req.files.pet_uploadedPic.name, //TODO generate random number so that someone's profpic file-name doesn't override someone else's
+    human_id: req.user.id
+  }
+
+//delete any previous versions of pet pic that user had stored in database
+Pets.destroy({
+  where: {
+    human_id: req.user.id,
+    pet_name: req.user.pet_name
+  }
+}).then(
+    Pets.create(imageInfo_Pets)
+    .then(function(results) {
+      //  res.json(results);
+    })
+    .catch(function(err) {
+      console.log("Data err with upload");
+      console.log(err);
+    })
+  );
+  // The name of the input field (i.e. "uploadedPic") is used to retrieve the uploaded file
+  var pet_uploadedPic = req.files.pet_uploadedPic;
+
+  // Use the mv() method to place the file somewhere on your server
+  pet_uploadedPic.mv('uploads/' + req.files.pet_uploadedPic.name, function(err) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    }
+
+    // Upload to S3
+    var params = {
+      localFile: 'uploads/' + req.files.pet_uploadedPic.name,
+
+      s3Params: {
+        Bucket: keys.s3bucket,
+        Key: req.files.pet_uploadedPic.name, // File path of location on S3
+      },
+    };
+
+    var uploader = client.uploadFile(params);
+    uploader.on('error', function(err) {
+      console.error("unable to upload:", err.stack);
+      res.status(500).send(err.stack);
+    });
+    uploader.on('end', function() {
+      console.log('File uploaded!');
+      res.redirect('/profile');
+      //delete pictures from local storage after pushing and pulling to and from aws
+      if (fs.existsSync("uploads/" + req.files.pet_uploadedPic.name)) { // check to ensure file still exists on file system
+          fs.unlink("uploads/" + req.files.pet_uploadedPic.name); // delete file from server file system after 60 seconds
+      }
+    });
+  });
+
+}); //end pets aws post route
 
 
 }; //end module.exports
