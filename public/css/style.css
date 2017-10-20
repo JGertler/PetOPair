@@ -7,7 +7,7 @@
 
 }
 #username-h1{
-  font-family: 'Gloria Hallelujah';
+  font-family: 'Concert One';
   margin:0px;
 }
 
@@ -17,6 +17,7 @@
 
 #profile-page-container{
   margin-top:30px;
+  margin-bottom:30px;
 }
 
 .modalContainer {
@@ -59,7 +60,6 @@ button.grabDataBtn  {
    color: #2D3047 !important;
    font-size: 40px;
 }
-
 
 
 #bulletinHeader {
@@ -124,17 +124,18 @@ p {
 }
 
 #profile-page-container {
-  background-image: url("../media/profBackground.jpg") !important;
-  background-repeat: repeat;
+ /*background-image: url("../media/profBackground.jpg") !important;
+  background-repeat: repeat;*/
+  background-color: #F4D35E;
 }
 
 .profileContainer {
-  background-color: #FFDBB5 !important;
+  background-color:white;
 }
 
 /*these all contain our pallet colors */
 .side-nav {
-  background-color: #F4D35E !important;
+  background-color: #C04ABC !important;
   font-family: 'Concert One' !important;
 
 }
@@ -147,7 +148,7 @@ nav ul a {
 }
 
 .user-view {
-  background-color: #FFDBB5 !important;
+  background-color: #2D3047 !important;
 }
 
 #navbar {
@@ -156,7 +157,11 @@ nav ul a {
 }
 
 .page-footer {
-    background-color: #419D78 !important;
+  margin-top: 35px;
+  padding-top: 35px;
+  background-color: #419D78 !important;
+    
+    
 }
 
 

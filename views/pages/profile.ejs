@@ -13,34 +13,44 @@
 <div id="profile-page-container">
 <div class="container">
   <div class="section profileContainer">
-      <div class="row">
-        <!--where user uploads profile picture -->
-        <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data">
-          <div class="col m4 col s12">
-            <input type="file" id="file-input" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
-            <img class="materialboxed defaultPic" id="preview" class="main-profile-pic" src="/profile_pic" alt="User img"/>
-            <button id="profBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
-              <i class="material-icons right">camera_alt</i>
-            </button>
-          </div>
-        </form>
-        <div class="col m6 col s12">
-          <h2 id="username-h1"></h2>
-          <h3 id="city-state-h3"></h3>
-          <img src="/media/sugar.jpg" style="width: 50px">
-          <p> Gain more sugar by taking jobs from the <a href="/bulletinboard">Bulletin Board</a>!</p>
-          <p> Need a sitter? Ask your neighbors <a href="/bulletin">here</a>!</p>
-        </div>
+    
+        <!--<div class="section no-pad-bot petBackground" id="index-banner">-->
+            <div class="container">
+              
+              <h1 class="header center col s6"><img class="mainLogo animated bounceIn" src="/media/Petopair.png"></h1>
+              <!--where user uploads profile picture -->
+            </div>
+      
       </div>
-      <div class="row">
-        <div class="col s12">
-          <div id="about-me-div">
-          </div>
-        </div>
-      </div>
-    </div>
+          <form ref="uploadForm" action="/uploadForm" method="post" enctype="multipart/form-data">
+            <div class="col m4 col s12">
+              <input type="file" id="file-input" name="uploadedPic" accept="image/*" onchange="readURL(this);"/>
+                <img class="materialboxed defaultPic" id="preview" class="main-profile-pic" src="/profile_pic" alt="User img"/>
+                  <button id="profBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">camera_alt</i>
+                  </button>
+                  <h2 id="username-h1"></h2>
+              <h3 id="city-state-h3"></h3>
+                  <p> Gain more sugar by taking jobs from the <a href="/bulletinboard">  Bulletin Board   </a> <img src="/media/sugar.jpg" style="width: 50px">         
+                  <p> Need a sitter? Ask your neighbors <a href="/bulletin">here</a></p>
+            </div>
+          </form>
+            <div class="col m6 col s12">
+              
+            </div>
+  </div>
 </div>
-<div>
+  
+
+      <div class="row">
+         <div class="col s12">
+          <div id="about-me-div">
+
+          </div>
+        </div>
+      </div>
+</div>
+
 
 <footer class="page-footer">
   <% include ../partials/footer%>
