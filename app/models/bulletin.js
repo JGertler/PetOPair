@@ -20,7 +20,10 @@ var bulletinPost = sequelize.define('Bulletin', {
 	},
 	end_date: {
 	type: Sequelize.DATE
+	},
+	human_id: {
+	type: Sequelize.INTEGER
 	}
 });
 
-module.exports = Bulletin;
+module.exports = bulletinPost;
