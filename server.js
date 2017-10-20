@@ -32,6 +32,13 @@ app.set('view engine', 'ejs');
 
 require("./app/routing/apiRoutes.js")(passport, app, db);
 require("./app/routing/htmlRoutes.js")(app, passport);
+/*app.use(function (req, res, next) {
+	res.status(404).sendFile(__dirname, '../pages/error.ejs', req.params.pic_name)
+  });
+  */
+  app.get("*", function(request, response) {
+    response.render('pages/error');
+  });
 
 db.sequelize.sync()
 //db.sequelize.sync({ force:true })

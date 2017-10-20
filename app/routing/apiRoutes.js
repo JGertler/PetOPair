@@ -11,7 +11,9 @@ var s3 = require('s3');
 var keys = require("../config/keys.js");
 var loginAuth =require("./userSignInAuth.js");
 var fs = require("fs");
-var bulletin = require("../models/bulletin.js");
+var bulletinPost = require("../models/bulletin.js");
+module.exports = bulletinPost;
+
 //config variables for up/download from s3
 var client = s3.createClient({
   maxAsyncS3: 20, // this is the default
