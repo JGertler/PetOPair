@@ -1,6 +1,7 @@
 var Human = require("../models/info.js");
 var Pets = require("../models/petInfo.js");
 var Image = require("../models/images.js");
+var bulletinPost= require("../models/bulletin.js");
 //var keys = require("../config/keys.js");
 var request = require("request");
 var bCrypt = require("bcrypt-nodejs");
