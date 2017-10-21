@@ -60,7 +60,6 @@ $(document).ready(function() {
       }
 
       $.post("/signin", info, function(userObject) {
-        console.log("lalala" + userObject);
         currentUser=JSON.stringify(userObject);
         window.location.href = '/profile';
 
@@ -95,7 +94,6 @@ function showProfile() {
           $("#side-nav-email").text(data.email);
           $("#about-pets-div").append("About user's pets here");
           // $("#sugar_cups").append(data.cups_of_sugar);
-          console.log(data.pet_name);
         });
 
       };
@@ -103,7 +101,7 @@ function showProfile() {
 showProfile();
 
 
-// this should autofill in bulletin form
+// this should autofill in bulletin form and profile. this doesn't work yet though
 
 function showPetInfo() {
 
@@ -114,14 +112,8 @@ function showPetInfo() {
             var last = capitalizeFirstLetter(data.last_name)
           //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
           var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
-          $("#username-quote").text(data.username);
-          $("#username-h1").text(first + '  ' + lastInitial);
-          $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
-          $("#side-nav-name").text(first + '  ' + last);
-          $("#side-nav-email").text(data.email);
-          $("#about-pets-div").append("About user's pets here");
-          // $("#sugar_cups").append(data.cups_of_sugar);
-          console.log(data.pet_name);
+          $("#bulletinUser").text(first + '  ' + lastInitial);
+          $("#bulletinUserCity").text(data.locality + ", " + data.administrative_area_level_1);
         });
 
       };
