@@ -24,18 +24,13 @@
         <ul class="collection">
           <li class="collection-item avatar">
             <img src="/media/petCartoon.png" alt="" class="circle">
-            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            <h3 id="bulletinUser"></h3>
+            <h4 id="bulletinUserCity"></h4>
+            <a href="/bulletinboard" class="secondary-content"><i class="material-icons">grade</i></a>
           </li>
           <div class="input-field col s12">
-            <input id="pet_name" type="text" class="validate">
+            <input id="pet_for_care" type="text" class="validate">
             <label for="pet_name">Pet's Name</label>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="city_name" type="text" class="validate">
-              <label for="City">City</label>
-            </div>
           </div>
           <div class="row">
             <div class="col s8 offset-s2">
@@ -45,28 +40,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12" id="treatment_level">
               <label class="treatment clearfix" for="treatment">
                   <span class="commoner">Commoner</span>
                   <span class="royal">Royal Treatment</span>
               </label>
-              <form action="#">
                 <p class="range-field">
                   <input type="range" id="treatment" min="0" max="10">
                 </p>
-
-              </form>
             </div>
           </div>
           <div class="row">
-            <form class="col s12">
               <div class="input-field col s12">
                 <textarea id="more_info" class="materialize-textarea" data-length="120"></textarea>
                 <label for="textarea1">Please add enter any additional instructions here: </label>
-            </form>
-            </div>
+              </div>
           </div>
-
           <div class="row">
             <div class="input-field col s6">
               <input id="start_date" type="text" class="validate datepicker">
@@ -77,8 +66,8 @@
               <input id="end_date" type="text" class="validate datepicker">
               <label for="end_date">End Date</label>
             </div>
-
           </div>
+        </form>
     </div>
 
   </div>
@@ -115,23 +104,24 @@
 
 
   function grabBulletinData(event) {
-    event.preventDefault();
+
     console.log("grab pet data button works");
-    var pet_for_care:  = $("#pet_for_care").val().trim();
-    var city_for_care = $("#city_for_care").val().trim();
-    var treatment_level: = $("#treatment_level").val().trim();
-    var added_notes = $("#added_notes").val().trim();
+    //this will change to be autopopuated from Pets table instead of upon manual entry
+    var pet_for_care = $("#pet_for_care").val().trim();
+    var city_for_care = $("#bulletinUserCity").val().trim();
+    var treatment_level = $("#treatment_level").val().trim();
+    var added_notes = $("#more_info").val().trim();
     var start_date = $("#start_date").val().trim();
     var end_date = $("#end_date").val().trim();
 
 
     var petInfo = {
-      pet_name: pet_name,
-      city: city,
-      treatment: treatment,
-      moreInfo: moreInfo,
-      startDate: startDate,
-      endDate: endDate
+      pet_for_care: pet_for_care,
+      city_for_care: city_for_care,
+      treatment_level: treatment_level,
+      added_notes: added_notes,
+      start_date: start_date,
+      end_date: end_date
 
     }
 
