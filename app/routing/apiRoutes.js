@@ -301,8 +301,6 @@ app.get("/api/pets", loginAuth.isLoggedIn, function(req, res) {
 
 // amazon aws route
 
-// amazon aws route
-
 app.use(fileUpload());
 
 app.post("/uploadForm", loginAuth.isLoggedIn, function(req, res) {

@@ -31,20 +31,6 @@
             <label for="pet_name">Pet's Name</label>
           </div>
 
-          <div id="morePets">
-            <a class="waves-effect waves-light btn" id="add">Add another Pet</a>
-
-            <script>
-              $("#add").click(function () {
-                $("#morePets").append('<input id="pet_name" type="text" class="validate" placeholder="Pet"><label for="pet_name">Pets Name</label>');
-
-              });
-            </script>
-
-          </div>
-
-          <br>
-          <br>
           <div class="row">
             <div class="input-field col s12">
               <input id="city_name" type="text" class="validate">
@@ -98,7 +84,7 @@
   </div>
 
 
-  <button class="btn waves-effect waves-light" id="grabpetdata" type="submit" name="action">Submit
+  <button class="btn waves-effect waves-light" id="grabbulletindata" type="submit" name="action">Submit
           <!--         <a href="/aboutMe"></a>
           -->           <i class="material-icons right">send</i>
           </button>
@@ -127,15 +113,16 @@
     closeOnSelect: false // Close upon selecting a date,
   });
 
-  function grabPetData(event) {
+
+  function grabBulletinData(event) {
     event.preventDefault();
     console.log("grab pet data button works");
-    var pet_name = $("#pet_name").val().trim();
-    var city = $("#city_name").val().trim();
-    var treatment = $("#treatment").val().trim();
-    var moreInfo = $("#more_info").val().trim();
-    var startDate = $("#start_date").val().trim();
-    var endDate = $("#end_date").val().trim();
+    var pet_for_care:  = $("#pet_for_care").val().trim();
+    var city_for_care = $("#city_for_care").val().trim();
+    var treatment_level: = $("#treatment_level").val().trim();
+    var added_notes = $("#added_notes").val().trim();
+    var start_date = $("#start_date").val().trim();
+    var end_date = $("#end_date").val().trim();
 
 
     var petInfo = {
@@ -155,7 +142,7 @@
   }
 
 
-  $("#grabpetdata").on("click", grabPetData);
+  $("#grabbulletindata").on("click", grabBulletinData);
 
   //ends grabData function
 

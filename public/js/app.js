@@ -93,7 +93,7 @@ function showProfile() {
           $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
           $("#side-nav-name").text(first + '  ' + last);
           $("#side-nav-email").text(data.email);
-          $("#about-me-div").append("About user's pets here");
+          $("#about-pets-div").append("About user's pets here");
           // $("#sugar_cups").append(data.cups_of_sugar);
           console.log(data.pet_name);
         });
@@ -102,6 +102,31 @@ function showProfile() {
 
 showProfile();
 
+
+// this should autofill in bulletin form
+
+function showPetInfo() {
+
+    //ajax calling user data from apiRoutes
+        $.get("/profile/user", function(data) {
+          var dataString = JSON.stringify(data);
+            var first = capitalizeFirstLetter(data.first_name);
+            var last = capitalizeFirstLetter(data.last_name)
+          //this will capture the first letter of the last name to show on profile (i.e. Jessica G.)
+          var lastInitial = capitalizeFirstLetter(data.last_name[0] + ".");
+          $("#username-quote").text(data.username);
+          $("#username-h1").text(first + '  ' + lastInitial);
+          $("#city-state-h3").text(data.locality + ", " + data.administrative_area_level_1)
+          $("#side-nav-name").text(first + '  ' + last);
+          $("#side-nav-email").text(data.email);
+          $("#about-pets-div").append("About user's pets here");
+          // $("#sugar_cups").append(data.cups_of_sugar);
+          console.log(data.pet_name);
+        });
+
+      };
+
+showPetInfo();
 
 
 
