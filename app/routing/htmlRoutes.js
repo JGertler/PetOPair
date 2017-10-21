@@ -15,6 +15,11 @@ module.exports = function(app, passport) {
   app.get("/", function(request, response) {
     response.render('pages/index');
   });
+
+	app.get("/disclaimer", function(request, response) {
+		response.render('pages/disclaimer');
+	});
+
   app.get("/signup", function(request, response) {
     response.render('pages/signUp');
   });

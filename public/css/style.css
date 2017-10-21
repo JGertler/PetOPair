@@ -14,6 +14,15 @@ main {
     }
 };
 
+p {
+  color: black;
+}
+.disclaimer {
+  font-size: 12px !important;
+  font-family: 'Gloria Hallelujah' !important;
+
+}
+
 #about-me-div{
 border: solid;
 border-color: white !important;
@@ -124,13 +133,15 @@ label.treatment .royal{
 }
 
 
-p {
-  color: black;
-}
 
 .main-profile-pic {
   padding: 30px 10px 55px 10px;
   background-color: white;
+}
+
+.socialMedia li {
+  font-size: 30px;
+  display: inline;
 }
 
 #profile-page-container {
@@ -143,12 +154,21 @@ p {
   border: solid;
   border-color: white;
   background-color: #d9ebe4;
+  padding: 50px;
 }
 
 /*these all contain our pallet colors */
 .side-nav {
   background-color: #419D78 !important;
   font-family: 'Concert One' !important;
+}
+
+.navLogo {
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  position: relative;
+  bottom: 30px;
 }
 
 .side-nav li>a{
@@ -222,7 +242,7 @@ box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 
 
 
-.circle {
+.circleQ {
 border: solid;
 border-color: white;
 background-color: orange;
