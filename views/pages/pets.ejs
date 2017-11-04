@@ -131,15 +131,19 @@
 <script>
 //allows pet pics to display
 function readURL(input) {
+  var elem = $(input);
   if (input.files && input.files[0]) {
     var reader = new FileReader();
-    console.log($('#petPreview').src)
-    reader.onload = function (e) {
-      document.getElementById('petPreview' + numPets).src =  e.target.result;
+    reader.onload = function(e) {
+      elem.siblings('img').attr('src', e.target.result);
     }
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(elem.get(0).files[0]);
   }
 }
+
+$("input[type='file']").change(function() {
+  readURL(this);
+});
 
 
 //this allows user to add more pets with pet type in the form
@@ -153,7 +157,7 @@ $("#switch").on('change', function() {
 
 $("#addPet").click(function () {
   numPets++;
-  $("#morePets").prepend("<div class='input-field col s4'> <input id='pet_name" + numPets + "' type='text' class='validate' placeholder='Pet Name'><label for='pet_name'></label> </div> <div class='input-field col s4' id='petType' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div> <div class='input-field col s4'> <img class='materialboxed defaultPic' id='petPreview" + numPets + "' class='main-profile-pic' src='/pet_pic' alt='User img'/> </div>");
+  $("#morePets").append("<div class='row'> <div class='input-field col s4'> <input id='pet_name' type='text' class='validate'> <label for='pet_name'>Pet Name</label> </div> <div class='input-field col s4'> <input type='file' id='file-input' name='pet_uploadedPic' accept='image/*' onchange='readURL(this);'/> <img class='materialboxed defaultPic' id='petPreview' class='main-profile-pic' src='/pet_pic' alt='User img'/> </div> <div class='input-field col s4' id='pet_type' style='color: black; width: 300px;'> <select multiple> <option value='' disabled selected>schweetie</option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label> </div> </div>");
 
   $("select").material_select();
 
