@@ -92,13 +92,13 @@ module.exports = function(passport, app, user) {
 
      });
    });
-
+//this doesn't work yet
    app.get("/pet_pic", loginAuth.isLoggedIn, function(req, res) {
       console.log(req.user);
 
       Pets.findOne({
         where: {
-          human_id: req.user.id,
+          human_id: req.user.human_id,
           // pet_name: req.user.pet_name
         }
       }).then(function(result) {
@@ -275,13 +275,11 @@ passport.use(
 
 // put a new petsitting request in the pets table from the bulletin
 app.post("/request_sitter_in_db", loginAuth.isLoggedIn, function(req, response) {
-  console.log(req.body);
-  console.log(req.user);
-  var petInfo = req.body;
+  var reqInfo = req.body;
   //put the humans id in with the pet to grab human data
-  petInfo.human_id = req.user.id;
-  console.log(petInfo);
-  Pets.create(petInfo)
+  reqInfo.human_id = req.user.id;
+  console.log(reqInfo);
+  bulletinPost.create(reqInfo)
   .then(function(results) {
     response.json(results);
   })
@@ -291,9 +289,9 @@ app.post("/request_sitter_in_db", loginAuth.isLoggedIn, function(req, response) 
   });
 });
 
-//gets all the bulletin posts from the pets table and posts them to the api/pets route which is grabbed from the front end bulletin board
-app.get("/api/pets", loginAuth.isLoggedIn, function(req, res) {
-  Pets.findAll({}).then(function(results) {
+//gets all the bulletin posts from the bulletin table and posts them to the api/sitterRequests route which is grabbed from the front end bulletin board
+app.get("/api/sitterRequests", loginAuth.isLoggedIn, function(req, res) {
+  bulletinPost.findAll({}).then(function(results) {
     res.json(results);
   });
 });
@@ -368,11 +366,8 @@ Image.destroy({
 }); //end human aws post route
 
 app.post('/put_pet_in_db', loginAuth.isLoggedIn, function(req, res) {
-    // `req.user` contains the authenticated pet.
-    //check that data is valid
 
     var pets = req.body;
-    console.log("sup"+ req.body);
     for (var i=0; i<pets.length; i++){
       var pet = pets[i];
       if (pet.pet_name == "" || pet.pet_type == "") {

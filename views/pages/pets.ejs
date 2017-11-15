@@ -40,7 +40,7 @@
 
     <div class="input-field col s4">
     <input type="file" id="file-input" name="pet_uploadedPic" accept="image/*" onchange="readURL(this);"/>
-    <img class="materialboxed defaultPic" id="petPreview" class="main-profile-pic" src="/pet_pic" alt="User img"/>
+    <img class="materialboxed defaultPic" id="petPreview" class="main-Pet-Pic" src="/pet_pic" alt="User img"/>
     </div>
 
     <div class="input-field col s4" id="pet_type" style="color: black; width: 300px;">
@@ -131,54 +131,66 @@
 <script>
 //allows pet pics to display
 function readURL(input) {
+  var elem = $(input);
   if (input.files && input.files[0]) {
     var reader = new FileReader();
-    console.log($('#petPreview').src)
-    reader.onload = function (e) {
-      document.getElementById('petPreview' + numPets).src =  e.target.result;
+    reader.onload = function(e) {
+      elem.siblings('img').attr('src', e.target.result);
     }
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(elem.get(0).files[0]);
   }
 }
 
 
+$("input[type='file']").change(function() {
+  readURL(this);
+});
 //this allows user to add more pets with pet type in the form
 var numPets = 1;
-
 var yesPets= $('#switch').is(":checked");
 $('#notes').trigger('autoresize');
 $("#switch").on('change', function() {
       $(".petForm").toggle();
 });
-
 $("#addPet").click(function () {
   numPets++;
-  $("#morePets").prepend("<div class='input-field col s4'> <input id='pet_name_" + numPets + "' type='text' class='validate' placeholder='Pet Name'><label for='pet_name'></label> </div> <div class='input-field col s4' id='petType' style='color: black; width: 300px;'> <select multiple> <option value=''disabled selected></option> <option value='1'>Cat</option> <option value='2'>Dog</option> <option value='3'>Rabbit</option> <option value='4'>Ferret</option> <option value='5'>Bird</option> <option value='6'>Rodent</option> <option value='7'>Reptile</option> <option value='8'>Fish</option> </select> <label>Pet Type</label></div> <div class='input-field col s4'> <img class='materialboxed defaultPic' id='petPreview_" + numPets + "' class='main-profile-pic' src='/pet_pic' alt='User img'/> </div>");
-
+$("#morePets").prepend("<div class='input-field col s4'> \
+<input id='pet_name" + numPets + "' type='text' class='validate' placeholder='Pet Name'> <label for='pet_name'></label> </div> \
+<div class='input-field col s4' id='petType" + numPets + "'style='color: black; width: 300px;'> \
+<select multiple> \
+<option value=''disabled selected></option> \
+<option value='1'>Cat</option> \
+<option value='2'>Dog</option>\
+ <option value='3'>Rabbit</option> \
+ <option value='4'>Ferret</option> \
+ <option value='5'>Bird</option> \
+ <option value='6'>Rodent</option> \
+ <option value='7'>Reptile</option> \
+ <option value='8'>Fish</option> \
+ </select> \
+ <label>Pet Type</label>\
+ </div>  \
+ <div class='input-field col s4'> \
+ <input type='file' id='petPreview" + numPets + "' name='pet_uploadedPic' accept='image/*' onchange='readURL(this);'/> \
+ <img class='materialboxed defaultPic' id='petPreviewImg" + numPets + "' class='main-Pet-Pic' src='/pet_pic' alt='User img'/> \
+ </div>");
   $("select").material_select();
-
   $(".petBox").css({"height": "+=100px"});
 });
 
-
 var petObject;
-
 function grabData_Pets(event) {
   event.preventDefault();
-
   var petArray = [];
-
-
   for (var i=1; i<numPets; i++){
     // get variables
-    var pet_name = $("#pet_name_"+i).val().trim(),
-    pet_pic= $("#petPreview_" +i).val().trim(),
-    pet_type = $("#pet_type_"+i).val().trim(),
-    morning= $("#morning_"+i).val().trim(),
-    midday= $("#midday_"+i).val().trim(),
-    night= $("#night_"+i).val().trim(),
-    notes= $("#notes_"+i).val().trim();
-
+    var pet_name = $("#pet_name"+i).val().trim(),
+    pet_pic= $("#petPreview" +i).val().trim(),
+    pet_type = $("#pet_type"+i).val().trim(),
+    morning= $("#morning"+i).val().trim(),
+    midday= $("#midday"+i).val().trim(),
+    night= $("#night"+i).val().trim(),
+    notes= $("#notes"+i).val().trim();
     var petInfo = {
       pet_name: pet_name,
       pet_pic: pet_pic,
@@ -188,16 +200,12 @@ function grabData_Pets(event) {
       night: night,
       notes: notes
     };
-
     // push to array
     petArray.push(petInfo);
-
-
-  }
-
-
+  } //end loop
 // ajax call because this is on the frontend
   $.post("/put_pet_in_db", petArray, function(petObject) {
+     console.log("heyhey" + petObject)
     //  console.log(userObject);
     window.location.href = '/profile';
     if (petObject == "data not entered correctly") {
@@ -213,10 +221,6 @@ function grabData_Pets(event) {
     //console.log(data);
   })
 } // end grabdata function
-//ends grabData function
-
 //on click of "Submit" button, the grabdata function occurs
 $("#grabdata_pets").on("click", grabData_Pets);
-
-
 </script>
