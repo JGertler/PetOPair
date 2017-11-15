@@ -141,6 +141,10 @@ function readURL(input) {
   }
 }
 
+$("input[type='file']").change(function() {
+  readURL(this);
+});
+
 
 $("input[type='file']").change(function() {
   readURL(this);
@@ -174,6 +178,7 @@ $("#morePets").prepend("<div class='input-field col s4'> \
  <input type='file' id='petPreview" + numPets + "' name='pet_uploadedPic' accept='image/*' onchange='readURL(this);'/> \
  <img class='materialboxed defaultPic' id='petPreviewImg" + numPets + "' class='main-Pet-Pic' src='/pet_pic' alt='User img'/> \
  </div>");
+
   $("select").material_select();
   $(".petBox").css({"height": "+=100px"});
 });
@@ -202,8 +207,7 @@ function grabData_Pets(event) {
     };
     // push to array
     petArray.push(petInfo);
-  } //end loop
-// ajax call because this is on the frontend
+  } //end loop// ajax call because this is on the frontend
   $.post("/put_pet_in_db", petArray, function(petObject) {
      console.log("heyhey" + petObject)
     //  console.log(userObject);
@@ -221,6 +225,7 @@ function grabData_Pets(event) {
     //console.log(data);
   })
 } // end grabdata function
+
 //on click of "Submit" button, the grabdata function occurs
 $("#grabdata_pets").on("click", grabData_Pets);
 </script>

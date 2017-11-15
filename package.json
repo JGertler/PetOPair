@@ -40,5 +40,9 @@
     "request": "^2.81.0",
     "s3": "^4.4.0",
     "sequelize": "^4.13.8"
+  },
+  "production": {
+    "use-env-variable": "JAWSDB_URL",
+    "dialect": "mysql"
   }
 }
