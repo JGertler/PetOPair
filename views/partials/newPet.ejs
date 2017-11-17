@@ -1,0 +1,86 @@
+<form ref="uploadForm_Pets" action="/uploadForm_Pets" method="post" enctype="multipart/form-data">
+<div class="modal modal-fixed-footer" id="petModal">
+<div class="modal-content">
+  <div class="row">
+      <h4>All about...</h4>
+      <!--TODO: add pet's name dynamically to header upon entry of name  -->
+  </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <input id="pet_name" type="text" class="validate">
+        <label for="pet_name">Pet Name</label>
+      </div>
+
+      <div class="input-field col s4" id="pet_type">
+        <select multiple>
+          <option value="" disabled selected>Type of Schweetie</option>
+          <option value="1">Cat</option>
+          <option value="2">Dog</option>
+          <option value="3">Rabbit</option>
+          <option value="4">Ferret</option>
+          <option value="5">Bird</option>
+          <option value="6">Rodent</option>
+          <option value="7">Reptile</option>
+          <option value="8">Fish</option>
+        </select>
+        <label>Pet Type</label>
+      </div>
+
+<label for="file-input">Pet Pic</label>
+      <div class="input-field col s4">
+      <input type="file" id="file-input" name="pet_uploadedPic" accept="image/*" onchange="readPetURL(this);"/>
+      <img class="materialboxed petPreviewBox" id="petPreview" class="main-Pet-Pic" src="/pet_pic" alt="Pet Image"/>
+      </div>
+
+    </div>
+
+    <div class="row petSchedule">
+      <div class="input-field col s10 offset-s1">
+          <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">snooze</i>This pet's breakfast.</div>
+          <div class="collapsible-body">
+            <span>
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label id="morning" for="textarea1"></label>
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">wb_sunny</i>This pet's midday food, if applicable.</div>
+          <div class="collapsible-body">
+            <span>
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label id="midday" for="textarea1"></label>
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">cake</i>This pet's dinner.</div>
+          <div class="collapsible-body">
+            <span>
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label id="night" for="textarea1"></label>
+            </span>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">event_note</i>The normal notes I leave my petsitters.</div>
+          <div class="collapsible-body">
+            <span>
+            <textarea id="textarea1" class="materialize-textarea" placeholder="Don't be embarassed about the royal treatment your pet might require. Be honest and embrace your pet's royalty."></textarea>
+            <label id="notes" for="textarea1"></label>
+            </span>
+          </div>
+        </li>
+        </ul>
+    </div>
+  </div>
+
+</div>  <!--end modal content-->
+<div class="modal-footer">
+  <button class="btn waves-effect waves-light modal-action modal-close" id="grabdata_pets" type="submit" name="action">Update<i class="material-icons right">pets</i>
+  </button>
+</div>
+</div> <!--end modal-->
+  </form>

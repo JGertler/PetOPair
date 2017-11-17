@@ -21,7 +21,11 @@ module.exports = function(app, passport) {
 	});
 
   app.get("/signup", function(request, response) {
-    response.render('pages/signUp');
+    if (!request.user) {
+			response.render('pages/signUp');
+		} else {
+			response.redirect('/profile');
+		}
   });
 
 	app.get("/pets", loginAuth.isLoggedIn, function(request, response) {

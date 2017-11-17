@@ -70,12 +70,12 @@ button.grabDataBtn  {
 }
 
 #signUpButton {
-   background-color: #C04ABC !important;
+   background-color: #d35e10 !important;
 
 }
 
 .material-icons {
-   color: #2D3047 !important;
+   color: #1e374d!important;
    font-size: 40px;
 }
 
@@ -146,8 +146,7 @@ label.treatment .royal{
 
 #profile-page-container {
   margin-top: 50px;
-  background-image: url("../media/petz.png");
-  background-repeat: repeat;
+
 }
 
 .profileContainer {
@@ -158,7 +157,7 @@ label.treatment .royal{
 
 /*these all contain our pallet colors */
 .side-nav {
-  background-color: #419D78 !important;
+  background-color: #83C452 !important;
   font-family: 'Concert One' !important;
 }
 
@@ -180,36 +179,39 @@ nav ul a {
 }
 
 .user-view {
-  background-color: white;
+  background-color: #1e374d;
 }
 
+.user-view span {
+  color: white;
+}
 .user-view a {
   color: black;
 }
 
 #navbar {
-    background-color: #2D3047 !important;
+    background-color: #1e374d!important;
     font-family: 'Concert One' !important;
 }
 
 .page-footer {
-    background-color: #419D78 !important;
+    background-color: #83C452 !important;
 }
 
 
 button{
-  background-color: #F4D35E !important;
+  background-color: #e0bc53 !important;
 }
 
 .modal-trigger {
-  background-color: #419D78 !important;
+  background-color: #83C452 !important;
 }
 
 .homeBtn {
   position: relative;
   left: 30px;
   font-size: 45px !important;
-  color: #C04ABC !important;
+  color: #d35e10 !important;
 }
 
 
@@ -240,32 +242,12 @@ box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 
-
-.circleQ {
-border: solid;
-border-color: white;
-background-color: orange;
-border-radius: 360px;
-padding: 0;
-margin: 0;
-height: 300px;
-width: 300px;
-
+#petModal {
+  color: black;
 }
 
-.switch {
-  font-size: 30px;
-  font-family: Concert One;
-  position: relative;
-  left: 35px;
-  top: 50px;
-}
-
-.yesno {
-  position: relative;
-  left: 40px;
-}
-
-.petForm {
-  display: none;
+#petPreview {
+  width: 150px;
+  height: 150px;
+  background-image: url("../media/pawPlaceholder.png");
 }
