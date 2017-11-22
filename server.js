@@ -4,7 +4,9 @@ var bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 var passport   = require('passport')
 var session    = require('cookie-session')
+var morgan = require('morgan');
 
+app.use(morgan('dev')); // log every request to the console
 
 //this allows us to run locally OR use heroku
 var PORT= process.env.PORT || 8000;

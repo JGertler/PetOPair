@@ -41,11 +41,11 @@ var sequelize = require("../config/connection.js");
         type: Sequelize.TEXT
       },
       address_lat: {
-    type: Sequelize.DECIMAL(18, 14)
-   },
-   address_lng: {
-     type: Sequelize.DECIMAL(18, 14)
-   }
+      type: Sequelize.DECIMAL(18, 14)
+      },
+      address_lng: {
+      type: Sequelize.DECIMAL(18, 14)
+      }
   })
 
 

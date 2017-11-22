@@ -366,19 +366,11 @@ Image.destroy({
 }); //end human aws post route
 
 app.post('/put_pet_in_db', loginAuth.isLoggedIn, function(req, res) {
-
     var pets = req.body;
-    for (var i=0; i<pets.length; i++){
-      var pet = pets[i];
-      if (pet.pet_name == "" || pet.pet_type == "") {
-        return res.send("data not entered correctly");
 
+      if (pets.pet_name == "" || pets.pet_type == "") {
+        return res.send("data not entered correctly");
       }
-    }
-    for (var i=0; i<pets.length; i++) {
-      //for every pet sumbitted they will be assigned the same human_id
-      var pet = pets[i];
-      pet.human_id = req.user.id;
       Pets.create(pet).then(function(newPet, created) {
         if (!newPet) {
           console.log ("error");
@@ -387,7 +379,7 @@ app.post('/put_pet_in_db', loginAuth.isLoggedIn, function(req, res) {
           console.log("yay a pet was added to the database");
         }
       });
-    }
+
 });
 
 // TODO edit the below code to upload pictures per pet
